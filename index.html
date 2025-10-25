@@ -1,346 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Michael Alibeaj — Portfolio & CV</title>
-  <meta name="description" content="Portfolio of Michael Alibeaj — Computer Science M.Sc. student focused on Big Data, AI, and Business Intelligence." />
-  <meta name="robots" content="index,follow" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚙️</text></svg>">
-  
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="Michael Alibeaj — Portfolio & CV" />
-  <meta property="og:description" content="Computer Science M.Sc. student focusing on Data, AI, and BI. Projects, achievements, and downloadable CV." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="" />
-  <meta property="og:image" content="" />
-  <meta name="twitter:card" content="summary_large_image" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Michael Alibeaj — Portfolio & CV</title>
+<meta name="description" content="Portfolio of Michael Alibeaj — Computer Science M.Sc. student focused on Big Data, AI, and Business Intelligence." />
+<meta name="robots" content="index,follow" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚙️</text></svg>">
+<!-- Open Graph / Twitter -->
+<meta property="og:title" content="Michael Alibeaj — Portfolio & CV" />
+<meta property="og:description" content="Computer Science M.Sc. student focusing on Data, AI, and BI. Projects, achievements, and downloadable CV." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="" />
+<meta property="og:image" content="" />
+<meta name="twitter:card" content="summary_large_image" />
 
-  <style>
-    :root{
-      --bg:#07080c; --panel:rgba(18,19,24,.65); --text:#e7e9ee; --muted:#a3a9b7; --brand:#74c0ff; --accent:#66f0a0; --ring:#8b5cf6;
-      --shadow: 0 18px 60px rgba(0,0,0,.35);
-    }
-    :root.light{
-      --bg:#f6f7fb; --panel:rgba(255,255,255,.75); --text:#16181d; --muted:#5d667b; --brand:#0b74ff; --accent:#0bbf72; --ring:#7c3aed;
-      --shadow: 0 22px 60px rgba(0,0,0,.10);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text); letter-spacing:.2px; background:var(--bg);
-    }
-    /* Animated gradient glow background */
-    body::before{
-      content:""; position:fixed; inset:-20%; z-index:-1;
-      background: radial-gradient(60% 40% at 20% 10%, color-mix(in oklab, var(--brand) 35%, transparent), transparent 60%),
-                  radial-gradient(50% 35% at 80% 0%, color-mix(in oklab, var(--ring) 30%, transparent), transparent 60%),
-                  radial-gradient(60% 45% at 50% 100%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 60%);
-      filter: blur(40px) saturate(130%);
-      animation: float 18s linear infinite alternate;
-    }
-    @keyframes float{ to{ transform: translate3d(0,-2%,0) scale(1.02);} }
-    @media (prefers-reduced-motion: reduce){ body::before{ animation:none } }
 
-    a{color:var(--brand); text-decoration:none}
-    a:hover{ text-decoration:underline }
-    .container{ max-width:1100px; margin:0 auto; padding:24px }
+<style>
+:root{
+--bg:#07080c; --panel:rgba(18,19,24,.65); --text:#e7e9ee; --muted:#a3a9b7; --brand:#74c0ff; --accent:#66f0a0; --ring:#8b5cf6;
+--shadow: 0 18px 60px rgba(0,0,0,.35);
+}
+:root.light{
+--bg:#f6f7fb; --panel:rgba(255,255,255,.75); --text:#16181d; --muted:#5d667b; --brand:#0b74ff; --accent:#0bbf72; --ring:#7c3aed;
+--shadow: 0 22px 60px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+color:var(--text); letter-spacing:.2px; background:var(--bg);
+}
+/* Animated gradient glow background */
+body::before{
+content:""; position:fixed; inset:-20%; z-index:-1;
+background: radial-gradient(60% 40% at 20% 10%, color-mix(in oklab, var(--brand) 35%, transparent), transparent 60%),
+radial-gradient(50% 35% at 80% 0%, color-mix(in oklab, var(--ring) 30%, transparent), transparent 60%),
+radial-gradient(60% 45% at 50% 100%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 60%);
+filter: blur(40px) saturate(130%);
+animation: float 18s linear infinite alternate;
+}
+@keyframes float{ to{ transform: translate3d(0,-2%,0) scale(1.02);} }
+@media (prefers-reduced-motion: reduce){ body::before{ animation:none } }
 
-    header{ position:sticky; top:0; backdrop-filter:saturate(1.4) blur(10px); background:linear-gradient(180deg, color-mix(in oklab, var(--bg) 40%, transparent), transparent); border-bottom:1px solid color-mix(in oklab, var(--text) 10%, transparent); z-index:3 }
-    .nav{ display:flex; align-items:center; gap:16px; justify-content:space-between }
-    .nav a.btn{ padding:10px 14px; border-radius:14px; background:var(--panel); border:1px solid color-mix(in oklab, var(--text) 10%, transparent); box-shadow:var(--shadow); transition: transform .15s ease }
-    .nav a.btn:hover{ transform: translateY(-1px) }
 
-    .hero{ display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center; padding-block:48px }
-    .card{ background:var(--panel); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); border-radius:22px; padding:24px; box-shadow:var(--shadow); position:relative; overflow:hidden }
-    .card::after{ content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none; background:linear-gradient(120deg, color-mix(in oklab, var(--brand) 35%, transparent), transparent 30%, color-mix(in oklab, var(--accent) 25%, transparent) 60%, transparent 80%); opacity:.25 }
-    .card:hover{ transform: translateY(-2px); }
+a{color:var(--brand); text-decoration:none}
+a:hover{ text-decoration:underline }
+.container{ max-width:1100px; margin:0 auto; padding:24px }
 
-    h1{ font-size:clamp(30px,4.2vw,46px); line-height:1.12; margin:0 0 10px; letter-spacing:.2px }
-    .subtitle{ color:var(--muted); margin:0 0 18px }
-    .pill{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:linear-gradient(135deg, color-mix(in oklab, var(--brand) 25%, transparent), color-mix(in oklab, var(--ring) 20%, transparent)); border:1px solid color-mix(in oklab, var(--brand) 55%, transparent); color:color-mix(in oklab, var(--text) 90%, white); font-weight:700; letter-spacing:.3px }
 
-    .grid{ display:grid; gap:18px }
-    .grid.cols-3{ grid-template-columns:repeat(3,1fr) }
-    .grid.cols-2{ grid-template-columns:repeat(2,1fr) }
+header{ position:sticky; top:0; backdrop-filter:saturate(1.4) blur(10px); background:linear-gradient(180deg, color-mix(in oklab, var(--bg) 40%, transparent), transparent); border-bottom:1px solid color-mix(in oklab, var(--text) 10%, transparent); z-index:3 }
+.nav{ display:flex; align-items:center; gap:16px; justify-content:space-between }
+.nav a.btn{ padding:10px 14px; border-radius:14px; background:var(--panel); border:1px solid color-mix(in oklab, var(--text) 10%, transparent); box-shadow:var(--shadow); transition: transform .15s ease }
+.nav a.btn:hover{ transform: translateY(-1px) }
 
-    .section{ padding-block:30px }
-    .section h2{ margin:0 0 12px; font-size:26px }
-    .muted{ color:var(--muted) }
-    .kvs{ display:flex; flex-wrap:wrap; gap:10px }
-    .kv{ padding:8px 12px; background:color-mix(in oklab, var(--text) 6%, transparent); border-radius:12px; border:1px solid color-mix(in oklab, var(--text) 10%, transparent) }
 
-    .pdf-note{ font-size:14px; }
+.hero{ display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center; padding-block:48px }
+.card{ background:var(--panel); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); border-radius:22px; padding:24px; box-shadow:var(--shadow); position:relative; overflow:hidden }
+.card::after{ content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none; background:linear-gradient(120deg, color-mix(in oklab, var(--brand) 35%, transparent), transparent 30%, color-mix(in oklab, var(--accent) 25%, transparent) 60%, transparent 80%); opacity:.25 }
+.card:hover{ transform: translateY(-2px); }
 
-    footer{ padding:28px 0; color:var(--muted); border-top:1px dashed color-mix(in oklab, var(--text) 14%, transparent) }
 
-    .row{ display:flex; gap:18px; align-items:center; flex-wrap:wrap }
-    .actions{ display:flex; gap:12px; flex-wrap:wrap }
-    .btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px; border:1px solid color-mix(in oklab, var(--text) 12%, transparent); background:var(--panel); color:var(--text); cursor:pointer; transition: transform .15s ease, box-shadow .15s ease }
-    .btn.primary{ background:linear-gradient(135deg, color-mix(in oklab, var(--brand) 75%, transparent), color-mix(in oklab, var(--accent) 35%, transparent)); color:#fff; box-shadow: 0 6px 24px color-mix(in oklab, var(--brand) 30%, transparent) }
-    .btn:hover{ transform:translateY(-1px) }
-    .tag{ font-size:12px; padding:4px 8px; border-radius:999px; background:color-mix(in oklab, var(--text) 7%, transparent); border:1px solid color-mix(in oklab, var(--text) 10%, transparent) }
+h1{ font-size:clamp(30px,4.2vw,46px); line-height:1.12; margin:0 0 10px; letter-spacing:.2px }
+.subtitle{ color:var(--muted); margin:0 0 18px }
+.pill{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:linear-gradient(135deg, color-mix(in oklab, var(--brand) 25%, transparent), color-mix(in oklab, var(--ring) 20%, transparent)); border:1px solid color-mix(in oklab, var(--brand) 55%, transparent); color:color-mix(in oklab, var(--text) 90%, white); font-weight:700; letter-spacing:.3px }
 
-    /* Avatar badge */
-    .avatar{ width:84px; height:84px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg, color-mix(in oklab, var(--brand) 40%, transparent), color-mix(in oklab, var(--accent) 35%, transparent)); border:2px solid color-mix(in oklab, var(--text) 14%, transparent); font-weight:800; font-size:28px; color:#061018; box-shadow: var(--shadow) }
 
-    @media (max-width:900px){ .hero{ grid-template-columns:1fr } .grid.cols-3{ grid-template-columns:1fr 1fr } }
-    @media (max-width:640px){ .grid.cols-3{ grid-template-columns:1fr } .grid.cols-2{ grid-template-columns:1fr } }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="container nav">
-      <div class="row">
-        <strong>Michael Alibeaj</strong>
-        <span class="tag">Big Data & BI</span>
-      </div>
-      <div class="actions">
-        <a href="#projects" class="btn">Projects</a>
-        <a href="#skills" class="btn">Skills</a>
-        <a href="cv.html" class="btn" target="_blank" rel="noreferrer">CV</a>
-        <button id="themeBtn" class="btn" aria-label="Toggle theme">🌓 Theme</button>
-        <a class="btn primary" href="#contact">Contact</a>
-      </div>
-    </div>
-  </header>
+.grid{ display:grid; gap:18px }
+.grid.cols-3{ grid-template-columns:repeat(3,1fr) }
+.grid.cols-2{ grid-template-columns:repeat(2,1fr) }
 
-  <main class="container">
-    <section class="hero">
-      <div class="card">
-        <span class="pill">🎯 Business Intelligence Engineer — Internship</span>
-        <h1>Data, Insights, & Scalable Analytics</h1>
-        <p class="subtitle">M.Sc. Computer Science @ Politecnico di Milano. Focus on data pipelines, BI dashboards, and ML-driven analytics that support decisions.</p>
-        <div class="kvs" aria-label="Quick facts">
-          <span class="kv">🏆 1st — DMFW Challenge</span>
-          <span class="kv">🥈 2nd — AN2DL Challenge</span>
-          <span class="kv">📈 Power BI, SQL, Python</span>
-        </div>
-        <div class="actions" style="margin-top:16px">
-          <a class="btn primary" href="cv.html">View CV</a>
-          <a class="btn" href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">LinkedIn</a>
-        </div>
-      </div>
-      <div class="card">
-        <h2 style="margin-top:0">At a glance</h2>
-        <ul class="muted">
-          <li>Built Python ETL pipelines and BI dashboards for a 6-country agriculture analytics project (MENA).</li>
-          <li>Led a 5-person team to ship a RAG platform; improved search relevance by 28% and reduced latency by 35%.</li>
-          <li>Top 1% in vision tasks; solid foundations in statistics, performance modeling, and system design.</li>
-        </ul>
-        <div class="actions">
-          <a class="btn" href="#projects">See projects</a>
-          <a class="btn" href="#skills">See skills</a>
-        </div>
-      </div>
-    </section>
 
-    <section id="projects" class="section">
-      <h2>Selected Projects</h2>
+.section{ padding-block:30px }
+.section h2{ margin:0 0 12px; font-size:26px }
+.muted{ color:var(--muted) }
+.kvs{ display:flex; flex-wrap:wrap; gap:10px }
+.kv{ padding:8px 12px; background:color-mix(in oklab, var(--text) 6%, transparent); border-radius:12px; border:1px solid color-mix(in oklab, var(--text) 10%, transparent) }
 
-      <!-- Featured projects you control manually -->
-      <h3 class="muted" style="margin-top:0">Featured</h3>
-      <div class="grid cols-3">
-        <article class="card">
-          <h3 style="margin-top:0">Staples — Early Warning & Decision Support</h3>
-          <p class="muted">Python ETL for FAOSTAT & UN Data, KPIs for storage & pricing trends, integrated into dashboards supporting supply chain & trade decisions.</p>
-          <div class="row">
-            <span class="tag">Python</span>
-            <span class="tag">ETL</span>
-            <span class="tag">BI</span>
-          </div>
-          <p><a href="https://www.som.polimi.it/en/staples-strengthening-resilience-of-cereal-value-chains/" target="_blank" rel="noreferrer">Project context</a></p>
-        </article>
-        <article class="card">
-          <h3 style="margin-top:0">RAG Q&A Platform</h3>
-          <p class="muted">FAISS-based retrieval, preprocessing pipelines (tokenization & chunking), modular architecture; +28% relevance, −35% latency.</p>
-          <div class="row">
-            <span class="tag">Python</span>
-            <span class="tag">FAISS</span>
-            <span class="tag">LLM</span>
-          </div>
-          <p><a href="https://github.com/MikeTech01/NLP" target="_blank" rel="noreferrer">GitHub</a></p>
-        </article>
-        <article class="card">
-          <h3 style="margin-top:0">Deep Learning for Vision</h3>
-          <p class="muted">Top 1% leaderboard among ~800 participants; image classification & semantic segmentation using TensorFlow/Keras.</p>
-          <div class="row">
-            <span class="tag">TensorFlow</span>
-            <span class="tag">Keras</span>
-            <span class="tag">Computer Vision</span>
-          </div>
-          <p><a href="https://github.com/MikeTech01/AN2DL" target="_blank" rel="noreferrer">GitHub</a></p>
-        </article>
-      </div>
 
-      <!-- Auto grid from GitHub -->
-      <h3 style="margin-top:26px">More Projects</h3>
-      <p class="muted" style="margin-top:0">Click the button to load repositories from GitHub (non-forks). This avoids auto-calling the API on page load.</p>
-      <div class="actions" style="margin-bottom:12px">
-        <button class="btn" id="loadProjectsBtn">⤵ Load GitHub Projects</button>
-      </div>
-      <div id="gh-projects" class="grid cols-3" aria-live="polite" aria-busy="false"></div>
-      </div>
-    </section>
+.pdf-note{ font-size:14px; }
 
-    <section id="skills" class="section">
-      <h2>Skills</h2>
-      <div class="grid cols-2">
-        <div class="card">
-          <h3 style="margin-top:0">Data & BI</h3>
-          <div class="kvs">
-            <span class="kv">SQL</span>
-            <span class="kv">Power BI</span>
-            <span class="kv">Excel</span>
-            <span class="kv">Matplotlib</span>
-            <span class="kv">Pandas</span>
-          </div>
-        </div>
-        <div class="card">
-          <h3 style="margin-top:0">Engineering</h3>
-          <div class="kvs">
-            <span class="kv">Python</span>
-            <span class="kv">C</span>
-            <span class="kv">Java</span>
-            <span class="kv">Git/GitHub CI</span>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    
+footer{ padding:28px 0; color:var(--muted); border-top:1px dashed color-mix(in oklab, var(--text) 14%, transparent) }
 
-    <section id="contact" class="section">
-      <h2>Contact</h2>
-      <div class="card">
-        <p style="margin:0 0 10px">Open to Business Intelligence Engineer internship opportunities in Milan.</p>
-        <ul class="muted" style="margin:0 0 14px; padding-left:18px">
-          <li>Email: <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></li>
-          <li>GitHub: <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></li>
-          <li>LinkedIn: <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">LinkedIn Profile</a></li>
-          <li>Location: Milan, Italy</li>
-        </ul>
-        <div class="actions">
-          <a class="btn" href="#resume">View CV</a>
-          <a class="btn" href="#projects">See projects</a>
-        </div>
-      </div>
-    </section>
-  </main>
 
-  <footer>
-    <div class="container">
-      © <span id="year"></span> Michael Alibeaj • Built for GitHub Pages • <a href="#" id="toggleContrast">Accessibility</a>
-    </div>
-  </footer>
-
-  <script>
-    // Theme toggle with localStorage
-    const root = document.documentElement;
-    const themeBtn = document.getElementById('themeBtn');
-    const saved = localStorage.getItem('theme') || 'dark';
-    if(saved === 'light'){ root.classList.add('light'); }
-    themeBtn.addEventListener('click', () => {
-      root.classList.toggle('light');
-      localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
-    });
-
-    // Current year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Simple high-contrast toggle (adds stronger borders)
-    document.getElementById('toggleContrast').addEventListener('click', (e)=>{
-      e.preventDefault();
-      document.body.classList.toggle('hi-contrast');
-    });
-  </script>
-
-  <style>
-    /* Accessibility booster on demand */
-    .hi-contrast :is(.card,.btn,.kv){ border-color: color-mix(in oklab, var(--text) 30%, transparent) !important; }
-    .hi-contrast *{ outline-color: color-mix(in oklab, var(--text) 30%, transparent); }
-  </style>
-
-  <!-- Structured data for SEO -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Michael Alibeaj",
-      "jobTitle": "Business Intelligence Engineer (Intern)",
-      "address": {"@type":"PostalAddress","addressLocality":"Milan","addressCountry":"IT"},
-      "email": "mailto:malibeaj01@outlook.com",
-      "url": "",
-      "sameAs": [
-        "https://github.com/MikeTech01",
-        "https://www.linkedin.com/in/michael-alibeaj-9810771a6/"
-      ]
-    }
-  </script>
-  <script>
-    // ------- GitHub Projects Auto Grid -------
-    async function fetchGitHubProjects(username, containerId){
-      const container = document.getElementById(containerId);
-      try{
-        const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=24&sort=updated` ,{
-          headers:{
-            // Enable topics field
-            'Accept':'application/vnd.github+json'
-          }
-        });
-        if(!res.ok) throw new Error('GitHub API error');
-        let repos = await res.json();
-        // Filter: no forks, has description or non-empty, sort by stars then updated
-        repos = repos.filter(r => !r.fork)
-                     .sort((a,b)=> (b.stargazers_count - a.stargazers_count) || (new Date(b.updated_at)-new Date(a.updated_at)))
-                     .slice(0,9);
-
-        container.innerHTML = '';
-        if(repos.length === 0){
-          container.innerHTML = '<div class="card">No repositories to show right now.</div>';
-          container.setAttribute('aria-busy','false');
-          return;
-        }
-
-        for(const r of repos){
-          const card = document.createElement('article');
-          card.className = 'card';
-          card.innerHTML = `
-            <h3 style="margin-top:0">${r.name.replace(/-/g,' ')}</h3>
-            <p class="muted">${(r.description||'No description provided.').slice(0,160)}</p>
-            <div class="row">
-              ${r.language ? `<span class='tag'>${r.language}</span>` : ''}
-              <span class='tag'>★ ${r.stargazers_count}</span>
-              <span class='tag'>Updated: ${new Date(r.updated_at).toLocaleDateString()}</span>
-            </div>
-            <p style="margin-top:10px"><a href="${r.html_url}" target="_blank" rel="noreferrer">View on GitHub</a></p>
-          `;
-          container.appendChild(card);
-        }
-      }catch(err){
-        container.innerHTML = '<div class="card">Could not load GitHub projects. Check your username or rate limits.</div>';
-      }finally{
-        container.setAttribute('aria-busy','false');
-      }
-    }
-
-    // Change username here if needed
-    // Button-triggered load instead of auto
-    const loadBtn = document.getElementById('loadProjectsBtn');
-    if(loadBtn){
-      loadBtn.addEventListener('click', ()=>{
-        const container = document.getElementById('gh-projects');
-        container.setAttribute('aria-busy','true');
-        loadBtn.disabled = true;
-        loadBtn.textContent = 'Loading…';
-        fetchGitHubProjects('MikeTech01', 'gh-projects').finally(()=>{
-          loadBtn.textContent = 'Reload Projects';
-          loadBtn.disabled = false;
-        });
-      });
-    }
-  </script>
-  </body>
-</html>
+.row{ display:flex; gap:18px; align-items:center; flex-wrap:wrap }
+.actions{ display:flex; gap:12px; flex-wrap:wrap }
+.btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px; border:1px solid color-mix(in oklab, var(--text) 12%, transparent); background:var(--panel); color:var(--text); cursor:pointer; transition: transform .15s ease, box-shadow .15s ease }
+</body>
