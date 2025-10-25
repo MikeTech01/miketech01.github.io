@@ -1,90 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Michael Alibeaj — Portfolio & CV</title>
-<meta name="description" content="Portfolio of Michael Alibeaj — Computer Science M.Sc. student focused on Big Data, AI, and Business Intelligence." />
-<meta name="robots" content="index,follow" />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚙️</text></svg>">
-<!-- Open Graph / Twitter -->
-<meta property="og:title" content="Michael Alibeaj — Portfolio & CV" />
-<meta property="og:description" content="Computer Science M.Sc. student focusing on Data, AI, and BI. Projects, achievements, and downloadable CV." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="" />
-<meta property="og:image" content="" />
-<meta name="twitter:card" content="summary_large_image" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Michael Alibeaj — Portfolio</title>
+  <meta name="description" content="Portfolio of Michael Alibeaj — Computer Science M.Sc. student focused on Big Data, AI, and Business Intelligence." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚙️</text></svg>">
+  <style>
+    :root{
+      --bg:#07080c; --panel:rgba(18,19,24,.65); --text:#e7e9ee; --muted:#a3a9b7;
+      --brand:#74c0ff; --accent:#66f0a0; --ring:#8b5cf6;
+      --shadow:0 18px 60px rgba(0,0,0,.35);
+    }
+    :root.light{
+      --bg:#f6f7fb; --panel:rgba(255,255,255,.8); --text:#16181d; --muted:#5d667b;
+      --brand:#0b74ff; --accent:#0bbf72; --ring:#7c3aed; --shadow:0 22px 60px rgba(0,0,0,.1);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:var(--bg);color:var(--text);letter-spacing:.2px;
+    }
+    body::before{
+      content:"";position:fixed;inset:-20%;z-index:-1;
+      background:radial-gradient(60% 40% at 20% 10%,color-mix(in oklab,var(--brand) 35%,transparent),transparent 60%),
+                 radial-gradient(50% 35% at 80% 0%,color-mix(in oklab,var(--ring) 30%,transparent),transparent 60%),
+                 radial-gradient(60% 45% at 50% 100%,color-mix(in oklab,var(--accent) 18%,transparent),transparent 60%);
+      filter:blur(40px) saturate(130%);
+      animation:float 18s linear infinite alternate;
+    }
+    @keyframes float{to{transform:translate3d(0,-2%,0) scale(1.02)}}
+    a{color:var(--brand);text-decoration:none}a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;backdrop-filter:saturate(1.4) blur(10px);
+      background:linear-gradient(180deg,color-mix(in oklab,var(--bg) 40%,transparent),transparent);
+      border-bottom:1px solid color-mix(in oklab,var(--text) 10%,transparent);z-index:3}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .nav a.btn{padding:10px 14px;border-radius:14px;background:var(--panel);
+      border:1px solid color-mix(in oklab,var(--text) 10%,transparent);box-shadow:var(--shadow)}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;padding-block:48px}
+    .card{background:var(--panel);border:1px solid color-mix(in oklab,var(--text) 12%,transparent);
+      border-radius:22px;padding:24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .card::after{content:\"\";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+      background:linear-gradient(120deg,color-mix(in oklab,var(--brand) 35%,transparent),transparent 30%,color-mix(in oklab,var(--accent) 25%,transparent) 60%,transparent 80%);
+      opacity:.25}
+    h1{font-size:clamp(30px,4.2vw,46px);line-height:1.12;margin:0 0 10px}
+    .subtitle{color:var(--muted);margin:0 0 18px}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
+      background:linear-gradient(135deg,color-mix(in oklab,var(--brand) 25%,transparent),color-mix(in oklab,var(--ring) 20%,transparent));
+      border:1px solid color-mix(in oklab,var(--brand) 55%,transparent);color:white;font-weight:700}
+    .grid{display:grid;gap:18px}.grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .section{padding-block:30px}.section h2{margin:0 0 12px;font-size:26px}
+    .muted{color:var(--muted)}
+    .kvs{display:flex;flex-wrap:wrap;gap:10px}
+    .kv{padding:8px 12px;background:color-mix(in oklab,var(--text) 6%,transparent);
+      border-radius:12px;border:1px solid color-mix(in oklab,var(--text) 10%,transparent)}
+    footer{padding:28px 0;color:var(--muted);border-top:1px dashed color-mix(in oklab,var(--text) 14%,transparent)}
+    .row{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:14px;
+      border:1px solid color-mix(in oklab,var(--text) 12%,transparent);background:var(--panel);
+      color:var(--text);cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+    .btn.primary{background:linear-gradient(135deg,color-mix(in oklab,var(--brand) 75%,transparent),
+      color-mix(in oklab,var(--accent) 35%,transparent));color:#fff;box-shadow:0 6px 24px color-mix(in oklab,var(--brand) 30%,transparent)}
+    .avatar{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;
+      background:linear-gradient(135deg,color-mix(in oklab,var(--brand) 40%,transparent),
+      color-mix(in oklab,var(--accent) 35%,transparent));border:2px solid color-mix(in oklab,var(--text) 14%,transparent);
+      font-weight:800;font-size:28px;color:#061018;box-shadow:var(--shadow)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="row">
+        <div class="avatar">MA</div>
+        <strong>Michael Alibeaj</strong>
+      </div>
+      <div class="actions">
+        <a href="#projects" class="btn">Projects</a>
+        <a href="#skills" class="btn">Skills</a>
+        <a href="cv.html" class="btn" target="_blank" rel="noreferrer">CV</a>
+        <a href="#contact" class="btn primary">Contact</a>
+      </div>
+    </div>
+  </header>
 
+  <main class="container">
+    <section class="hero">
+      <div class="card">
+        <span class="pill">🎯 Business Intelligence Engineer — Internship</span>
+        <h1>Turning Data Into Actionable Insight</h1>
+        <p class="subtitle">M.Sc. Computer Science @ Politecnico di Milano. Specializing in Big Data, BI dashboards, and ML analytics for data-driven decision making.</p>
+        <div class="kvs">
+          <span class="kv">🏆 DMFW Challenge — 1st</span>
+          <span class="kv">🥈 AN2DL Challenge — 2nd</span>
+          <span class="kv">📊 Power BI, SQL, Python</span>
+        </div>
+        <div class="actions" style="margin-top:16px">
+          <a class="btn primary" href="#projects">Explore Projects</a>
+          <a class="btn" href="https://github.com/MikeTech01" target="_blank">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+      <div class="card">
+        <h2 style="margin-top:0">Highlights</h2>
+        <ul class="muted">
+          <li>Built analytics pipelines and BI dashboards for multi-country data (FAOSTAT, UN).</li>
+          <li>Led a team of 5 in a RAG project improving relevance by 28%.</li>
+          <li>Top 1% in deep learning challenges; strong quantitative and systems background.</li>
+        </ul>
+      </div>
+    </section>
 
-<style>
-:root{
---bg:#07080c; --panel:rgba(18,19,24,.65); --text:#e7e9ee; --muted:#a3a9b7; --brand:#74c0ff; --accent:#66f0a0; --ring:#8b5cf6;
---shadow: 0 18px 60px rgba(0,0,0,.35);
-}
-:root.light{
---bg:#f6f7fb; --panel:rgba(255,255,255,.75); --text:#16181d; --muted:#5d667b; --brand:#0b74ff; --accent:#0bbf72; --ring:#7c3aed;
---shadow: 0 22px 60px rgba(0,0,0,.10);
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-color:var(--text); letter-spacing:.2px; background:var(--bg);
-}
-/* Animated gradient glow background */
-body::before{
-content:""; position:fixed; inset:-20%; z-index:-1;
-background: radial-gradient(60% 40% at 20% 10%, color-mix(in oklab, var(--brand) 35%, transparent), transparent 60%),
-radial-gradient(50% 35% at 80% 0%, color-mix(in oklab, var(--ring) 30%, transparent), transparent 60%),
-radial-gradient(60% 45% at 50% 100%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 60%);
-filter: blur(40px) saturate(130%);
-animation: float 18s linear infinite alternate;
-}
-@keyframes float{ to{ transform: translate3d(0,-2%,0) scale(1.02);} }
-@media (prefers-reduced-motion: reduce){ body::before{ animation:none } }
+    <section id="projects" class="section">
+      <h2>Featured Projects</h2>
+      <div class="grid cols-3">
+        <article class="card">
+          <h3>Staples — Early Warning System</h3>
+          <p class="muted">Python ETL + KPIs for trade & storage trends across 6 countries.</p>
+          <div class="row"><span class="tag">Python</span><span class="tag">ETL</span><span class="tag">BI</span></div>
+          <p><a href="https://www.som.polimi.it/en/staples-strengthening-resilience-of-cereal-value-chains/" target="_blank">Project Context</a></p>
+        </article>
+        <article class="card">
+          <h3>RAG Q&A Platform</h3>
+          <p class="muted">FAISS retrieval, LLM integration, -35% latency, +28% relevance.</p>
+          <div class="row"><span class="tag">Python</span><span class="tag">FAISS</span><span class="tag">LLM</span></div>
+          <p><a href="https://github.com/MikeTech01/NLP" target="_blank">GitHub</a></p>
+        </article>
+        <article class="card">
+          <h3>Deep Learning for Vision</h3>
+          <p class="muted">Top 1% leaderboard, semantic segmentation & classification.</p>
+          <div class="row"><span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">CV</span></div>
+          <p><a href="https://github.com/MikeTech01/AN2DL" target="_blank">GitHub</a></p>
+        </article>
+      </div>
 
+      <h3 style="margin-top:26px">More Projects</h3>
+      <p class="muted">Click below to load additional repositories from GitHub.</p>
+      <div class="actions"><button class="btn" id="loadProjectsBtn">⤵ Load GitHub Projects</button></div>
+      <div id="gh-projects" class="grid cols-3" aria-live="polite" aria-busy="false"></div>
+    </section>
 
-a{color:var(--brand); text-decoration:none}
-a:hover{ text-decoration:underline }
-.container{ max-width:1100px; margin:0 auto; padding:24px }
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="grid cols-3">
+        <div class="card"><h3>Data & BI</h3><div class="kvs"><span class="kv">SQL</span><span class="kv">Power BI</span><span class="kv">Excel</span><span class="kv">Matplotlib</span></div></div>
+        <div class="card"><h3>Engineering</h3><div class="kvs"><span class="kv">Python</span><span class="kv">C</span><span class="kv">Java</span><span class="kv">GitHub CI</span></div></div>
+        <div class="card"><h3>AI & ML</h3><div class="kvs"><span class="kv">TensorFlow</span><span class="kv">Keras</span><span class="kv">Scikit-learn</span><span class="kv">NLP</span></div></div>
+      </div>
+    </section>
 
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>Open to Business Intelligence Engineer internships in Milan.</p>
+        <ul class="muted">
+          <li>Email: <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></li>
+          <li>GitHub: <a href="https://github.com/MikeTech01">github.com/MikeTech01</a></li>
+          <li>LinkedIn: <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/">LinkedIn</a></li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="cv.html" target="_blank" rel="noreferrer">View CV</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-header{ position:sticky; top:0; backdrop-filter:saturate(1.4) blur(10px); background:linear-gradient(180deg, color-mix(in oklab, var(--bg) 40%, transparent), transparent); border-bottom:1px solid color-mix(in oklab, var(--text) 10%, transparent); z-index:3 }
-.nav{ display:flex; align-items:center; gap:16px; justify-content:space-between }
-.nav a.btn{ padding:10px 14px; border-radius:14px; background:var(--panel); border:1px solid color-mix(in oklab, var(--text) 10%, transparent); box-shadow:var(--shadow); transition: transform .15s ease }
-.nav a.btn:hover{ transform: translateY(-1px) }
+  <footer><div class="container">© <span id="year"></span> Michael Alibeaj • Built for GitHub Pages</div></footer>
 
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-.hero{ display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center; padding-block:48px }
-.card{ background:var(--panel); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); border-radius:22px; padding:24px; box-shadow:var(--shadow); position:relative; overflow:hidden }
-.card::after{ content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none; background:linear-gradient(120deg, color-mix(in oklab, var(--brand) 35%, transparent), transparent 30%, color-mix(in oklab, var(--accent) 25%, transparent) 60%, transparent 80%); opacity:.25 }
-.card:hover{ transform: translateY(-2px); }
+    async function fetchGitHubProjects(username, containerId){
+      const container=document.getElementById(containerId);
+      try{
+        const res=await fetch(`https://api.github.com/users/${username}/repos?per_page=24&sort=updated`);
+        let repos=await res.json();
+        repos=repos.filter(r=>!r.fork)
+                   .sort((a,b)=>b.stargazers_count-a.stargazers_count)
+                   .slice(0,9);
+        container.innerHTML='';
+        for(const r of repos){
+          const card=document.createElement('article');
+          card.className='card';
+          card.innerHTML=`<h3>${r.name.replace(/-/g,' ')}</h3>
+          <p class='muted'>${(r.description||'No description').slice(0,150)}</p>
+          <div class='row'>
+            ${r.language?`<span class='tag'>${r.language}</span>`:''}
+            <span class='tag'>★ ${r.stargazers_count}</span>
+          </div>
+          <p><a href='${r.html_url}' target='_blank'>View on GitHub</a></p>`;
+          container.appendChild(card);
+        }
+      }catch(e){
+        container.innerHTML='<div class=\"card\">Unable to load repos</div>';
+      }
+      container.setAttribute('aria-busy','false');
+    }
 
-
-h1{ font-size:clamp(30px,4.2vw,46px); line-height:1.12; margin:0 0 10px; letter-spacing:.2px }
-.subtitle{ color:var(--muted); margin:0 0 18px }
-.pill{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:linear-gradient(135deg, color-mix(in oklab, var(--brand) 25%, transparent), color-mix(in oklab, var(--ring) 20%, transparent)); border:1px solid color-mix(in oklab, var(--brand) 55%, transparent); color:color-mix(in oklab, var(--text) 90%, white); font-weight:700; letter-spacing:.3px }
-
-
-.grid{ display:grid; gap:18px }
-.grid.cols-3{ grid-template-columns:repeat(3,1fr) }
-.grid.cols-2{ grid-template-columns:repeat(2,1fr) }
-
-
-.section{ padding-block:30px }
-.section h2{ margin:0 0 12px; font-size:26px }
-.muted{ color:var(--muted) }
-.kvs{ display:flex; flex-wrap:wrap; gap:10px }
-.kv{ padding:8px 12px; background:color-mix(in oklab, var(--text) 6%, transparent); border-radius:12px; border:1px solid color-mix(in oklab, var(--text) 10%, transparent) }
-
-
-.pdf-note{ font-size:14px; }
-
-
-footer{ padding:28px 0; color:var(--muted); border-top:1px dashed color-mix(in oklab, var(--text) 14%, transparent) }
-
-
-.row{ display:flex; gap:18px; align-items:center; flex-wrap:wrap }
-.actions{ display:flex; gap:12px; flex-wrap:wrap }
-.btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px; border:1px solid color-mix(in oklab, var(--text) 12%, transparent); background:var(--panel); color:var(--text); cursor:pointer; transition: transform .15s ease, box-shadow .15s ease }
+    const btn=document.getElementById('loadProjectsBtn');
+    btn.addEventListener('click',()=>{
+      btn.disabled=true;btn.textContent='Loading...';
+      fetchGitHubProjects('MikeTech01','gh-projects').finally(()=>{
+        btn.textContent='Reload Projects';btn.disabled=false;
+      });
+    });
+  </script>
 </body>
+</html>
