@@ -18,55 +18,75 @@
 
   <style>
     :root{
-      --bg:#0b0c10; --panel:#121318; --text:#e7e9ee; --muted:#a3a9b7; --brand:#6bc1ff; --accent:#66f0a0;
-      --shadow: 0 8px 24px rgba(0,0,0,.25);
+      --bg:#07080c; --panel:rgba(18,19,24,.65); --text:#e7e9ee; --muted:#a3a9b7; --brand:#74c0ff; --accent:#66f0a0; --ring:#8b5cf6;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
     }
     :root.light{
-      --bg:#f6f7fb; --panel:#ffffff; --text:#16181d; --muted:#5d667b; --brand:#006dff; --accent:#0bbf72;
-      --shadow: 0 10px 24px rgba(0,0,0,.08);
+      --bg:#f6f7fb; --panel:rgba(255,255,255,.75); --text:#16181d; --muted:#5d667b; --brand:#0b74ff; --accent:#0bbf72; --ring:#7c3aed;
+      --shadow: 0 22px 60px rgba(0,0,0,.10);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background:var(--bg); color:var(--text); letter-spacing:.2px;
+      color:var(--text); letter-spacing:.2px; background:var(--bg);
     }
+    /* Animated gradient glow background */
+    body::before{
+      content:""; position:fixed; inset:-20%; z-index:-1;
+      background: radial-gradient(60% 40% at 20% 10%, color-mix(in oklab, var(--brand) 35%, transparent), transparent 60%),
+                  radial-gradient(50% 35% at 80% 0%, color-mix(in oklab, var(--ring) 30%, transparent), transparent 60%),
+                  radial-gradient(60% 45% at 50% 100%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 60%);
+      filter: blur(40px) saturate(130%);
+      animation: float 18s linear infinite alternate;
+    }
+    @keyframes float{ to{ transform: translate3d(0,-2%,0) scale(1.02);} }
+    @media (prefers-reduced-motion: reduce){ body::before{ animation:none } }
+
     a{color:var(--brand); text-decoration:none}
     a:hover{ text-decoration:underline }
     .container{ max-width:1100px; margin:0 auto; padding:24px }
-    header{ position:sticky; top:0; backdrop-filter:saturate(1.4) blur(8px); background:color-mix(in oklab, var(--bg) 85%, transparent); border-bottom:1px solid color-mix(in oklab, var(--text) 12%, transparent); z-index:3 }
-    .nav{ display:flex; align-items:center; gap:16px; justify-content:space-between }
-    .nav a.btn{ padding:10px 14px; border-radius:12px; background:var(--panel); border:1px solid color-mix(in oklab, var(--text) 10%, transparent); box-shadow:var(--shadow); }
 
-    .hero{ display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center; padding-block:40px }
-    .card{ background:var(--panel); border:1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius:20px; padding:24px; box-shadow:var(--shadow) }
-    h1{ font-size:clamp(28px,4.2vw,44px); line-height:1.15; margin:0 0 10px; }
+    header{ position:sticky; top:0; backdrop-filter:saturate(1.4) blur(10px); background:linear-gradient(180deg, color-mix(in oklab, var(--bg) 40%, transparent), transparent); border-bottom:1px solid color-mix(in oklab, var(--text) 10%, transparent); z-index:3 }
+    .nav{ display:flex; align-items:center; gap:16px; justify-content:space-between }
+    .nav a.btn{ padding:10px 14px; border-radius:14px; background:var(--panel); border:1px solid color-mix(in oklab, var(--text) 10%, transparent); box-shadow:var(--shadow); transition: transform .15s ease }
+    .nav a.btn:hover{ transform: translateY(-1px) }
+
+    .hero{ display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center; padding-block:48px }
+    .card{ background:var(--panel); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); border-radius:22px; padding:24px; box-shadow:var(--shadow); position:relative; overflow:hidden }
+    .card::after{ content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none; background:linear-gradient(120deg, color-mix(in oklab, var(--brand) 35%, transparent), transparent 30%, color-mix(in oklab, var(--accent) 25%, transparent) 60%, transparent 80%); opacity:.25 }
+    .card:hover{ transform: translateY(-2px); }
+
+    h1{ font-size:clamp(30px,4.2vw,46px); line-height:1.12; margin:0 0 10px; letter-spacing:.2px }
     .subtitle{ color:var(--muted); margin:0 0 18px }
-    .pill{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:color-mix(in oklab, var(--brand) 20%, transparent); border:1px solid color-mix(in oklab, var(--brand) 55%, transparent); color:color-mix(in oklab, var(--text) 90%, white); font-weight:600 }
+    .pill{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:linear-gradient(135deg, color-mix(in oklab, var(--brand) 25%, transparent), color-mix(in oklab, var(--ring) 20%, transparent)); border:1px solid color-mix(in oklab, var(--brand) 55%, transparent); color:color-mix(in oklab, var(--text) 90%, white); font-weight:700; letter-spacing:.3px }
+
     .grid{ display:grid; gap:18px }
     .grid.cols-3{ grid-template-columns:repeat(3,1fr) }
     .grid.cols-2{ grid-template-columns:repeat(2,1fr) }
 
-    .section{ padding-block:28px }
-    .section h2{ margin:0 0 10px; font-size:24px }
+    .section{ padding-block:30px }
+    .section h2{ margin:0 0 12px; font-size:26px }
     .muted{ color:var(--muted) }
     .kvs{ display:flex; flex-wrap:wrap; gap:10px }
-    .kv{ padding:8px 12px; background:color-mix(in oklab, var(--text) 6%, transparent); border-radius:10px; border:1px solid color-mix(in oklab, var(--text) 10%, transparent) }
+    .kv{ padding:8px 12px; background:color-mix(in oklab, var(--text) 6%, transparent); border-radius:12px; border:1px solid color-mix(in oklab, var(--text) 10%, transparent) }
 
-    .pdf-embed{ height:72vh; width:100%; border:none; border-radius:16px; background:#000; }
     .pdf-note{ font-size:14px; }
 
     footer{ padding:28px 0; color:var(--muted); border-top:1px dashed color-mix(in oklab, var(--text) 14%, transparent) }
 
     .row{ display:flex; gap:18px; align-items:center; flex-wrap:wrap }
     .actions{ display:flex; gap:12px; flex-wrap:wrap }
-    .btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid color-mix(in oklab, var(--text) 12%, transparent); background:var(--panel); color:var(--text); cursor:pointer }
-    .btn.primary{ background:linear-gradient(135deg, color-mix(in oklab, var(--brand) 75%, transparent), color-mix(in oklab, var(--accent) 35%, transparent)); color:#fff }
+    .btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px; border:1px solid color-mix(in oklab, var(--text) 12%, transparent); background:var(--panel); color:var(--text); cursor:pointer; transition: transform .15s ease, box-shadow .15s ease }
+    .btn.primary{ background:linear-gradient(135deg, color-mix(in oklab, var(--brand) 75%, transparent), color-mix(in oklab, var(--accent) 35%, transparent)); color:#fff; box-shadow: 0 6px 24px color-mix(in oklab, var(--brand) 30%, transparent) }
     .btn:hover{ transform:translateY(-1px) }
     .tag{ font-size:12px; padding:4px 8px; border-radius:999px; background:color-mix(in oklab, var(--text) 7%, transparent); border:1px solid color-mix(in oklab, var(--text) 10%, transparent) }
 
+    /* Avatar badge */
+    .avatar{ width:84px; height:84px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg, color-mix(in oklab, var(--brand) 40%, transparent), color-mix(in oklab, var(--accent) 35%, transparent)); border:2px solid color-mix(in oklab, var(--text) 14%, transparent); font-weight:800; font-size:28px; color:#061018; box-shadow: var(--shadow) }
+
     @media (max-width:900px){ .hero{ grid-template-columns:1fr } .grid.cols-3{ grid-template-columns:1fr 1fr } }
-    @media (max-width:640px){ .grid.cols-3{ grid-template-columns:1fr } .grid.cols-2{ grid-template-columns:1fr } .pdf-embed{ height:64vh } }
+    @media (max-width:640px){ .grid.cols-3{ grid-template-columns:1fr } .grid.cols-2{ grid-template-columns:1fr } }
   </style>
 </head>
 <body>
@@ -79,7 +99,7 @@
       <div class="actions">
         <a href="#projects" class="btn">Projects</a>
         <a href="#skills" class="btn">Skills</a>
-        <a href="cv.html" class="btn">CV</a>
+        <a href="cv.html" class="btn" target="_blank" rel="noreferrer">CV</a>
         <button id="themeBtn" class="btn" aria-label="Toggle theme">🌓 Theme</button>
         <a class="btn primary" href="#contact">Contact</a>
       </div>
@@ -190,21 +210,7 @@
       </div>
     </section>
 
-    <section id="resume" class="section">
-      <h2>CV / Resume</h2>
-      <div class="card">
-        <p class="muted">Inline viewer below. If your browser blocks PDF previews, use the download button.</p>
-        <!-- Place your PDF file in the same folder and name it `resume.pdf` (or change the src below). -->
-        <object class="pdf-embed" data="resume.pdf" type="application/pdf">
-          <iframe class="pdf-embed" src="resume.pdf"></iframe>
-        </object>
-        <div class="row" style="margin-top:12px">
-          <a class="btn primary" href="resume.pdf" download>⬇️ Download CV</a>
-          <a class="btn" href="#contact">Contact me</a>
-          <span class="pdf-note muted">File not showing? Some mobile browsers disable PDF preview — download instead.</span>
-        </div>
-      </div>
-    </section>
+    
 
     <section id="contact" class="section">
       <h2>Contact</h2>
@@ -336,18 +342,5 @@
       });
     }
   </script>
-  <script>
-    // Make in-page CV section offer a full-page link too
-    (function(){
-      const resumeSection = document.querySelector('#resume .actions');
-      if(resumeSection){
-        const link = document.createElement('a');
-        link.className = 'btn';
-        link.href = 'cv.html';
-        link.textContent = 'Open full-page CV';
-        resumeSection.prepend(link);
-      }
-    })();
-  </script>
-</body>
-<!--
+  </body>
+</html>
