@@ -79,7 +79,7 @@
       <div class="actions">
         <a href="#projects" class="btn">Projects</a>
         <a href="#skills" class="btn">Skills</a>
-        <a href="#resume" class="btn">CV</a>
+        <a href="cv.html" class="btn">CV</a>
         <button id="themeBtn" class="btn" aria-label="Toggle theme">🌓 Theme</button>
         <a class="btn primary" href="#contact">Contact</a>
       </div>
@@ -98,7 +98,7 @@
           <span class="kv">📈 Power BI, SQL, Python</span>
         </div>
         <div class="actions" style="margin-top:16px">
-          <a class="btn primary" href="#resume">View CV</a>
+          <a class="btn primary" href="cv.html">View CV</a>
           <a class="btn" href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">GitHub</a>
           <a class="btn" href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">LinkedIn</a>
         </div>
@@ -157,9 +157,11 @@
 
       <!-- Auto grid from GitHub -->
       <h3 style="margin-top:26px">More Projects</h3>
-      <p class="muted" style="margin-top:0">Pulled automatically from GitHub (recently updated, non-forks). Edit the username in the script if needed.</p>
-      <div id="gh-projects" class="grid cols-3" aria-live="polite" aria-busy="true">
-        <div class="card" id="gh-loading">Loading projects…</div>
+      <p class="muted" style="margin-top:0">Click the button to load repositories from GitHub (non-forks). This avoids auto-calling the API on page load.</p>
+      <div class="actions" style="margin-bottom:12px">
+        <button class="btn" id="loadProjectsBtn">⤵ Load GitHub Projects</button>
+      </div>
+      <div id="gh-projects" class="grid cols-3" aria-live="polite" aria-busy="false"></div>
       </div>
     </section>
 
@@ -319,7 +321,33 @@
     }
 
     // Change username here if needed
-    fetchGitHubProjects('MikeTech01', 'gh-projects');
+    // Button-triggered load instead of auto
+    const loadBtn = document.getElementById('loadProjectsBtn');
+    if(loadBtn){
+      loadBtn.addEventListener('click', ()=>{
+        const container = document.getElementById('gh-projects');
+        container.setAttribute('aria-busy','true');
+        loadBtn.disabled = true;
+        loadBtn.textContent = 'Loading…';
+        fetchGitHubProjects('MikeTech01', 'gh-projects').finally(()=>{
+          loadBtn.textContent = 'Reload Projects';
+          loadBtn.disabled = false;
+        });
+      });
+    }
+  </script>
+  <script>
+    // Make in-page CV section offer a full-page link too
+    (function(){
+      const resumeSection = document.querySelector('#resume .actions');
+      if(resumeSection){
+        const link = document.createElement('a');
+        link.className = 'btn';
+        link.href = 'cv.html';
+        link.textContent = 'Open full-page CV';
+        resumeSection.prepend(link);
+      }
+    })();
   </script>
 </body>
-</html>
+<!--
