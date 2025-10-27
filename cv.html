@@ -6,24 +6,53 @@
 <title>Michael Alibeaj — CV</title>
 <meta name="description" content="Curriculum Vitae of Michael Alibeaj." />
 <style>
-  :root{ --bg:#ffffff; --ink:#0f172a; --sub:#475569; --line:#e2e8f0;
-         --accent:#ff9900; --accent-ink:#1f2937;
-         --font: ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial; }
-  @media (prefers-color-scheme: dark){ :root{ --bg:#0b1020; --ink:#f1f5f9; --sub:#94a3b8; --line:#1f2a44; --accent:#ffb366; --accent-ink:#111827; } }
+  :root{
+    --ink:#eaf2ff; --muted:#cbd7f2; --panel:rgba(16,22,41,.72); --line:rgba(255,255,255,.12);
+    --bg1:#0b1220; --bg2:#0e1b34; --bg3:#13263f;
+    --glow1:#ff9900; --glow2:#6aa6ff; --glow3:#41d392;
+    --font: ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--font);display:flex;min-height:100vh;flex-direction:column}
-  header{border-bottom:1px solid var(--line);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-  .muted{color:var(--sub);font-size:.95rem}
-  .btn{display:inline-block;border:1px solid var(--line);padding:8px 12px;border-radius:8px;text-decoration:none;color:inherit;margin-left:6px}
-  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
-  main{flex:1;display:grid;place-items:center;padding:36px 24px;text-align:center}
-  footer{border-top:1px solid var(--line);padding:18px 0;text-align:center;color:var(--sub)}
+  body{
+    margin:0;color:var(--ink);font:16px/1.7 var(--font);
+    background:
+      radial-gradient(60% 50% at 10% 0%, color-mix(in oklab, var(--glow2) 24%, transparent), transparent 70%),
+      radial-gradient(55% 45% at 90% 10%, color-mix(in oklab, var(--glow1) 26%, transparent), transparent 72%),
+      radial-gradient(70% 60% at 50% 100%, color-mix(in oklab, var(--glow3) 20%, transparent), transparent 70%),
+      linear-gradient(180deg, var(--bg1), var(--bg2) 40%, var(--bg3));
+    background-attachment: fixed;
+    display:flex;min-height:100vh;flex-direction:column;
+  }
+  header, main{
+    max-width:920px;margin:0 auto;padding:22px;
+  }
+  header{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+    border-bottom:1px solid var(--line);
+    background:var(--panel); backdrop-filter:saturate(1.2) blur(6px); border-radius:12px; margin-top:22px;
+  }
+  .muted{color:var(--muted);font-size:.95rem}
+  .btn{display:inline-block;border:1px solid var(--line);padding:10px 14px;border-radius:10px;text-decoration:none;color:inherit;margin-left:6px;background:var(--panel)}
+  .btn.primary{
+    background:linear-gradient(135deg, color-mix(in oklab, var(--glow1) 78%, #fff 10%), color-mix(in oklab, var(--glow2) 28%, #fff 5%));
+    color:#111827;font-weight:800
+  }
+  main{
+    text-align:center;margin-top:18px;
+    background:var(--panel); border:1px solid var(--line); border-radius:12px;
+  }
+  footer{color:var(--muted);text-align:center;padding:18px 0}
+  @media print{
+    body{background:#fff;color:#000}
+    header, main{background:#fff}
+    a{color:#000;text-decoration:underline}
+  }
 </style>
 </head>
 <body>
 <header>
   <div>
-    <strong>Michael Alibeaj</strong>
+    <strong style="font-size:1.05rem">Michael Alibeaj</strong>
     <div class="muted">M.Sc. Computer Science — Business Intelligence & Data</div>
   </div>
   <div>
@@ -33,8 +62,8 @@
 </header>
 
 <main>
-  <p class="muted">Open the CV in your browser’s native viewer.</p>
-  <p>
+  <p class="muted" style="margin:14px 0 6px">Open the CV in your browser’s viewer.</p>
+  <p style="margin:0 0 18px">
     <a class="btn primary" href="resume.pdf" target="_blank" rel="noreferrer">Open Full Page CV</a>
     <a class="btn" href="resume.pdf" download>⬇️ Download CV</a>
   </p>
@@ -43,4 +72,6 @@
 <footer>© <span id="y"></span> Michael Alibeaj</footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
-</html>
+</h
+
+  
