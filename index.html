@@ -3,52 +3,40 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Michael Alibeaj — Portfolio</title>
-<meta name="description" content="M.Sc. Computer Science — About page with quick links." />
+<title>Michael Alibeaj — M.Sc. Computer Science</title>
+<meta name="description" content="About and contact for Michael Alibeaj, M.Sc. Computer Science." />
 <meta name="robots" content="index,follow" />
 <style>
   :root{
-    /* Palette */
-    --ink:#0f172a;         /* text (light mode) */
-    --muted:#475569;       /* secondary text */
-    --panel:rgba(255,255,255,.80);
-    --line:rgba(15,23,42,.12);
+    /* Amazon-ish palette */
+    --navy:#232F3E;       /* Amazon deep navy */
+    --mid:#1a2633;        /* darker panel bg */
+    --ink:#F3F4F6;        /* light text */
+    --muted:#C7D2FE;      /* soft blue text */
+    --line:rgba(255,255,255,.14);
 
-    /* Background colors (multi-color, non-white) */
-    --bg1:#0b1220;         /* midnight blue */
-    --bg2:#0e1b34;         /* deep indigo */
-    --bg3:#13263f;         /* slate/teal mix */
-    --glow1:#ff9900;       /* warm accent (orange) */
-    --glow2:#6aa6ff;       /* cool accent (indigo/blue) */
-    --glow3:#41d392;       /* green/teal */
+    --blue:#146EB4;       /* Amazon blue accent */
+    --orange:#FF9900;     /* Amazon orange */
+    --orange-ink:#111827;
 
-    --max:1120px; --rail:320px; --radius:14px;
+    --panel:rgba(18,25,34,.72);
+    --radius:14px;
+    --max:1120px;
+    --rail:320px;
     --font: ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
-  }
-
-  @media (prefers-color-scheme: dark){
-    :root{
-      --ink:#f1f5f9;
-      --muted:#a5b4c7;
-      --panel:rgba(16,22,41,.72);
-      --line:rgba(255,255,255,.12);
-    }
   }
 
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0;color:var(--ink);font:16px/1.65 var(--font);
-    /* Colored background – layered gradients (no solid white) */
     background:
-      radial-gradient(60% 50% at 10% 0%, color-mix(in oklab, var(--glow2) 24%, transparent), transparent 70%),
-      radial-gradient(55% 45% at 90% 10%, color-mix(in oklab, var(--glow1) 26%, transparent), transparent 72%),
-      radial-gradient(70% 60% at 50% 100%, color-mix(in oklab, var(--glow3) 20%, transparent), transparent 70%),
-      linear-gradient(180deg, var(--bg1), var(--bg2) 40%, var(--bg3));
+      radial-gradient(60% 50% at 0% 0%, color-mix(in oklab, var(--blue) 22%, transparent), transparent 60%),
+      radial-gradient(60% 50% at 100% 0%, color-mix(in oklab, var(--orange) 18%, transparent), transparent 62%),
+      linear-gradient(180deg, #0f1822, var(--navy) 40%, #0b131a);
     background-attachment: fixed;
   }
-
-  a{color:#cfe0ff;text-decoration:none}
+  a{color:#9BD1FF;text-decoration:none}
   a:hover{text-decoration:underline}
 
   .page{
@@ -56,46 +44,54 @@
     grid-template-columns:var(--rail) 1fr; gap:28px; padding:28px;
   }
 
-  /* Sidebar (left) */
+  /* Sidebar */
   .rail{
     position:sticky; top:0; align-self:start; height:max-content;
     padding:20px; border:1px solid var(--line); border-radius:var(--radius);
-    background:var(--panel); backdrop-filter:saturate(1.2) blur(6px);
+    background:var(--panel); backdrop-filter:saturate(1.1) blur(6px);
   }
   .name{display:flex;align-items:center;gap:12px}
   .badge{
-    width:40px;height:40px;border-radius:10px;
-    background:conic-gradient(from 220deg, var(--glow2), var(--glow1), var(--glow3), var(--glow2));
-    display:grid;place-items:center;color:#0b1220;font-weight:800;border:1px solid var(--line)
+    width:42px;height:42px;border-radius:10px;
+    background:conic-gradient(from 210deg, var(--orange), #ffd08a 30%, var(--blue) 65%, #7fbaf0);
+    display:grid;place-items:center;color:var(--orange-ink);font-weight:800;border:1px solid var(--line)
   }
-  .role{color:#e6edf7;margin:6px 0 12px;opacity:.9}
-  .meta{color:#c6d1e3;font-size:14px}
+  .role{color:#dbe7ff;opacity:.9;margin:6px 0 12px}
+  .meta{color:#cfe0ff;font-size:14px}
 
   .actions a{
     display:block; text-align:center; margin-top:8px; padding:10px 12px;
-    border-radius:10px; border:1px solid var(--line); color:#111827;
-    background:linear-gradient(135deg, color-mix(in oklab, var(--glow1) 78%, #fff 20%), color-mix(in oklab, var(--glow2) 28%, #fff 10%));
-    text-decoration:none; font-weight:700;
+    border-radius:10px; border:1px solid var(--line);
+    background:linear-gradient(135deg, color-mix(in oklab, var(--orange) 78%, #fff 10%), color-mix(in oklab, var(--blue) 26%, #fff 5%));
+    color:var(--orange-ink); font-weight:800; text-decoration:none;
   }
   .actions a.secondary{
-    background:var(--panel); color:#e6edf7; font-weight:500;
+    background:var(--panel); color:#dbe7ff; font-weight:600;
   }
 
   nav{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
-  nav a{display:block;padding:6px 0;color:#c6d1e3}
+  nav a{display:block;padding:6px 0;color:#cfe0ff}
   nav a.active{color:#ffffff;font-weight:700}
 
-  /* Main (right) */
+  /* Main */
   main{min-width:0}
-  section{
+  .panel{
     padding:22px 20px; border:1px solid var(--line); border-radius:var(--radius);
-    background:var(--panel); backdrop-filter:saturate(1.2) blur(6px);
+    background:var(--panel); backdrop-filter:saturate(1.1) blur(6px);
   }
+  .title{
+    padding:18px 20px; border:1px solid var(--line); border-radius:var(--radius);
+    background:linear-gradient(135deg, color-mix(in oklab, var(--blue) 30%, transparent), color-mix(in oklab, var(--orange) 24%, transparent));
+  }
+  .title h1{margin:0;font-size:clamp(22px,3.5vw,34px);letter-spacing:.3px}
+  .title p{margin:6px 0 0;color:#f8fafc;opacity:.9}
+
   section h2{
-    margin:0 0 8px; font-size:16px; letter-spacing:.2px; text-transform:uppercase; color:#cfe0ff
+    margin:0 0 8px; font-size:16px; letter-spacing:.2px; text-transform:uppercase; color:#dbe7ff
   }
   .lead{font-size:20px;margin:4px 0 6px}
-  .muted{color:#c6d1e3}
+  .muted{color:var(--muted)}
+  .list{margin:10px 0 0;padding-left:18px;color:#dbe7ff}
 
   footer{opacity:.8;color:#c6d1e3;font-size:14px;text-align:center;margin-top:10px}
 
@@ -107,10 +103,10 @@
     nav a{padding:0}
   }
 
-  /* Print (clean) */
+  /* Print */
   @media print{
     body{background:#fff;color:#000}
-    .rail, section{background:#fff}
+    .rail, .panel, .title{background:#fff}
     .actions, nav a[href^="#"]{display:none}
     a{color:#000;text-decoration:underline}
   }
@@ -118,7 +114,7 @@
 </head>
 <body>
   <div class="page">
-    <!-- LEFT: sections / quick links -->
+    <!-- LEFT: Sections / links -->
     <aside class="rail" aria-label="Sidebar">
       <div class="name">
         <div class="badge" aria-hidden="true">MA</div>
@@ -138,18 +134,39 @@
 
       <nav aria-label="Sections">
         <a href="#about" class="active">About</a>
+        <a href="#contact">Contact</a>
       </nav>
     </aside>
 
-    <!-- RIGHT: ONLY About -->
+    <!-- RIGHT: Title + About + Contact -->
     <main>
-      <section id="about">
+      <!-- Title block -->
+      <div class="title" role="banner" aria-label="Page title">
+        <h1>Business Intelligence & Data — Student Portfolio</h1>
+        <p>M.Sc. Computer Science candidate focused on data modeling, Python/SQL, and BI for decision-making.</p>
+      </div>
+
+      <!-- About -->
+      <section id="about" class="panel" style="margin-top:18px">
         <h2>About</h2>
-        <p class="lead">I’m a M.Sc. Computer Science student focused on data, analytics, and BI. I like turning messy inputs into clear, reliable insights.</p>
-        <p class="muted">
-          Strengths: data modeling, Python (Pandas), SQL, and building pragmatic dashboards that answer real questions.
-          I care about data quality, metric definitions, and making results easy to consume.
-        </p>
+        <p class="lead">I turn messy datasets into reliable metrics and clear dashboards.</p>
+        <p class="muted">My strengths are Python (Pandas), SQL, and pragmatic BI delivery. I care about data quality, reproducible transforms, and making insights easy to consume by non-technical stakeholders.</p>
+        <ul class="list">
+          <li>Strong foundations: statistics, performance modeling, and software engineering.</li>
+          <li>Comfortable defining KPIs and validating data pipelines end-to-end.</li>
+        </ul>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="panel" style="margin-top:12px">
+        <h2>Contact</h2>
+        <p class="muted">Happy to connect for internship opportunities in Milan or remote.</p>
+        <ul class="list" style="list-style:none;padding-left:0">
+          <li>Email: <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></li>
+          <li>GitHub: <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></li>
+          <li>LinkedIn: <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">linkedin.com/in/michael-alibeaj-9810771a6</a></li>
+          <li>Location: Milan, Italy</li>
+        </ul>
       </section>
 
       <footer>© <span id="year"></span> Michael Alibeaj · Built for GitHub Pages</footer>
@@ -160,7 +177,7 @@
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Sidebar highlight (only About exists, but kept for future sections)
+  // Sidebar active link sync
   const links = Array.from(document.querySelectorAll('nav a'));
   const sections = links.map(a => document.querySelector(a.getAttribute('href')));
   const onScroll = () => {
