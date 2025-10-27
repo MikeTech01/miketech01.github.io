@@ -7,38 +7,39 @@
 <meta name="description" content="Curriculum Vitae of Michael Alibeaj." />
 <style>
   :root{
-    --navy:#232F3E; --ink:#F3F4F6; --muted:#D1E0FF; --line:rgba(255,255,255,.14);
-    --blue:#146EB4; --orange:#FF9900; --orange-ink:#111827;
-    --panel:rgba(18,25,34,.72); --radius:14px;
+    --navy:#232F3E; --ink:#F5F7FB; --muted:#D1E0FF; --line:rgba(255,255,255,.14);
+    --blue:#146EB4; --blue-2:#7FB8FF; --orange:#FF9900; --orange-2:#FFD28A;
+    --panel:rgba(20,26,36,.72); --panel-strong:rgba(20,26,36,.82);
+    --radius:16px; --shadow:0 12px 40px rgba(0,0,0,.28);
     --font: ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   }
   *{box-sizing:border-box}
   body{
     margin:0;color:var(--ink);font:16px/1.7 var(--font);
     background:
-      radial-gradient(60% 50% at 0% 0%, color-mix(in oklab, var(--blue) 22%, transparent), transparent 60%),
-      radial-gradient(60% 50% at 100% 0%, color-mix(in oklab, var(--orange) 18%, transparent), transparent 62%),
-      linear-gradient(180deg, #0f1822, var(--navy) 40%, #0b131a);
+      radial-gradient(60% 45% at 0% 10%, color-mix(in oklab, var(--blue) 26%, transparent), transparent 60%),
+      radial-gradient(60% 45% at 100% 0%, color-mix(in oklab, var(--orange) 22%, transparent), transparent 60%),
+      linear-gradient(180deg, #111827, var(--navy) 45%, #0b131a);
     background-attachment: fixed;
     display:flex;min-height:100vh;flex-direction:column;
   }
-  header, main{
-    max-width:920px;margin:0 auto;padding:22px;
-  }
+  .wrap{max-width:940px;margin:0 auto;padding:24px}
   header{
     display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
     border:1px solid var(--line);border-radius:var(--radius);
-    background:var(--panel); backdrop-filter:saturate(1.1) blur(6px); margin-top:22px;
+    background:var(--panel-strong); backdrop-filter:saturate(1.1) blur(8px);
+    padding:18px 20px; box-shadow: var(--shadow); margin-top:16px;
   }
   .muted{color:var(--muted);font-size:.95rem}
-  .btn{display:inline-block;border:1px solid var(--line);padding:10px 14px;border-radius:10px;text-decoration:none;color:inherit;margin-left:6px;background:var(--panel)}
+  .btn{display:inline-block;border:1px solid var(--line);padding:10px 14px;border-radius:12px;text-decoration:none;color:inherit;background:var(--panel)}
   .btn.primary{
-    background:linear-gradient(135deg, color-mix(in oklab, var(--orange) 78%, #fff 10%), color-mix(in oklab, var(--blue) 26%, #fff 5%));
-    color:var(--orange-ink);font-weight:800
+    background:linear-gradient(135deg, color-mix(in oklab, var(--orange) 78%, #fff 10%), color-mix(in oklab, var(--blue) 28%, #fff 6%));
+    color:#111827;font-weight:800
   }
   main{
-    text-align:center;margin-top:18px;
-    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    text-align:center;margin-top:16px;
+    background:var(--panel-strong); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 20px; box-shadow: var(--shadow);
   }
   footer{color:var(--muted);text-align:center;padding:18px 0}
   @media print{
@@ -49,26 +50,28 @@
 </style>
 </head>
 <body>
-<header>
-  <div>
-    <strong style="font-size:1.05rem">Michael Alibeaj</strong>
-    <div class="muted">M.Sc. Computer Science — Business Intelligence & Data</div>
-  </div>
-  <div>
-    <a class="btn" href="index.html">← Back to Site</a>
-    <a class="btn" href="resume.pdf" download>⬇️ Download PDF</a>
-  </div>
-</header>
+  <div class="wrap">
+    <header>
+      <div>
+        <strong style="font-size:1.05rem">Michael Alibeaj</strong>
+        <div class="muted">M.Sc. Computer Science — Business Intelligence & Data</div>
+      </div>
+      <div>
+        <a class="btn" href="index.html">← Back to Site</a>
+        <a class="btn" href="resume.pdf" download>⬇️ Download PDF</a>
+      </div>
+    </header>
 
-<main>
-  <p class="muted" style="margin:14px 0 6px">Open the CV in your browser’s viewer.</p>
-  <p style="margin:0 0 18px">
-    <a class="btn primary" href="resume.pdf" target="_blank" rel="noreferrer">Open Full Page CV</a>
-    <a class="btn" href="resume.pdf" download>⬇️ Download CV</a>
-  </p>
-</main>
+    <main>
+      <p class="muted" style="margin:8px 0 10px">Open the CV in your browser’s full-page viewer.</p>
+      <p style="margin:0 0 6px">
+        <a class="btn primary" href="resume.pdf" target="_blank" rel="noreferrer">Open Full Page CV</a>
+        <a class="btn" href="resume.pdf" download>⬇️ Download CV</a>
+      </p>
+    </main>
 
-<footer>© <span id="y"></span> Michael Alibeaj</footer>
+    <footer>© <span id="y"></span> Michael Alibeaj</footer>
+  </div>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
