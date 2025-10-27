@@ -3,147 +3,287 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Michael Alibeaj · Business Intelligence & Analytics</title>
-<meta name="description" content="Business Intelligence & Analytics — case studies, experience, skills, contact." />
+<title>Michael Alibeaj — M.Sc. Computer Science</title>
+<meta name="description" content="Portfolio of Michael Alibeaj — M.Sc. Computer Science. Data, BI, and software projects, experience, and contact." />
+<meta name="robots" content="index,follow" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2712%27 fill=%27%230f172a%27/><text x=%2750%25%27 y=%2757%25%27 text-anchor=%27middle%27 font-size=%2748%27 fill=%27white%27 font-family=%27Arial%27>MA</text></svg>">
+
 <style>
   :root{
-    --bg:#ffffff; --text:#0f172a; --sub:#475569; --line:#e2e8f0; --link:#0b74ff; --max:880px;
+    --bg:#ffffff; --ink:#0f172a; --sub:#475569; --line:#e2e8f0; --link:#0b74ff;
+    --max:1120px; --rail:300px; --radius:12px;
     --font: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
   }
   @media (prefers-color-scheme: dark){
-    :root{ --bg:#0b1020; --text:#f1f5f9; --sub:#94a3b8; --line:#1f2a44; --link:#60a5fa; }
+    :root{ --bg:#0b1020; --ink:#f1f5f9; --sub:#94a3b8; --line:#1f2a44; --link:#60a5fa; }
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--font)}
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
-  .wrap{max-width:var(--max);margin:0 auto;padding:28px}
-  header{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}
-  h1{font-size:clamp(28px,4vw,42px);line-height:1.15;margin:0}
-  .lead{color:var(--sub);margin-top:6px}
-  .actions a{display:inline-block;border:1px solid var(--line);padding:8px 12px;border-radius:8px;margin-right:8px}
-  section{padding:22px 0;border-bottom:1px solid var(--line)}
-  h2{font-size:18px;margin:0 0 10px;letter-spacing:.2px;text-transform:uppercase}
-  .meta{color:var(--sub);font-size:14px}
-  ul.compact{margin:8px 0 0;padding-left:18px;color:var(--sub)}
-  .grid{display:grid;gap:10px}
+  .page{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:var(--rail) 1fr;gap:28px;padding:28px}
+  /* Sidebar */
+  .rail{position:sticky;top:0;align-self:start;height:100%;padding:20px;border:1px solid var(--line);border-radius:var(--radius)}
+  .rail h1{font-size:22px;margin:0}
+  .rail .sub{color:var(--sub);margin:6px 0 12px}
+  .rail .meta{color:var(--sub);font-size:14px}
+  .rail .stack{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+  .rail .chip{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:13px;color:var(--sub)}
+  .rail .actions a{display:block;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-top:8px;text-align:center}
+  nav{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+  nav a{display:block;padding:6px 0;color:var(--sub)}
+  nav a.active{color:var(--ink);font-weight:600}
+  /* Main */
+  main{min-width:0}
+  section{padding:22px 20px;border:1px solid var(--line);border-radius:var(--radius);margin-bottom:18px}
+  section h2{font-size:16px;letter-spacing:.2px;text-transform:uppercase;margin:0 0 10px;color:var(--sub)}
+  .lead{font-size:18px}
+  .klist{margin:8px 0 0;padding-left:18px;color:var(--sub)}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .pill{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:13px;color:var(--sub)}
+  .grid{display:grid;gap:14px}
   .grid.two{grid-template-columns:1fr 1fr}
-  @media (max-width:760px){ .grid.two{grid-template-columns:1fr} header{flex-direction:column} }
-  footer{color:var(--sub);padding:18px 0}
-  /* print */
-  @media print{ .actions{display:none} a{color:inherit;text-decoration:underline} }
+  .muted{color:var(--sub)}
+  footer{color:var(--sub);font-size:14px;margin-top:8px;text-align:center}
+  /* Responsive */
+  @media (max-width:960px){ .page{grid-template-columns:1fr} .rail{position:relative} nav{display:flex;flex-wrap:wrap;gap:12px} nav a{padding:0} }
+  /* Print */
+  @media print{ .rail .actions, nav, #loadProjectsBtn, #repoFilters {display:none} a{color:inherit} }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div>
-        <h1>Michael Alibeaj</h1>
-        <div class="lead">Business Intelligence & Analytics — M.Sc. Computer Science (Politecnico di Milano)</div>
+  <div class="page">
+    <!-- SIDEBAR -->
+    <aside class="rail" aria-label="Profile">
+      <h1>Michael Alibeaj</h1>
+      <div class="sub">M.Sc. Computer Science — Politecnico di Milano</div>
+      <div class="meta">Milan, Italy · <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></div>
+
+      <div class="stack" aria-label="Focus">
+        <span class="chip">Business Intelligence</span>
+        <span class="chip">Data Engineering</span>
+        <span class="chip">Analytics</span>
       </div>
-      <div class="actions">
-        <a href="mailto:malibeaj01@outlook.com">Email</a>
-        <a href="cv.html">CV</a>
+
+      <div class="actions" aria-label="Quick actions">
+        <a href="cv.html">View CV</a>
         <a href="resume.pdf" download>Download CV</a>
         <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">LinkedIn</a>
       </div>
-    </header>
 
-    <section aria-labelledby="hero">
-      <h2 id="hero">Profile</h2>
-      <p>I build reliable data pipelines and concise BI dashboards that help teams make confident decisions. Strong foundations in analytics, performance modeling, and ML, with top finishes in competitive university challenges.</p>
-      <p class="meta">Highlights: 1st — DMFW · 2nd — AN2DL · Power BI · SQL · Python</p>
-    </section>
+      <nav aria-label="Sections">
+        <a href="#about" class="active">About</a>
+        <a href="#projects">Case Studies</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#awards">Awards</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </aside>
 
-    <section aria-labelledby="cases">
-      <h2 id="cases">Case Studies</h2>
-      <article>
-        <strong>Staples — Decision Support</strong> <span class="meta">Data Engineer · 2025</span>
-        <ul class="compact">
-          <li><b>Built:</b> Python ETL for FAOSTAT & UN Data → curated KPIs (storage, pricing) → BI dashboards.</li>
-          <li><b>Impact:</b> Supported cross-country trade decisions; reduced manual data prep; unified indicators.</li>
-          <li class="meta">Stack: Python · Pandas · Power BI</li>
-        </ul>
-      </article>
-      <article>
-        <strong>RAG Q&A Platform</strong> <span class="meta">Tech Lead · 2025</span>
-        <ul class="compact">
-          <li><b>Built:</b> Ingestion, tokenization/chunking, FAISS retrieval, LLM orchestration; CI on GitHub.</li>
-          <li><b>Impact:</b> <b>+28%</b> relevance, <b>−35%</b> latency; modular, scalable deployment.</li>
-          <li class="meta">Stack: Python · FAISS · LLM</li>
-        </ul>
-      </article>
-      <article>
-        <strong>Deep Learning for Vision</strong> <span class="meta">Contributor · 2024</span>
-        <ul class="compact">
-          <li><b>Built:</b> Keras/TensorFlow pipelines for classification & segmentation.</li>
-          <li><b>Impact:</b> Top 1% among ~800 participants; robust validation.</li>
-          <li class="meta">Stack: TensorFlow · Keras</li>
-        </ul>
-      </article>
-    </section>
+    <!-- MAIN -->
+    <main>
+      <section id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About</h2>
+        <p class="lead">I build reliable data pipelines and clear BI dashboards that help teams make confident, measurable decisions.</p>
+        <p class="muted">Strong foundations in data modeling, statistics, and software engineering. Top placements in university competitions. Comfortable bridging technical work and business outcomes.</p>
+        <div class="row" style="margin-top:8px">
+          <span class="pill">1st — DMFW</span>
+          <span class="pill">2nd — AN2DL</span>
+          <span class="pill">Power BI · SQL · Python</span>
+        </div>
+      </section>
 
-    <section aria-labelledby="experience">
-      <h2 id="experience">Experience</h2>
-      <div class="grid two">
-        <div>
-          <strong>Politecnico di Milano — Staples</strong><br />
-          <span class="meta">Data Engineer (project)</span>
-          <ul class="compact">
-            <li>Designed Python ETL for public datasets; standardized schemas; automated refresh.</li>
-            <li>Defined KPIs and integrated dashboards for storage capacity & pricing trends.</li>
+      <section id="projects" aria-labelledby="cases-title">
+        <h2 id="cases-title">Case Studies</h2>
+        <article>
+          <strong>Staples — Decision Support</strong> <span class="muted">· Data Engineer · 2025</span>
+          <ul class="klist">
+            <li><b>Built:</b> Python ETL for FAOSTAT & UN Data → curated KPIs (storage, pricing) → BI dashboards.</li>
+            <li><b>Impact:</b> Enabled cross-country trade decisions; reduced manual prep; unified indicators.</li>
+            <li class="muted">Stack: Python · Pandas · Power BI — <a href="https://www.som.polimi.it/en/staples-strengthening-resilience-of-cereal-value-chains/" target="_blank" rel="noreferrer">Context</a></li>
           </ul>
-        </div>
-        <div>
-          <strong>RAG Platform</strong><br />
-          <span class="meta">Team Lead</span>
-          <ul class="compact">
-            <li>Led 5 contributors; retrieval pipeline & evaluation; CI/CD with quality gates.</li>
-            <li>Delivered measurable gains: <b>+28%</b> relevance, <b>−35%</b> latency.</li>
+        </article>
+        <article style="margin-top:12px">
+          <strong>RAG Q&A Platform</strong> <span class="muted">· Tech Lead · 2025</span>
+          <ul class="klist">
+            <li><b>Built:</b> Ingestion, tokenization/chunking, FAISS retrieval, LLM orchestration; CI on GitHub.</li>
+            <li><b>Impact:</b> <b>+28%</b> relevance, <b>−35%</b> latency; modular, scalable deployment.</li>
+            <li class="muted">Stack: Python · FAISS · LLM — <a href="https://github.com/MikeTech01/NLP" target="_blank" rel="noreferrer">GitHub</a></li>
           </ul>
-        </div>
-      </div>
-    </section>
+        </article>
+        <article style="margin-top:12px">
+          <strong>Deep Learning for Vision</strong> <span class="muted">· Contributor · 2024</span>
+          <ul class="klist">
+            <li><b>Built:</b> Keras/TensorFlow pipelines for image classification & segmentation.</li>
+            <li><b>Impact:</b> Top 1% among ~800 participants; rigorous validation.</li>
+            <li class="muted">Stack: TensorFlow · Keras — <a href="https://github.com/MikeTech01/AN2DL" target="_blank" rel="noreferrer">GitHub</a></li>
+          </ul>
+        </article>
 
-    <section aria-labelledby="skills">
-      <h2 id="skills">Skills</h2>
-      <div class="grid two">
-        <div>
-          <strong>Analytics & BI</strong>
-          <ul class="compact"><li>SQL · Power BI · Excel (Pivot, PowerQuery) · Matplotlib</li></ul>
+        <div style="margin-top:14px">
+          <button id="loadProjectsBtn" style="border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:transparent;cursor:pointer">Load more repositories from GitHub</button>
+          <div id="repoFilters" class="row" style="display:none; margin-top:10px">
+            <a class="pill" data-filter="all" href="#">All</a>
+            <a class="pill" data-filter="python" href="#">Python</a>
+            <a class="pill" data-filter="bi" href="#">BI / Data</a>
+            <a class="pill" data-filter="llm" href="#">LLM / NLP</a>
+            <a class="pill" data-filter="cvml" href="#">CV / ML</a>
+          </div>
+          <div id="gh-projects" class="grid two" style="margin-top:10px"></div>
         </div>
-        <div>
-          <strong>Data Engineering</strong>
-          <ul class="compact"><li>Python (Pandas) · ETL/ELT · APIs · Git/GitHub Actions</li></ul>
-        </div>
-        <div>
-          <strong>ML & Stats</strong>
-          <ul class="compact"><li>scikit-learn · TensorFlow/Keras · NLP · Performance Modeling</li></ul>
-        </div>
-        <div>
-          <strong>Languages</strong>
-          <ul class="compact"><li>Italian (Native) · Albanian (Native) · English (Proficient) · French (Intermediate)</li></ul>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section aria-labelledby="awards">
-      <h2 id="awards">Awards</h2>
-      <ul class="compact">
-        <li><b>DMFW Challenge</b> — 1st, Politecnico di Milano</li>
-        <li><b>AN2DL Challenge</b> — 2nd, Politecnico di Milano</li>
-        <li><b>Italian Mathematical Olympiad</b> — Top 10% (regional)</li>
-      </ul>
-    </section>
+      <section id="experience" aria-labelledby="exp-title">
+        <h2 id="exp-title">Experience</h2>
+        <div class="grid two">
+          <div>
+            <strong>Politecnico di Milano — Staples</strong><br />
+            <span class="muted">Data Engineer (project)</span>
+            <ul class="klist">
+              <li>Designed Python ETL for public datasets; standardized schemas; automated refresh.</li>
+              <li>Defined KPIs for storage capacity & pricing; integrated dashboards for stakeholders.</li>
+            </ul>
+          </div>
+          <div>
+            <strong>RAG Platform</strong><br />
+            <span class="muted">Team Lead</span>
+            <ul class="klist">
+              <li>Led 5 contributors; retrieval pipeline & evaluation; CI with quality gates.</li>
+              <li>Delivered <b>+28%</b> relevance and <b>−35%</b> latency through modular design.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-    <section aria-labelledby="links">
-      <h2 id="links">More</h2>
-      <p class="meta">Prefer a deeper dive? Browse code and notebooks on <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">GitHub</a>.</p>
-    </section>
+      <section id="skills" aria-labelledby="skills-title">
+        <h2 id="skills-title">Skills</h2>
+        <div class="grid two">
+          <div>
+            <strong>Analytics & BI</strong>
+            <ul class="klist"><li>SQL · Power BI · Excel (Pivot, PowerQuery) · Matplotlib</li></ul>
+          </div>
+          <div>
+            <strong>Data Engineering</strong>
+            <ul class="klist"><li>Python (Pandas) · ETL/ELT · APIs · Git/GitHub Actions</li></ul>
+          </div>
+          <div>
+            <strong>ML & Stats</strong>
+            <ul class="klist"><li>scikit-learn · TensorFlow/Keras · NLP · Performance Modeling</li></ul>
+          </div>
+          <div>
+            <strong>Languages</strong>
+            <ul class="klist"><li>Italian (Native) · Albanian (Native) · English (Proficient) · French (Intermediate)</li></ul>
+          </div>
+        </div>
+      </section>
 
-    <footer>© <span id="y"></span> Michael Alibeaj · Milan, Italy</footer>
+      <section id="awards" aria-labelledby="awards-title">
+        <h2 id="awards-title">Awards</h2>
+        <ul class="klist">
+          <li><b>DMFW Challenge</b> — 1st, Politecnico di Milano</li>
+          <li><b>AN2DL Challenge</b> — 2nd, Politecnico di Milano</li>
+          <li><b>Italian Mathematical Olympiad</b> — Top 10% (regional)</li>
+        </ul>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact</h2>
+        <p class="muted">Open to Business Intelligence Engineer internships in Milan.</p>
+        <p>Email: <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a> · GitHub: <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a> · LinkedIn: <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">Profile</a></p>
+      </section>
+
+      <footer>© <span id="year"></span> Michael Alibeaj · Milan, Italy</footer>
+    </main>
   </div>
-<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Sidebar section highlight on scroll (simple, unobtrusive)
+  const links = Array.from(document.querySelectorAll('nav a'));
+  const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+  const onScroll = () => {
+    const y = window.scrollY + 120;
+    let active = 0;
+    sections.forEach((s,i)=>{ if(s && s.offsetTop <= y) active = i; });
+    links.forEach((a,i)=> a.classList.toggle('active', i===active));
+  };
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // Click-to-load GitHub repos + simple filters
+  let REPOS = [];
+  const gh = document.getElementById('gh-projects');
+  const filtersWrap = document.getElementById('repoFilters');
+
+  function render(list){
+    gh.innerHTML = '';
+    if(!list.length){ gh.innerHTML = '<div class="muted">No repositories to show.</div>'; return; }
+    list.slice(0,8).forEach(r => {
+      const div = document.createElement('div');
+      div.style.border = '1px solid var(--line)';
+      div.style.borderRadius = '12px';
+      div.style.padding = '12px';
+      div.innerHTML = `
+        <strong>${r.name.replace(/-/g,' ')}</strong>
+        <div class="muted" style="margin:4px 0">${(r.description||'No description').slice(0,140)}</div>
+        <div class="muted" style="font-size:14px"> ${r.language ? r.language+' · ' : ''}★ ${r.stargazers_count} · Updated ${new Date(r.updated_at).toLocaleDateString()} </div>
+        <div style="margin-top:8px"><a href="${r.html_url}" target="_blank" rel="noreferrer">View on GitHub</a></div>
+      `;
+      gh.appendChild(div);
+    });
+  }
+
+  function matchesFilter(r,f){
+    if(f==='all') return true;
+    const text = `${r.name} ${(r.description||'')} ${(r.topics||[]).join(' ')}`.toLowerCase();
+    const lang = (r.language||'').toLowerCase();
+    if(f==='python') return lang==='python' || text.includes('python');
+    if(f==='bi') return /bi|business intelligence|power bi|dashboard|kpi|etl|sql/.test(text);
+    if(f==='llm') return /llm|rag|nlp|gpt|embedding|faiss|transformer/.test(text);
+    if(f==='cvml') return /vision|opencv|segmentation|classification|keras|tensorflow/.test(text);
+    return true;
+  }
+
+  async function loadRepos(){
+    gh.innerHTML = '<div class="muted">Loading…</div>';
+    try{
+      const res = await fetch('https://api.github.com/users/MikeTech01/repos?per_page=60&sort=updated', { headers:{'Accept':'application/vnd.github+json'}});
+      let repos = await res.json();
+      REPOS = repos.filter(r=>!r.fork).sort((a,b)=> (b.stargazers_count-a.stargazers_count) || (new Date(b.updated_at)-new Date(a.updated_at)));
+      filtersWrap.style.display = '';
+      render(REPOS);
+    }catch(e){
+      gh.innerHTML = '<div class="muted">Could not load repositories.</div>';
+    }
+  }
+
+  document.getElementById('loadProjectsBtn')?.addEventListener('click', (e)=>{
+    e.currentTarget.textContent = 'Reload repositories';
+    loadRepos();
+  });
+
+  filtersWrap.addEventListener('click', (e)=>{
+    const a = e.target.closest('[data-filter]'); if(!a) return;
+    e.preventDefault();
+    render(REPOS.filter(r => matchesFilter(r, a.dataset.filter)));
+  });
+</script>
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Person",
+  "name":"Michael Alibeaj",
+  "jobTitle":"M.Sc. Computer Science",
+  "email":"mailto:malibeaj01@outlook.com",
+  "address":{"@type":"PostalAddress","addressLocality":"Milan","addressCountry":"IT"},
+  "sameAs":["https://github.com/MikeTech01","https://www.linkedin.com/in/michael-alibeaj-9810771a6/"]
+}
+</script>
 </body>
 </html>
