@@ -7,13 +7,15 @@
 <meta name="description" content="Curriculum Vitae of Michael Alibeaj." />
 <style>
   :root{ --bg:#ffffff; --ink:#0f172a; --sub:#475569; --line:#e2e8f0;
+         --accent:#ff9900; --accent-ink:#1f2937;
          --font: ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial; }
-  @media (prefers-color-scheme: dark){ :root{ --bg:#0b1020; --ink:#f1f5f9; --sub:#94a3b8; --line:#1f2a44; } }
+  @media (prefers-color-scheme: dark){ :root{ --bg:#0b1020; --ink:#f1f5f9; --sub:#94a3b8; --line:#1f2a44; --accent:#ffb366; --accent-ink:#111827; } }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--font);display:flex;min-height:100vh;flex-direction:column}
   header{border-bottom:1px solid var(--line);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
   .muted{color:var(--sub);font-size:.95rem}
   .btn{display:inline-block;border:1px solid var(--line);padding:8px 12px;border-radius:8px;text-decoration:none;color:inherit;margin-left:6px}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
   main{flex:1;display:grid;place-items:center;padding:36px 24px;text-align:center}
   footer{border-top:1px solid var(--line);padding:18px 0;text-align:center;color:var(--sub)}
 </style>
@@ -33,7 +35,7 @@
 <main>
   <p class="muted">Open the CV in your browser’s native viewer.</p>
   <p>
-    <a class="btn" href="resume.pdf" target="_blank" rel="noreferrer">Open Full Page CV</a>
+    <a class="btn primary" href="resume.pdf" target="_blank" rel="noreferrer">Open Full Page CV</a>
     <a class="btn" href="resume.pdf" download>⬇️ Download CV</a>
   </p>
 </main>
