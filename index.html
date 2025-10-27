@@ -4,41 +4,62 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Michael Alibeaj — M.Sc. Computer Science</title>
-<meta name="description" content="About and contact for Michael Alibeaj, M.Sc. Computer Science." />
+<meta name="description" content="About & Contact for Michael Alibeaj — M.Sc. Computer Science." />
 <meta name="robots" content="index,follow" />
 <style>
   :root{
-    /* Amazon-ish palette */
-    --navy:#232F3E;       /* Amazon deep navy */
-    --mid:#1a2633;        /* darker panel bg */
-    --ink:#F3F4F6;        /* light text */
-    --muted:#C7D2FE;      /* soft blue text */
+    /* Amazon-inspired palette */
+    --navy:#232F3E;        /* deep */
+    --ink:#F5F7FB;         /* main text */
+    --muted:#C9D7FF;       /* soft blue text */
     --line:rgba(255,255,255,.14);
 
-    --blue:#146EB4;       /* Amazon blue accent */
-    --orange:#FF9900;     /* Amazon orange */
-    --orange-ink:#111827;
+    --blue:#146EB4;        /* accent blue */
+    --blue-2:#7FB8FF;      /* lighter blue */
+    --orange:#FF9900;      /* accent orange */
+    --orange-2:#FFD28A;    /* warm glow */
 
-    --panel:rgba(18,25,34,.72);
-    --radius:14px;
-    --max:1120px;
-    --rail:320px;
-    --font: ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+    --panel:rgba(20,26,36,.70);
+    --panel-strong:rgba(20,26,36,.82);
+    --radius:16px;
+    --max:1160px;
+    --rail:330px;
+
+    --focus: 0 0 0 3px rgba(127,184,255,.45), 0 0 0 6px rgba(255,153,0,.28);
+    --shadow: 0 12px 40px rgba(0,0,0,.28);
+    --shadow-soft: 0 8px 26px rgba(0,0,0,.18);
   }
 
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;color:var(--ink);font:16px/1.65 var(--font);
+    margin:0;color:var(--ink);font:16px/1.65 ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    /* Animated, layered background (navy/blue/orange) */
     background:
-      radial-gradient(60% 50% at 0% 0%, color-mix(in oklab, var(--blue) 22%, transparent), transparent 60%),
-      radial-gradient(60% 50% at 100% 0%, color-mix(in oklab, var(--orange) 18%, transparent), transparent 62%),
-      linear-gradient(180deg, #0f1822, var(--navy) 40%, #0b131a);
+      radial-gradient(60% 45% at 0% 10%, color-mix(in oklab, var(--blue) 26%, transparent), transparent 60%),
+      radial-gradient(60% 45% at 100% 0%, color-mix(in oklab, var(--orange) 22%, transparent), transparent 60%),
+      radial-gradient(70% 60% at 50% 100%, color-mix(in oklab, var(--blue-2) 20%, transparent), transparent 70%),
+      linear-gradient(180deg, #111827, var(--navy) 45%, #0b131a);
     background-attachment: fixed;
+    overflow-x:hidden;
   }
-  a{color:#9BD1FF;text-decoration:none}
-  a:hover{text-decoration:underline}
+  /* Ambient “orbs” for subtle motion */
+  .orbs{position:fixed;inset:-10% -10% -10% -10%;pointer-events:none;z-index:-1;filter:saturate(120%) blur(32px)}
+  .orb{position:absolute;border-radius:50%;opacity:.55}
+  .orb.b{background:radial-gradient(closest-side, color-mix(in oklab,var(--blue) 65%, transparent), transparent 70%)}
+  .orb.o{background:radial-gradient(closest-side, color-mix(in oklab,var(--orange) 60%, transparent), transparent 70%)}
+  .orb.g{background:radial-gradient(closest-side, color-mix(in oklab,#22d3ee 45%, transparent), transparent 70%)}
+  @keyframes floaty { to { transform: translate3d(0,-18px,0) scale(1.03) } }
+  .orb{animation: floaty 9s ease-in-out infinite alternate}
+  .orb:nth-child(1){width:36vw;height:36vw;left:-8vw;top:-6vw}
+  .orb:nth-child(2){width:28vw;height:28vw;right:-6vw;top:-4vw;animation-duration:11s}
+  .orb:nth-child(3){width:32vw;height:32vw;left:20vw;bottom:-10vw;animation-duration:13s}
+  @media (prefers-reduced-motion: reduce){
+    .orb{animation:none}
+  }
 
+  a{color:#9bd1ff;text-decoration:none;transition:opacity .15s ease}
+  a:hover{text-decoration:underline}
   .page{
     max-width:var(--max); margin:0 auto; display:grid;
     grid-template-columns:var(--rail) 1fr; gap:28px; padding:28px;
@@ -48,73 +69,100 @@
   .rail{
     position:sticky; top:0; align-self:start; height:max-content;
     padding:20px; border:1px solid var(--line); border-radius:var(--radius);
-    background:var(--panel); backdrop-filter:saturate(1.1) blur(6px);
+    background:var(--panel); backdrop-filter:saturate(1.25) blur(10px);
+    box-shadow: var(--shadow-soft);
   }
-  .name{display:flex;align-items:center;gap:12px}
+  .name{display:flex;align-items:center;gap:14px}
   .badge{
-    width:42px;height:42px;border-radius:10px;
-    background:conic-gradient(from 210deg, var(--orange), #ffd08a 30%, var(--blue) 65%, #7fbaf0);
-    display:grid;place-items:center;color:var(--orange-ink);font-weight:800;border:1px solid var(--line)
+    width:48px;height:48px;border-radius:12px;
+    background:
+      conic-gradient(from 210deg, var(--orange) 0 25%, var(--orange-2) 0 35%,
+                                 var(--blue) 0 70%, var(--blue-2) 0 100%);
+    display:grid;place-items:center;color:#0b1016;font-weight:900;border:1px solid var(--line);
+    box-shadow: inset 0 1px 8px rgba(255,255,255,.25);
   }
-  .role{color:#dbe7ff;opacity:.9;margin:6px 0 12px}
+  .role{color:#dbe7ff;opacity:.95;margin:6px 0 12px}
   .meta{color:#cfe0ff;font-size:14px}
 
   .actions a{
-    display:block; text-align:center; margin-top:8px; padding:10px 12px;
-    border-radius:10px; border:1px solid var(--line);
-    background:linear-gradient(135deg, color-mix(in oklab, var(--orange) 78%, #fff 10%), color-mix(in oklab, var(--blue) 26%, #fff 5%));
-    color:var(--orange-ink); font-weight:800; text-decoration:none;
+    display:block; text-align:center; margin-top:10px; padding:11px 14px;
+    border-radius:12px; border:1px solid var(--line);
+    background:linear-gradient(135deg, color-mix(in oklab, var(--orange) 78%, #fff 10%), color-mix(in oklab, var(--blue) 28%, #fff 6%));
+    color:#111827; font-weight:800; text-decoration:none;
+    box-shadow: var(--shadow-soft);
+    transform: translateY(0); transition: transform .15s ease, box-shadow .15s ease;
   }
+  .actions a:hover{transform: translateY(-1px); box-shadow: var(--shadow)}
   .actions a.secondary{
-    background:var(--panel); color:#dbe7ff; font-weight:600;
+    background:var(--panel-strong); color:#e8f1ff; font-weight:600;
   }
+  .actions a:focus-visible{outline:none; box-shadow: var(--focus)}
 
-  nav{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
-  nav a{display:block;padding:6px 0;color:#cfe0ff}
-  nav a.active{color:#ffffff;font-weight:700}
+  nav{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+  nav a{display:block;padding:7px 0;color:#cfe0ff;border-left:3px solid transparent;padding-left:10px}
+  nav a.active{color:#ffffff;font-weight:700;border-left-color: color-mix(in oklab, var(--blue) 50%, var(--orange) 50%)}
 
   /* Main */
   main{min-width:0}
-  .panel{
-    padding:22px 20px; border:1px solid var(--line); border-radius:var(--radius);
-    background:var(--panel); backdrop-filter:saturate(1.1) blur(6px);
-  }
   .title{
-    padding:18px 20px; border:1px solid var(--line); border-radius:var(--radius);
-    background:linear-gradient(135deg, color-mix(in oklab, var(--blue) 30%, transparent), color-mix(in oklab, var(--orange) 24%, transparent));
+    padding:22px 22px; border:1px solid var(--line); border-radius:var(--radius);
+    background:
+      linear-gradient(135deg, color-mix(in oklab, var(--blue) 28%, transparent), color-mix(in oklab, var(--orange) 20%, transparent));
+    box-shadow: var(--shadow-soft);
   }
-  .title h1{margin:0;font-size:clamp(22px,3.5vw,34px);letter-spacing:.3px}
+  .title h1{
+    margin:0; font-size:clamp(22px,3.6vw,36px); letter-spacing:.3px;
+    background:linear-gradient(90deg,#fff, #dbe7ff 40%, #ffe1b0); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
   .title p{margin:6px 0 0;color:#f8fafc;opacity:.9}
 
+  section.panel{
+    padding:22px 20px; border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--panel-strong); backdrop-filter:saturate(1.15) blur(10px); margin-top:16px;
+    box-shadow: var(--shadow-soft); position:relative; overflow:hidden;
+  }
+  /* Neon edge shimmer */
+  section.panel::after{
+    content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none;
+    background: linear-gradient(120deg, color-mix(in oklab, var(--blue) 35%, transparent),
+                                         transparent 30%,
+                                         color-mix(in oklab, var(--orange) 30%, transparent) 60%,
+                                         transparent 85%);
+    opacity:.25;
+  }
   section h2{
     margin:0 0 8px; font-size:16px; letter-spacing:.2px; text-transform:uppercase; color:#dbe7ff
   }
   .lead{font-size:20px;margin:4px 0 6px}
   .muted{color:var(--muted)}
-  .list{margin:10px 0 0;padding-left:18px;color:#dbe7ff}
+  .list{margin:10px 0 0;padding-left:18px;color:#e6eeff}
 
-  footer{opacity:.8;color:#c6d1e3;font-size:14px;text-align:center;margin-top:10px}
+  footer{opacity:.85;color:#c6d1e3;font-size:14px;text-align:center;margin-top:12px}
 
   /* Responsive */
   @media (max-width:980px){
     .page{grid-template-columns:1fr}
     .rail{position:relative}
     nav{display:flex;gap:12px;flex-wrap:wrap}
-    nav a{padding:0}
+    nav a{padding:0;border-left:0}
   }
 
-  /* Print */
-  @media print{
-    body{background:#fff;color:#000}
-    .rail, .panel, .title{background:#fff}
-    .actions, nav a[href^="#"]{display:none}
-    a{color:#000;text-decoration:underline}
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .actions a, a{transition:none}
   }
 </style>
 </head>
 <body>
+  <!-- background ambience -->
+  <div class="orbs">
+    <div class="orb b"></div>
+    <div class="orb o"></div>
+    <div class="orb g"></div>
+  </div>
+
   <div class="page">
-    <!-- LEFT: Sections / links -->
+    <!-- LEFT: Sidebar -->
     <aside class="rail" aria-label="Sidebar">
       <div class="name">
         <div class="badge" aria-hidden="true">MA</div>
@@ -126,7 +174,7 @@
       <div class="meta">Milan, Italy · <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></div>
 
       <div class="actions" aria-label="Actions">
-        <!-- Only VIEW CV (no download here) -->
+        <!-- Only View CV (no download here) -->
         <a href="cv.html">View CV</a>
         <a class="secondary" href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">GitHub</a>
         <a class="secondary" href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -140,27 +188,24 @@
 
     <!-- RIGHT: Title + About + Contact -->
     <main>
-      <!-- Title block -->
       <div class="title" role="banner" aria-label="Page title">
         <h1>Business Intelligence & Data — Student Portfolio</h1>
-        <p>M.Sc. Computer Science candidate focused on data modeling, Python/SQL, and BI for decision-making.</p>
+        <p>Focused on Python/SQL data modeling and BI that enable clear, confident decisions.</p>
       </div>
 
-      <!-- About -->
-      <section id="about" class="panel" style="margin-top:18px">
+      <section id="about" class="panel">
         <h2>About</h2>
-        <p class="lead">I turn messy datasets into reliable metrics and clear dashboards.</p>
-        <p class="muted">My strengths are Python (Pandas), SQL, and pragmatic BI delivery. I care about data quality, reproducible transforms, and making insights easy to consume by non-technical stakeholders.</p>
+        <p class="lead">I turn messy datasets into reliable metrics and readable dashboards.</p>
+        <p class="muted">Strengths: Python (Pandas), SQL, pragmatic BI delivery. I care about crisp metric definitions, data quality checks, and shipping insights that non-technical stakeholders can actually use.</p>
         <ul class="list">
-          <li>Strong foundations: statistics, performance modeling, and software engineering.</li>
-          <li>Comfortable defining KPIs and validating data pipelines end-to-end.</li>
+          <li>Solid foundations in statistics, performance modeling, and software engineering.</li>
+          <li>End-to-end ownership of small data stacks (ingest → transform → validate → publish).</li>
         </ul>
       </section>
 
-      <!-- Contact -->
-      <section id="contact" class="panel" style="margin-top:12px">
+      <section id="contact" class="panel">
         <h2>Contact</h2>
-        <p class="muted">Happy to connect for internship opportunities in Milan or remote.</p>
+        <p class="muted">Open to Business Intelligence / Data internships — Milan or remote.</p>
         <ul class="list" style="list-style:none;padding-left:0">
           <li>Email: <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></li>
           <li>GitHub: <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></li>
