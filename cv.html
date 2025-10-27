@@ -7,19 +7,18 @@
 <meta name="description" content="Curriculum Vitae of Michael Alibeaj." />
 <style>
   :root{
-    --ink:#eaf2ff; --muted:#cbd7f2; --panel:rgba(16,22,41,.72); --line:rgba(255,255,255,.12);
-    --bg1:#0b1220; --bg2:#0e1b34; --bg3:#13263f;
-    --glow1:#ff9900; --glow2:#6aa6ff; --glow3:#41d392;
+    --navy:#232F3E; --ink:#F3F4F6; --muted:#D1E0FF; --line:rgba(255,255,255,.14);
+    --blue:#146EB4; --orange:#FF9900; --orange-ink:#111827;
+    --panel:rgba(18,25,34,.72); --radius:14px;
     --font: ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   }
   *{box-sizing:border-box}
   body{
     margin:0;color:var(--ink);font:16px/1.7 var(--font);
     background:
-      radial-gradient(60% 50% at 10% 0%, color-mix(in oklab, var(--glow2) 24%, transparent), transparent 70%),
-      radial-gradient(55% 45% at 90% 10%, color-mix(in oklab, var(--glow1) 26%, transparent), transparent 72%),
-      radial-gradient(70% 60% at 50% 100%, color-mix(in oklab, var(--glow3) 20%, transparent), transparent 70%),
-      linear-gradient(180deg, var(--bg1), var(--bg2) 40%, var(--bg3));
+      radial-gradient(60% 50% at 0% 0%, color-mix(in oklab, var(--blue) 22%, transparent), transparent 60%),
+      radial-gradient(60% 50% at 100% 0%, color-mix(in oklab, var(--orange) 18%, transparent), transparent 62%),
+      linear-gradient(180deg, #0f1822, var(--navy) 40%, #0b131a);
     background-attachment: fixed;
     display:flex;min-height:100vh;flex-direction:column;
   }
@@ -28,18 +27,18 @@
   }
   header{
     display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
-    border-bottom:1px solid var(--line);
-    background:var(--panel); backdrop-filter:saturate(1.2) blur(6px); border-radius:12px; margin-top:22px;
+    border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--panel); backdrop-filter:saturate(1.1) blur(6px); margin-top:22px;
   }
   .muted{color:var(--muted);font-size:.95rem}
   .btn{display:inline-block;border:1px solid var(--line);padding:10px 14px;border-radius:10px;text-decoration:none;color:inherit;margin-left:6px;background:var(--panel)}
   .btn.primary{
-    background:linear-gradient(135deg, color-mix(in oklab, var(--glow1) 78%, #fff 10%), color-mix(in oklab, var(--glow2) 28%, #fff 5%));
-    color:#111827;font-weight:800
+    background:linear-gradient(135deg, color-mix(in oklab, var(--orange) 78%, #fff 10%), color-mix(in oklab, var(--blue) 26%, #fff 5%));
+    color:var(--orange-ink);font-weight:800
   }
   main{
     text-align:center;margin-top:18px;
-    background:var(--panel); border:1px solid var(--line); border-radius:12px;
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
   }
   footer{color:var(--muted);text-align:center;padding:18px 0}
   @media print{
@@ -72,6 +71,4 @@
 <footer>© <span id="y"></span> Michael Alibeaj</footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
-</h
-
-  
+</html>
