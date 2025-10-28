@@ -7,8 +7,8 @@
 <meta name="description" content="Portfolio and contact for Michael Alibeaj, M.Sc. Computer Science — Business Intelligence & Data Engineering student." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2712%27 fill=%27%23232F3E%27/><text x=%2750%25%27 y=%2757%25%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23FF9900%27 font-family=%27Arial%27>MA</text></svg>">
 
-<!-- 🐐 GoatCounter (free analytics) -->
-<script data-goatcounter="https://miketech01.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<!-- 🐐 GoatCounter (free analytics) — replace GOAT_NAME -->
+<script data-goatcounter="https://GOAT_NAME.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 
 <style>
 :root{
@@ -26,7 +26,7 @@ html,body{height:100%}
 body{
   margin:0;color:var(--ink);font:17px/1.7 var(--font);
   background:linear-gradient(180deg,var(--bg0),var(--navy) 50%,var(--bg1));
-  transition: background-color 0.35s ease, color 0.35s ease;
+  transition: background-color .35s ease, color .35s ease;
 }
 a{color:#9ccdfb;text-decoration:none}
 a:hover{text-decoration:underline}
@@ -38,7 +38,7 @@ a:hover{text-decoration:underline}
   border: 1px solid #3a4a5f; background: #243142; color: #e9f2ff;
   font-size: 18px; line-height: 1; display: grid; place-items: center;
   box-shadow: 0 10px 24px rgba(0,0,0,.25); cursor: pointer;
-  transition: background 0.35s ease, color 0.35s ease;
+  transition: background .35s ease, color .35s ease;
 }
 #toggle-rail{ left:16px; }
 #theme-toggle{ right:16px; }
@@ -50,8 +50,7 @@ a:hover{text-decoration:underline}
 .rail{position:sticky;top:0;align-self:start;height:max-content;
   padding:22px;border:1px solid var(--line);border-radius:var(--radius);
   background:var(--railbg);box-shadow:var(--shadow);
-  transition: background-color 0.35s ease, color 0.35s ease;
-}
+  transition: background-color .35s ease, color .35s ease;}
 .name{display:flex;align-items:center;gap:12px}
 .badge{width:48px;height:48px;border-radius:10px;display:grid;place-items:center;font-weight:900;color:#0f172a;
   background:linear-gradient(180deg,#ffd89a 0%,#ffb347 60%),linear-gradient(90deg,#4aa3e0,#146EB4);
@@ -73,12 +72,12 @@ body.sidebar-collapsed .rail{ display:none; }
 /* Sections */
 .title{padding:20px;border:1px solid var(--line);border-radius:var(--radius);
   background:var(--card);box-shadow:var(--shadow);
-  transition: background-color 0.35s ease, color 0.35s ease;}
+  transition: background-color .35s ease, color .35s ease;}
 .title h1{margin:0;font-size:clamp(24px,3.4vw,36px);color:#fff}
 .title p{margin:8px 0 0;color:#eaf2ff;opacity:.95}
 section.panel{padding:24px 20px;border:1px solid var(--line);border-radius:var(--radius);
   background:var(--card);box-shadow:var(--shadow);margin-top:16px;
-  transition: background-color 0.35s ease, color 0.35s ease;}
+  transition: background-color .35s ease, color .35s ease;}
 section h2{margin:0 0 10px;font-size:18px;text-transform:uppercase;color:#dbe7ff}
 .list{margin:10px 0 0;padding-left:18px;color:#e6eeff}
 footer{opacity:.85;color:#c6d1e3;font-size:15px;text-align:center;margin-top:12px}
@@ -102,25 +101,48 @@ figure.chart h3{margin:0 0 8px;font-size:1.15rem;color:#dbe7ff}
 .chart-svg{width:100%;height:300px;display:block}
 .chart-legend{color:#cfd8ea;font-size:1.05rem;margin-top:6px}
 
-/* Contact form */
-.form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 0}
-.form .full{grid-column:1/-1}
-.input, .textarea, .select, .checkbox{
-  width:100%; padding:12px 12px; border-radius:10px; border:1px solid var(--line);
-  background:#233042; color:#fff; outline:none;
+/* -------- Modern Contact layout -------- */
+.contact-wrap{
+  display:grid; grid-template-columns:1.3fr .9fr; gap:18px;
+}
+.card{border:1px solid var(--line);border-radius:12px;background:#223044;box-shadow:var(--shadow);padding:16px}
+.fg{position:relative;margin-top:10px}
+.input,.textarea{
+  width:100%; padding:16px 14px 12px; border-radius:10px; border:1px solid var(--line);
+  background:#233042; color:#fff; outline:none; transition:border .2s, box-shadow .2s, background .2s;
 }
 .textarea{ min-height:140px; resize:vertical }
-.checkbox{ width:auto; display:inline-block }
-label{ display:block; font-weight:600; margin:8px 0 6px; color:#dbe7ff }
-.btn{
-  padding:12px 16px; border:1px solid #3a4a5f; border-radius:10px;
-  background:#ffb347; color:#0f172a; font-weight:800; cursor:pointer;
+label.floating{
+  position:absolute; left:12px; top:12px; color:#a3b3cc; font-size:14px; padding:0 4px; pointer-events:none;
+  transition: transform .18s ease, font-size .18s ease, top .18s ease, color .18s ease;
+  background:transparent;
 }
+.input:focus, .textarea:focus{ border-color:#4aa3e0; box-shadow:0 0 0 3px rgba(74,163,224,.25) }
+.input:not(:placeholder-shown) + .floating,
+.textarea:not(:placeholder-shown) + .floating,
+.input:focus + .floating, .textarea:focus + .floating{
+  top:-8px; transform:translateY(-50%); font-size:12px; color:#cfe0ff; background:transparent;
+}
+.helper{ color:#cfe0ff; font-size:.95rem; margin:6px 0 0 }
+.form-actions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:8px }
+.btn{
+  padding:12px 16px; border:1px solid #3a4a5f; border-radius:10px; cursor:pointer;
+  background:linear-gradient(180deg,#ffb347,#ff9900); color:#0f172a; font-weight:800;
+}
+.btn.secondary{ background:#243142; color:#e9f2ff }
 .btn[disabled]{ opacity:.6; cursor:not-allowed }
-.note{ color:#cfe0ff; font-size:0.95rem; margin-top:6px }
-.alert{ margin-top:10px; padding:10px 12px; border-radius:10px; border:1px solid var(--line); display:none }
+.badge-pill{ font-size:.85rem; padding:6px 10px; border-radius:999px; border:1px solid var(--line); color:#cfe0ff }
+.alert{ margin-top:12px; padding:10px 12px; border-radius:10px; border:1px solid var(--line); display:none }
 .alert.ok{ background:#173a2a; color:#d7ffe6; border-color:#235a40; display:block }
 .alert.err{ background:#3a1a1a; color:#ffd7d7; border-color:#5a2323; display:block }
+
+/* Right contact card */
+.contact-card h3{ margin:0 0 8px }
+.kv{ display:grid; grid-template-columns:110px 1fr; gap:6px 10px; font-size:1rem; color:#eaf2ff }
+.btn-row{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap }
+.btn.ghost{ background:transparent; color:#e9f2ff; border:1px solid #3a4a5f }
+.btn.ghost:hover{ background:#243142 }
+.qr{ margin-top:12px; padding:10px; border:1px dashed #38506c; border-radius:12px; text-align:center }
 
 /* Success toast */
 .toast{position:fixed;bottom:26px;right:26px;background:#173a2a;color:#d7ffe6;
@@ -128,7 +150,7 @@ label{ display:block; font-weight:600; margin:8px 0 6px; color:#dbe7ff }
   transition:opacity .35s ease,transform .35s ease;z-index:9999;font-weight:700}
 .toast.show{opacity:1;transform:translateY(0)}
 
-/* LIGHT THEME (attribute-based) */
+/* LIGHT THEME (attribute-based!) */
 body[data-theme="light"]{
   --ink:#1B2532; --muted:#516074;
   --bg0:#f4f6fb; --navy:#f0f4fa; --bg1:#ffffff;
@@ -157,7 +179,7 @@ body[data-theme="light"] .input, body[data-theme="light"] .textarea{ background:
   .charts{grid-template-columns:1fr}
   .chart-grid{grid-template-columns:1fr}
   .chart-svg{height:260px}
-  .form{grid-template-columns:1fr}
+  .contact-wrap{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -231,62 +253,76 @@ body[data-theme="light"] .input, body[data-theme="light"] .textarea{ background:
       </div>
     </section>
 
-    <!-- Contact with Form -->
+    <!-- Contact (modernized) -->
     <section id="contact" class="panel reveal d4">
       <h2>Contact</h2>
-      <form id="contactForm" class="form" novalidate>
-        <!-- Honeypot + simple captcha timestamp -->
-        <input type="hidden" id="formTime" name="formTime" value="">
-        <input type="text" name="company" autocomplete="off" tabindex="-1" style="position:absolute;left:-5000px;opacity:0" aria-hidden="true">
+      <div class="contact-wrap">
+        <!-- Left: form -->
+        <div class="card">
+          <form id="contactForm" novalidate>
+            <input type="hidden" id="formTime" name="formTime" value="">
+            <input type="text" name="company" autocomplete="off" tabindex="-1" style="position:absolute;left:-5000px;opacity:0" aria-hidden="true">
 
-        <div>
-          <label for="name">Name</label>
-          <input id="name" name="name" class="input" placeholder="Your name" required />
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input id="email" name="email" class="input" type="email" placeholder="you@example.com" required />
-        </div>
-        <div class="full">
-          <label for="subject">Subject <span style="opacity:.6">(optional)</span></label>
-          <input id="subject" name="subject" class="input" placeholder="e.g., Internship opportunity" />
-        </div>
-        <div class="full">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" class="textarea" placeholder="Write your message…" required></textarea>
-        </div>
-        <div class="full">
-          <label>
-            <input type="checkbox" id="consent" required />
-            I consent to be contacted about my inquiry.
-          </label>
-          <div class="note">We’ll only use your details to reply to this message. No newsletter, no tracking pixels.</div>
-        </div>
-        <div class="full">
-          <button id="sendBtn" class="btn" type="submit">Send message</button>
-          <span id="formStatus" class="note" role="status" aria-live="polite" style="margin-left:10px"></span>
-        </div>
-        <div id="formAlert" class="alert" aria-live="assertive"></div>
-      </form>
+            <div class="fg">
+              <input id="name" name="name" class="input" placeholder=" " required />
+              <label for="name" class="floating">Your name</label>
+            </div>
+            <div class="fg">
+              <input id="email" name="email" class="input" type="email" placeholder=" " required />
+              <label for="email" class="floating">Email</label>
+            </div>
+            <div class="fg">
+              <input id="subject" name="subject" class="input" placeholder=" " />
+              <label for="subject" class="floating">Subject (optional)</label>
+            </div>
+            <div class="fg">
+              <textarea id="message" name="message" class="textarea" placeholder=" " required></textarea>
+              <label for="message" class="floating">Message</label>
+            </div>
 
-      <ul class="list" style="list-style:none;padding-left:0;margin-top:14px">
-        <li>Email: <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></li>
-        <li>GitHub: <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></li>
-        <li>LinkedIn: <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">linkedin.com/in/michael-alibeaj-9810771a6</a></li>
-      </ul>
+            <div class="form-actions">
+              <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="consent" required /> <span>I consent to be contacted about my inquiry.</span></label>
+            </div>
 
-      <!-- Optional inline LinkedIn "QR" accent -->
-      <div class="qr" style="margin-top:10px;text-align:center">
-        <div style="font-weight:700;margin-bottom:6px">Scan my LinkedIn</div>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="140" height="140" aria-hidden="true">
-          <rect width="100" height="100" fill="#fff" rx="8"/>
-          <rect x="10" y="10" width="20" height="20" fill="#232F3E"/>
-          <rect x="70" y="10" width="20" height="20" fill="#232F3E"/>
-          <rect x="10" y="70" width="20" height="20" fill="#232F3E"/>
-          <circle cx="50" cy="50" r="8" fill="#FF9900"/>
-          <rect x="44" y="44" width="12" height="12" fill="#232F3E"/>
-        </svg>
-        <div class="note">Opens: <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">LinkedIn profile</a></div>
+            <div class="form-actions">
+              <button id="sendBtn" class="btn" type="submit">Send message</button>
+              <button id="clearBtn" class="btn secondary" type="button">Clear</button>
+              <span class="badge-pill">No spam · No tracking</span>
+              <span id="formStatus" class="helper" role="status" aria-live="polite"></span>
+            </div>
+
+            <div id="formAlert" class="alert" aria-live="assertive"></div>
+          </form>
+        </div>
+
+        <!-- Right: contact card -->
+        <div class="card contact-card">
+          <h3>Reach me directly</h3>
+          <div class="kv" style="margin-top:8px">
+            <div>Email</div><div><a id="emailLink" href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a> <button id="copyMail" class="btn ghost" type="button" style="padding:6px 10px">Copy</button></div>
+            <div>GitHub</div><div><a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></div>
+            <div>LinkedIn</div><div><a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">/in/michael-alibeaj-9810771a6/</a></div>
+            <div>Location</div><div>Milan, Italy (CET/CEST)</div>
+          </div>
+          <div class="btn-row">
+            <a class="btn ghost" href="mailto:malibeaj01@outlook.com">Email</a>
+            <a class="btn ghost" href="cv.html">View CV</a>
+            <a class="btn ghost" href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn ghost" href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+          <div class="qr">
+            <div style="font-weight:700;margin-bottom:6px">Scan my LinkedIn</div>
+            <!-- simple brand QR accent -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="140" height="140">
+              <rect width="100" height="100" fill="#fff" rx="8"/>
+              <rect x="10" y="10" width="20" height="20" fill="#232F3E"/>
+              <rect x="70" y="10" width="20" height="20" fill="#232F3E"/>
+              <rect x="10" y="70" width="20" height="20" fill="#232F3E"/>
+              <circle cx="50" cy="50" r="8" fill="#FF9900"/>
+              <rect x="44" y="44" width="12" height="12" fill="#232F3E"/>
+            </svg>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -301,7 +337,7 @@ body[data-theme="light"] .input, body[data-theme="light"] .textarea{ background:
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
-<!-- Sidebar toggle + Theme toggle + Keyboard shortcuts (attribute-based theme) -->
+<!-- Sidebar toggle + Theme toggle + Keyboard shortcuts (uses data-theme) -->
 <script>
 (function(){
   const railBtn=document.getElementById('toggle-rail');
@@ -309,122 +345,105 @@ document.getElementById('year').textContent = new Date().getFullYear();
   const KEY_SIDEBAR='sidebar_collapsed_v1';
   const KEY_THEME='theme_pref_v1';
 
-  function applySidebar(c){document.body.classList.toggle('sidebar-collapsed',c);railBtn.textContent=c?'☰':'✕';}
-  function setTheme(mode){document.body.setAttribute('data-theme',mode);themeBtn.textContent=(mode==='light')?'🌙':'🌗';}
+  const applySidebar=(c)=>{document.body.classList.toggle('sidebar-collapsed',c);railBtn.textContent=c?'☰':'✕';};
+  const setTheme=(mode)=>{document.body.setAttribute('data-theme',mode);themeBtn.textContent=(mode==='light')?'🌙':'🌗';};
 
-  // init sidebar
-  const savedSidebar=localStorage.getItem(KEY_SIDEBAR)==='1';applySidebar(savedSidebar);
-  railBtn.onclick=()=>{const n=!document.body.classList.contains('sidebar-collapsed');applySidebar(n);try{localStorage.setItem(KEY_SIDEBAR,n?'1':'0')}catch{}};
+  // sidebar init
+  const savedSb=localStorage.getItem(KEY_SIDEBAR)==='1'; applySidebar(savedSb);
+  railBtn.onclick=()=>{const next=!document.body.classList.contains('sidebar-collapsed');applySidebar(next);try{localStorage.setItem(KEY_SIDEBAR',next?'1':'0')}catch{}};
 
-  // init theme
-  const savedTheme=localStorage.getItem(KEY_THEME) || (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
-  setTheme(savedTheme);
+  // theme init (saved → prefers → dark)
+  const saved=localStorage.getItem(KEY_THEME) || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  setTheme(saved);
 
-  // toggle theme
-  themeBtn.onclick=()=>{const next=(document.body.getAttribute('data-theme')==='light')?'dark':'light';setTheme(next);try{localStorage.setItem(KEY_THEME,next)}catch{}; setTimeout(()=>window.renderSnapshot&&window.renderSnapshot(true),150);};
+  themeBtn.onclick=()=>{
+    const next=(document.body.getAttribute('data-theme')==='light')?'dark':'light';
+    setTheme(next);
+    try{localStorage.setItem(KEY_THEME,next)}catch{}
+    setTimeout(()=>window.renderSnapshot && window.renderSnapshot(true),150);
+  };
 
-  // keys
-  window.addEventListener('keydown',e=>{
-    if(/input|textarea|select/i.test(e.target.tagName))return;
-    if(e.key==='s'||e.key==='S'){e.preventDefault();railBtn.click();}
-    else if(e.key==='t'||e.key==='T'){e.preventDefault();themeBtn.click();}
+  window.addEventListener('keydown', (e)=>{
+    if(/input|textarea|select/i.test(e.target.tagName)) return;
+    if(e.key==='s'||e.key==='S'){ e.preventDefault(); railBtn.click(); }
+    if(e.key==='t'||e.key==='T'){ e.preventDefault(); themeBtn.click(); }
   });
 })();
 </script>
 
-<!-- Contact form handler (Formspree) with sanitization + simple captcha + toast -->
+<!-- Contact form handler (sanitized + simple captcha + toast) -->
 <script>
 (function(){
-  const FORM_ENDPOINT = 'https://formspree.io/f/mgvpanqe'; // <-- Replace with your Formspree endpoint
+  const FORM_ENDPOINT = 'https://formspree.io/f/your_form_id'; // <-- Replace with your Formspree endpoint
   const form = document.getElementById('contactForm');
   const btn  = document.getElementById('sendBtn');
   const status = document.getElementById('formStatus');
   const alertBox = document.getElementById('formAlert');
   const toast = document.getElementById('toast');
   const tsField = document.getElementById('formTime');
-  tsField.value = String(Date.now()); // page load timestamp
+  const clearBtn=document.getElementById('clearBtn');
+  tsField.value = String(Date.now());
 
   const sanitize = s => s
-    .replace(/[<>&"']/g, c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c]))
+    .replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c]))
     .replace(/https?:\/\//gi,'[link removed]')
     .replace(/\n{3,}/g,'\n\n')
     .trim();
 
-  function showAlert(type, msg){
-    alertBox.className = 'alert ' + (type === 'ok' ? 'ok' : 'err');
-    alertBox.textContent = msg;
-    alertBox.style.display = 'block';
+  function showAlert(ok,msg){
+    alertBox.className='alert '+(ok?'ok':'err');
+    alertBox.textContent=msg;
+    alertBox.style.display='block';
   }
   function showToast(msg){
-    toast.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(()=>toast.classList.remove('show'), 2500);
+    toast.textContent=msg; toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'),2500);
   }
 
+  clearBtn?.addEventListener('click', ()=>{ form.reset(); alertBox.style.display='none'; status.textContent=''; });
+
   form.addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    alertBox.style.display = 'none';
-    status.textContent = '';
+    e.preventDefault(); alertBox.style.display='none'; status.textContent='';
+    if(form.company && form.company.value) return; // honeypot
+    const elapsed=(Date.now()-Number(tsField.value||0))/1000;
+    if(elapsed<5){ showAlert(false,'Please wait a few seconds before sending.'); return; }
 
-    // Honeypot
-    if (form.company && form.company.value) return;
-
-    // Simple captcha (require >= 5s since load)
-    const elapsed = (Date.now() - Number(tsField.value || 0))/1000;
-    if(elapsed < 5){
-      showAlert('err','Please wait a few seconds before sending.');
-      return;
+    const payload={
+      name:sanitize(form.name.value),
+      email:sanitize(form.email.value),
+      subject:sanitize(form.subject.value),
+      message:sanitize(form.message.value)
+    };
+    const consent=document.getElementById('consent')?.checked;
+    if(!payload.name||!payload.email||!payload.message||!consent){
+      showAlert(false,'Please fill required fields and accept consent.'); return;
     }
 
-    const name = sanitize(form.name.value);
-    const email = sanitize(form.email.value);
-    const subject = sanitize(form.subject.value);
-    const message = sanitize(form.message.value);
-    const consent = document.getElementById('consent').checked;
-
-    if(!name || !email || !message || !consent){
-      showAlert('err','Please fill required fields and accept consent.');
-      return;
-    }
-
-    btn.disabled = true;
-    btn.textContent = 'Sending…';
-    status.textContent = 'Sending your message…';
-
+    btn.disabled=true; btn.textContent='Sending…'; status.textContent='Sending…';
     try{
-      const res = await fetch(FORM_ENDPOINT, {
-        method:'POST',
-        headers:{ 'Accept':'application/json', 'Content-Type':'application/json' },
-        body: JSON.stringify({ name, email, subject, message })
-      });
-      const data = await res.json().catch(()=>({}));
-      if(res.ok){
-        form.reset();
-        status.textContent = '';
-        showAlert('ok','Thanks! Your message has been sent.');
-        showToast('Message sent ✅');
-        tsField.value = String(Date.now()); // reset captcha timer
-      }else{
-        const msg = (data && data.error) ? data.error : 'There was a problem sending your message.';
-        showAlert('err', msg);
-      }
-    }catch(err){
-      showAlert('err','Network error. Please try again in a moment.');
-    }finally{
-      btn.disabled = false;
-      btn.textContent = 'Send message';
-    }
+      const res=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(payload)});
+      const data=await res.json().catch(()=>({}));
+      if(res.ok){ form.reset(); tsField.value=String(Date.now()); showAlert(true,'Thanks! Your message has been sent.'); showToast('Message sent ✅'); status.textContent=''; }
+      else{ showAlert(false, data?.error || 'There was a problem sending your message.'); }
+    }catch{ showAlert(false,'Network error. Please try again.'); }
+    finally{ btn.disabled=false; btn.textContent='Send message'; }
+  });
+
+  // copy email quick action
+  document.getElementById('copyMail')?.addEventListener('click', async ()=>{
+    try{ await navigator.clipboard.writeText('malibeaj01@outlook.com'); showToast('Email copied 📋'); }
+    catch{ showAlert(false,'Copy failed.'); }
   });
 })();
 </script>
 
-<!-- GitHub Snapshot: owned + shared repos, stars, CI/README coverage, charts -->
+<!-- GitHub Snapshot (unchanged core logic) -->
 <script>
 /* ============== CONFIG ============== */
-const GH_USER = 'MikeTech01';          // <-- change if needed
-const MAX_HEALTH_REPOS = 15;           // how many recent repos to scan for CI/README
-const EVENTS_LIMIT = 30;               // how many Public Events to scan for shared repos
-const CACHE_TTL_MS = 15 * 60 * 1000;   // localStorage cache
+const GH_USER = 'MikeTech01';
+const MAX_HEALTH_REPOS = 15;
+const EVENTS_LIMIT = 30;
+const CACHE_TTL_MS = 15 * 60 * 1000;
 
 /* ============== UTIL ============== */
 const $ = s => document.querySelector(s);
@@ -447,7 +466,7 @@ function chartColors(){
   };
 }
 
-/* ============== SVG HELPERS (larger, clearer, theme-aware) ============== */
+/* ============== SVG HELPERS ============== */
 function drawColumns(svgId, series){
   const svg=document.getElementById(svgId); if(!svg||!series?.length)return;
   while(svg.lastChild) svg.removeChild(svg.lastChild);
@@ -486,7 +505,6 @@ function drawColumns(svgId, series){
     lbl.textContent=s.label; svg.appendChild(lbl);
   });
 }
-
 function drawHBars(svgId, series){
   const svg=document.getElementById(svgId); if(!svg||!series?.length)return;
   while(svg.lastChild) svg.removeChild(svg.lastChild);
@@ -598,7 +616,6 @@ async function renderSnapshot(forceRedraw=false){
       const projectsCombined = combined.length;
       const starsOwned = owned.reduce((s,r)=>s+(r.stargazers_count||0),0);
 
-      // Activity by Month (combined)
       const months = last12MonthLabels();
       const monthCount = Object.fromEntries(months.map(m=>[m.key,0]));
       combined.forEach(r=>{
@@ -608,20 +625,17 @@ async function renderSnapshot(forceRedraw=false){
       });
       const monthSeries = months.map((m,i)=>({ label:m.label, value:monthCount[m.key], color: i%2? '#3aa0ff':'#7fb8ff' }));
 
-      // Language split (top 3)
       const counts={}; combined.forEach(r=>{ const k=r.language||'Other'; counts[k]=(counts[k]||0)+1; });
       const langSeries = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([label,value],i)=>({
         label, value, color: i===0?'#FF9900':i===1?'#3aa0ff':'#7fb8ff'
       }));
 
-      // Top 3 by stars (combined)
       const top3 = combined
         .map(r=>({name:r.name, full:r.full_name, stars:r.stargazers_count||0, html_url:r.html_url}))
         .sort((a,b)=>b.stars-a.stars)
         .slice(0,3);
       const topStarsSeries = top3.map((r,i)=>({label:r.name, value:r.stars, color:i===0?'#FF9900':'#3aa0ff'}));
 
-      // Health checks on top N recent repos (combined)
       const healthSet = combined
         .sort((a,b)=> new Date(b.pushed_at||b.updated_at) - new Date(a.pushed_at||a.updated_at))
         .slice(0, MAX_HEALTH_REPOS);
@@ -642,7 +656,7 @@ async function renderSnapshot(forceRedraw=false){
       cacheSet(cacheKey, data);
     }
 
-    // KPIs with animation
+    // KPIs
     countTo(document.getElementById('kpi-projects'), data.projectsCombined);
     countTo(document.getElementById('kpi-stars'), data.starsOwned);
     countTo(document.getElementById('kpi-ci'), data.ciPct, '%');
@@ -658,12 +672,10 @@ async function renderSnapshot(forceRedraw=false){
 
     rmSkel();
 
-    // Charts (theme-aware)
     drawColumns('monthchart', data.monthSeries);
     drawColumns('langchart', data.langSeries);
     drawHBars('topstars', data.topStarsSeries);
 
-    // Featured list
     const UL = document.getElementById('featured-list');
     if (UL){
       UL.innerHTML = '';
@@ -682,8 +694,6 @@ async function renderSnapshot(forceRedraw=false){
     rmSkel();
   }
 }
-
-// expose for theme redraw and render initially
 window.renderSnapshot = renderSnapshot;
 renderSnapshot();
 </script>
