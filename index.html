@@ -43,15 +43,6 @@ a:hover{text-decoration:underline}
 #toggle-rail{left:16px;} #theme-toggle{right:16px;}
 #toggle-rail:focus-visible,#theme-toggle:focus-visible{ outline:3px solid rgba(20,110,180,.45); outline-offset:2px }
 
-/* Collapsed sidebar state (add this in your <style>, e.g. after .rail) */
-body.sidebar-collapsed .page { 
-  grid-template-columns: 1fr; 
-}
-body.sidebar-collapsed .rail { 
-  display: none; 
-}
-
-
 /* Layout */
 .page{max-width:var(--max);margin:0 auto;display:grid;
   grid-template-columns:var(--rail) 1fr;gap:28px;padding:28px}
@@ -70,6 +61,10 @@ body.sidebar-collapsed .rail {
 nav{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
 nav a{display:block;padding:8px 0;color:#d7e5ff}
 nav a.active{color:#fff;font-weight:800}
+
+/* Collapsed sidebar (needed for toggle to show/hide) */
+body.sidebar-collapsed .page { grid-template-columns: 1fr; }
+body.sidebar-collapsed .rail { display: none; }
 
 /* Fancy CTA */
 .cta{
@@ -190,7 +185,7 @@ body[data-theme="light"] .info-card{ background:#ffffff }
 <body data-theme="dark">
 
 <!-- UI controls -->
-<button id="toggle-rail" aria-label="Toggle sidebar" aria-expanded="true" title="Toggle sidebar">☰</button>
+<button id="toggle-rail" aria-label="Close sidebar" aria-expanded="true" title="Close sidebar">✕</button>
 <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">🌗</button>
 
 <div class="page">
@@ -366,7 +361,12 @@ document.getElementById('year').textContent = new Date().getFullYear();
   function applySidebar(collapsed){
     document.body.classList.toggle('sidebar-collapsed', collapsed);
     const btn = document.getElementById('toggle-rail');
-    if (btn) btn.textContent = collapsed ? '☰' : '✕';
+    if (btn) {
+      btn.textContent = collapsed ? '☰' : '✕';
+      btn.setAttribute('aria-expanded', String(!collapsed));
+      btn.setAttribute('aria-label', collapsed ? 'Open sidebar' : 'Close sidebar');
+      btn.title = collapsed ? 'Open sidebar' : 'Close sidebar';
+    }
   }
 
   function setTheme(mode){
@@ -400,20 +400,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
       requestAnimationFrame(()=>{ document.documentElement.style.transform = ''; });
       setTimeout(()=>window.renderSnapshot && window.renderSnapshot(true),150);
     });
-
-    <script>
-  // inside the Sidebar + Theme toggle script
-  function applySidebar(collapsed){
-    document.body.classList.toggle('sidebar-collapsed', collapsed);
-    const btn = document.getElementById('toggle-rail');
-    if (btn) {
-      btn.textContent = collapsed ? '☰' : '✕';
-      btn.setAttribute('aria-expanded', String(!collapsed));
-      btn.setAttribute('aria-label', collapsed ? 'Open sidebar' : 'Close sidebar');
-      btn.title = collapsed ? 'Open sidebar' : 'Close sidebar';
-    }
-  }
-</script>
 
     // Shortcuts
     window.addEventListener('keydown', (e)=>{
@@ -655,6 +641,7 @@ async function renderSnapshot(forceRedraw=false){
     setText('#kpi-ci-note', `Checked top ${MAX_HEALTH_REPOS} repos`);
     setText('#kpi-readme-note', `Checked top ${MAX_HEALTH_REPOS} repos`);
 
+    // visual cues
     if (data.ciPct >= 70) addGood(document.getElementById('kpi-ci'));
     if (data.readmePct >= 80) addGood(document.getElementById('kpi-readme'));
 
@@ -677,7 +664,6 @@ async function renderSnapshot(forceRedraw=false){
     setText('#month-legend', 'Repos updated per month (owned + shared, last 12)');
     setText('#api-status', 'GitHub API: OK');
 
-    // remove skeletons after render
     rmSkel();
   } catch (err){
     console.warn(err);
