@@ -146,5 +146,213 @@
   };
   document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 </script>
+<script>
+/* ========= CONFIG ========= */
+const GH_USER = 'MikeTech01';          // <-- put your GitHub username
+const WEEKS_TO_SHOW = 10;              // sparkline length
+const BI_KEYWORDS = ['bi','business intelligence','dashboard','power bi','quicksight'];
+
+/* ========= DOM SHORTCUTS ========= */
+const el = sel => document.querySelector(sel);
+
+/* ========= DRAW HELPERS (pure SVG) ========= */
+function drawSparkline(svgId, weeklyHours){
+  const svg = document.getElementById(svgId);
+  if(!svg || !weeklyHours?.length) return;
+
+  // Clear old
+  while (svg.lastChild) svg.removeChild(svg.lastChild);
+
+  const W=600,H=180,L=40,R=20,T=10,B=30;
+  const max = Math.max(16, ...weeklyHours);
+  const stepX = (W - L - R) / (weeklyHours.length - 1);
+
+  // axes
+  const yAxis = document.createElementNS('http://www.w3.org/2000/svg','line');
+  yAxis.setAttribute('x1',L); yAxis.setAttribute('y1',T);
+  yAxis.setAttribute('x2',L); yAxis.setAttribute('y2',H-B);
+  yAxis.setAttribute('stroke','#2e3a4a'); svg.appendChild(yAxis);
+  const xAxis = document.createElementNS('http://www.w3.org/2000/svg','line');
+  xAxis.setAttribute('x1',L); xAxis.setAttribute('y1',H-B);
+  xAxis.setAttribute('x2',W-R); xAxis.setAttribute('y2',H-B);
+  xAxis.setAttribute('stroke','#2e3a4a'); svg.appendChild(xAxis);
+
+  const pts = weeklyHours.map((v,i)=>{
+    const x = L + i*stepX;
+    const y = T + (1 - v/max) * (H - T - B);
+    return [x,y];
+  });
+
+  const d = pts.map((p,i)=> (i? 'L':'M') + p[0] + ' ' + p[1]).join(' ');
+  const fillPath = d + ` L ${L + (weeklyHours.length-1)*stepX} ${H-B} L ${L} ${H-B} Z`;
+
+  const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+  const grad = document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+  grad.setAttribute('id','slGrad'); grad.setAttribute('x1','0'); grad.setAttribute('y1','0'); grad.setAttribute('x2','0'); grad.setAttribute('y2','1');
+  const s1 = document.createElementNS('http://www.w3.org/2000/svg','stop'); s1.setAttribute('offset','0%'); s1.setAttribute('stop-color','#FF9900');
+  const s2 = document.createElementNS('http://www.w3.org/2000/svg','stop'); s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','#146EB4'); s2.setAttribute('stop-opacity','0.2');
+  grad.append(s1,s2); defs.appendChild(grad); svg.appendChild(defs);
+
+  const fill = document.createElementNS('http://www.w3.org/2000/svg','path');
+  fill.setAttribute('d', fillPath); fill.setAttribute('fill','url(#slGrad)'); fill.setAttribute('opacity','0.28'); svg.appendChild(fill);
+
+  const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+  path.setAttribute('d', d); path.setAttribute('fill','none'); path.setAttribute('stroke','#FF9900'); path.setAttribute('stroke-width','2.5'); svg.appendChild(path);
+
+  const [lx,ly] = pts[pts.length-1];
+  const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+  dot.setAttribute('cx', lx); dot.setAttribute('cy', ly); dot.setAttribute('r', '4.5'); dot.setAttribute('fill','#FF9900'); svg.appendChild(dot);
+
+  // goal line (10h)
+  const goal = 10; const gy = T + (1 - goal/max) * (H - T - B);
+  const gl = document.createElementNS('http://www.w3.org/2000/svg','line');
+  gl.setAttribute('x1', L); gl.setAttribute('x2', W - R); gl.setAttribute('y1', gy); gl.setAttribute('y2', gy);
+  gl.setAttribute('stroke','#3a4a5f'); gl.setAttribute('stroke-dasharray','4 4'); svg.insertBefore(gl, svg.firstChild);
+}
+
+function drawBars(svgId, series){
+  const svg = document.getElementById(svgId);
+  if(!svg || !series?.length) return;
+
+  while (svg.lastChild) svg.removeChild(svg.lastChild);
+
+  const W=600,H=180,L=40,R=20,T=10,B=30;
+  const barW = ((W - L - R) / series.length) * 0.65;
+  const gap  = ((W - L - R) / series.length) * 0.35;
+  const maxV = Math.max(1, ...series.map(s=>s.value)) * 1.25;
+
+  const axisX = document.createElementNS('http://www.w3.org/2000/svg','line');
+  axisX.setAttribute('x1',L); axisX.setAttribute('x2',W-R); axisX.setAttribute('y1',H-B); axisX.setAttribute('y2',H-B);
+  axisX.setAttribute('stroke','#2e3a4a'); svg.appendChild(axisX);
+
+  series.forEach((s,i)=>{
+    const x = L + i*(barW+gap) + gap*0.5;
+    const h = (s.value/maxV) * (H - T - B);
+    const y = (H - B) - h;
+
+    const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
+    rect.setAttribute('x', x); rect.setAttribute('y', y);
+    rect.setAttribute('width', barW); rect.setAttribute('height', h);
+    rect.setAttribute('rx','6'); rect.setAttribute('fill', s.color || '#7fb8ff'); rect.setAttribute('opacity','0.92');
+    svg.appendChild(rect);
+
+    const label = document.createElementNS('http://www.w3.org/2000/svg','text');
+    label.setAttribute('x', x + barW/2); label.setAttribute('y', H - B + 16);
+    label.setAttribute('text-anchor','middle'); label.setAttribute('fill','#D6DEEE'); label.setAttribute('font-size','12'); label.textContent = s.label;
+    svg.appendChild(label);
+
+    const val = document.createElementNS('http://www.w3.org/2000/svg','text');
+    val.setAttribute('x', x + barW/2); val.setAttribute('y', y - 6);
+    val.setAttribute('text-anchor','middle'); val.setAttribute('fill','#ffffff'); val.setAttribute('font-size','12'); val.textContent = s.value + (s.suffix || '');
+    svg.appendChild(val);
+  });
+}
+
+/* ========= GITHUB FETCHERS ========= */
+// 1) Repos (count, stars, topic keywords, primary languages)
+async function fetchRepos(user){
+  const res = await fetch(`https://api.github.com/users/${user}/repos?per_page=100&type=owner&sort=updated`, {
+    headers: {'Accept':'application/vnd.github+json'}
+  });
+  if(!res.ok) throw new Error('GitHub repos API error');
+  const repos = (await res.json()).filter(r => !r.fork);
+  return repos;
+}
+
+// 2) Events → last 300 public events → aggregate PushEvent commits into last N ISO weeks
+async function fetchWeeklyCommits(user, nWeeks){
+  const res = await fetch(`https://api.github.com/users/${user}/events/public`, {
+    headers: {'Accept':'application/vnd.github+json'}
+  });
+  if(!res.ok) throw new Error('GitHub events API error');
+  const events = await res.json();
+
+  // buckets for last nWeeks (0=oldest, end=most recent)
+  const now = new Date();
+  const weeks = Array(nWeeks).fill(0);
+
+  function isoWeekStart(d){
+    const date = new Date(d); const day = (date.getUTCDay()+6)%7; // Mon=0
+    date.setUTCDate(date.getUTCDate()-day); date.setUTCHours(0,0,0,0); return date;
+  }
+  const thisWeekStart = isoWeekStart(now);
+
+  events.forEach(ev=>{
+    if(ev.type !== 'PushEvent') return;
+    const when = new Date(ev.created_at);
+    const weekStart = isoWeekStart(when);
+    const diffDays = (thisWeekStart - weekStart) / (1000*60*60*24);
+    const idxFromEnd = Math.floor(diffDays/7);
+    const bucket = (WEEKS_TO_SHOW-1) - idxFromEnd; // map to our 0..n-1 timeline
+    if(bucket >= 0 && bucket < WEEKS_TO_SHOW){
+      const commits = ev?.payload?.size || 0;
+      weeks[bucket] += commits;
+    }
+  });
+
+  // fill leading empty with small zeros for nicer sparkline if no activity
+  return weeks.map(v => Math.min(v, 20));
+}
+
+/* ========= METRICS + RENDER ========= */
+async function renderDashboard(){
+  try{
+    const [repos, weeklyCommits] = await Promise.all([
+      fetchRepos(GH_USER),
+      fetchWeeklyCommits(GH_USER, WEEKS_TO_SHOW),
+    ]);
+
+    const projects = repos.length;
+    const totalStars = repos.reduce((s,r)=> s + (r.stargazers_count||0), 0);
+
+    // naive "dashboards" guess via keywords in name/description/topics
+    const isBI = r => {
+      const blob = `${r.name||''} ${(r.description||'')} ${(r.topics||[]).join(' ')}`.toLowerCase();
+      return BI_KEYWORDS.some(k => blob.includes(k));
+    };
+    const dashboards = repos.filter(isBI).length;
+
+    // primary language split (top 3)
+    const counts = {};
+    repos.forEach(r => {
+      const lang = (r.language || 'Other');
+      counts[lang] = (counts[lang]||0) + 1;
+    });
+    const langSeries = Object.entries(counts)
+      .sort((a,b)=>b[1]-a[1])
+      .slice(0,3)
+      .map(([label,value],i)=>({
+        label,
+        value,
+        color: i===0 ? '#FF9900' : i===1 ? '#3aa0ff' : '#7fb8ff',
+        suffix:''
+      }));
+
+    // KPIs
+    el('#kpi-projects') && (el('#kpi-projects').textContent = projects);
+    el('#kpi-dashboards') && (el('#kpi-dashboards').textContent = dashboards);
+    el('#kpi-stars') && (el('#kpi-stars').textContent = totalStars);
+
+    // Sparkline (weekly commits ≈ learning velocity proxy)
+    const hoursApprox = weeklyCommits.map(c => Math.min(15, Math.round(c * 1.0))); // 1 commit ≈ 1h (tweak)
+    drawSparkline('sparkline', hoursApprox);
+
+    // Bars (language split as a proxy for focus)
+    drawBars('barchart', langSeries);
+
+    // Optional deltas text (simple heuristics)
+    if (el('#kpi-projects-delta')) el('#kpi-projects-delta').textContent = 'Auto from GitHub';
+    if (el('#kpi-dashboards-delta')) el('#kpi-dashboards-delta').textContent = dashboards ? 'Found via topics/keywords' : 'No BI-tagged repos yet';
+    if (el('#kpi-stars-delta')) el('#kpi-stars-delta').textContent = 'Public repo stars total';
+
+  } catch (e){
+    console.warn(e);
+    // graceful fallback: leave the static example content in place
+  }
+}
+
+renderDashboard();
+</script>
+  
 </body>
 </html>
