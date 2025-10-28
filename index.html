@@ -4,181 +4,139 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Michael Alibeaj — M.Sc. Computer Science</title>
-<meta name="description" content="About & Contact for Michael Alibeaj, M.Sc. Computer Science." />
-<meta name="robots" content="index,follow" />
+<meta name="description" content="Portfolio and contact for Michael Alibeaj, M.Sc. Computer Science." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2712%27 fill=%27%23232F3E%27/><text x=%2750%25%27 y=%2757%25%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23FF9900%27 font-family=%27Arial%27>MA</text></svg>">
 <style>
   :root{
-    --navy:#232F3E;        /* deep background */
-    --navy-2:#1B2532;      /* panels */
-    --ink:#F5F7FB;         /* main text */
-    --muted:#D6DEEE;       /* secondary */
-    --line:#2e3a4a;        /* borders */
-
-    --blue:#146EB4;        /* accent */
-    --orange:#FF9900;      /* accent */
-    --btn-text:#0f172a;    /* dark text on orange */
-
-    --radius:14px;
-    --max:1160px;
-    --rail:330px;
+    --navy:#232F3E; --navy-2:#1B2532; --ink:#F5F7FB; --muted:#D6DEEE;
+    --line:#2e3a4a; --blue:#146EB4; --orange:#FF9900; --btn-text:#0f172a;
+    --radius:14px; --max:1160px; --rail:330px;
     --shadow:0 10px 28px rgba(0,0,0,.25);
-
-    --font: ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+    --font:ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   }
-
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0;color:var(--ink);font:16px/1.65 var(--font);
-    background:linear-gradient(180deg, #101723, var(--navy) 50%, #0c131b);
-    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    background:linear-gradient(180deg,#101723,var(--navy) 50%,#0c131b);
   }
   a{color:#9ccdfb;text-decoration:none}
   a:hover{text-decoration:underline}
-  a:focus-visible{outline:3px solid rgba(20,110,180,.45); outline-offset:2px; border-radius:6px}
-
-  .page{
-    max-width:var(--max); margin:0 auto; display:grid;
-    grid-template-columns:var(--rail) 1fr; gap:28px; padding:28px;
-  }
-
-  /* Sidebar */
+  a:focus-visible{outline:3px solid rgba(20,110,180,.45);outline-offset:2px;border-radius:6px}
+  .page{max-width:var(--max);margin:0 auto;display:grid;
+    grid-template-columns:var(--rail) 1fr;gap:28px;padding:28px}
   .rail{
-    position:sticky; top:0; align-self:start; height:max-content;
-    padding:20px; border:1px solid var(--line); border-radius:var(--radius);
-    background:var(--navy-2); box-shadow:var(--shadow);
+    position:sticky;top:0;align-self:start;height:max-content;
+    padding:20px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--navy-2);box-shadow:var(--shadow);
   }
   .name{display:flex;align-items:center;gap:12px}
-  .badge{
-    width:44px;height:44px;border-radius:10px;
-    display:grid;place-items:center;font-weight:900;color:var(--btn-text);
-    background:
-      linear-gradient(180deg,#ffd89a 0%, #ffb347 60%),
-      linear-gradient(90deg,#4aa3e0,#146EB4);
-    mix-blend:normal; border:1px solid #39485b;
-  }
+  .badge{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font-weight:900;color:var(--btn-text);
+    background:linear-gradient(180deg,#ffd89a 0%,#ffb347 60%),linear-gradient(90deg,#4aa3e0,#146EB4);
+    border:1px solid #39485b;}
   .role{color:#e6eefc;opacity:.92;margin:6px 0 12px}
   .meta{color:#cfe0ff;font-size:14px}
-
-  .actions a{
-    display:block; text-align:center; margin-top:10px; padding:11px 14px;
-    border-radius:10px; border:1px solid #3a4a5f; background:#ffb347;
-    color:var(--btn-text); font-weight:800; text-decoration:none;
-  }
-  .actions a.secondary{
-    background:#243142; color:#e9f2ff; font-weight:600;
-  }
-
+  .actions a{display:block;text-align:center;margin-top:10px;padding:11px 14px;
+    border-radius:10px;border:1px solid #3a4a5f;background:#ffb347;color:var(--btn-text);font-weight:800;text-decoration:none}
+  .actions a.secondary{background:#243142;color:#e9f2ff;font-weight:600}
   nav{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
   nav a{display:block;padding:8px 0;color:#d7e5ff}
   nav a.active{color:#ffffff;font-weight:700}
-
-  /* Main */
   main{min-width:0}
-  .title{
-    padding:18px 20px; border:1px solid var(--line); border-radius:var(--radius);
-    background:#1e2836; box-shadow:var(--shadow);
-  }
-  .title h1{
-    margin:0; font-size:clamp(22px,3.4vw,34px); letter-spacing:.3px;
-    color:#ffffff;
-  }
+  .title{padding:18px 20px;border:1px solid var(--line);border-radius:var(--radius);
+    background:#1e2836;box-shadow:var(--shadow)}
+  .title h1{margin:0;font-size:clamp(22px,3.4vw,34px);letter-spacing:.3px;color:#fff}
   .title p{margin:6px 0 0;color:#eaf2ff;opacity:.92}
-
-  section.panel{
-    padding:22px 20px; border:1px solid var(--line); border-radius:var(--radius);
-    background:#1e2836; box-shadow:var(--shadow); margin-top:16px;
-  }
-  section h2{
-    margin:0 0 8px; font-size:16px; letter-spacing:.2px; text-transform:uppercase; color:#dbe7ff
-  }
+  section.panel{padding:22px 20px;border:1px solid var(--line);border-radius:var(--radius);
+    background:#1e2836;box-shadow:var(--shadow);margin-top:16px}
+  section h2{margin:0 0 8px;font-size:16px;letter-spacing:.2px;text-transform:uppercase;color:#dbe7ff}
   .lead{font-size:20px;margin:4px 0 6px}
   .muted{color:var(--muted)}
   .list{margin:10px 0 0;padding-left:18px;color:#e6eeff}
-
   footer{opacity:.85;color:#c6d1e3;font-size:14px;text-align:center;margin-top:12px}
-
-  /* Responsive */
-  @media (max-width:980px){
-    .page{grid-template-columns:1fr}
-    .rail{position:relative}
-    nav{display:flex;gap:12px;flex-wrap:wrap}
-    nav a{padding:0}
-  }
-
-  /* Print */
-  @media print{
-    body{background:#fff;color:#000}
-    .rail, .title, .panel{background:#fff; box-shadow:none; border-color:#e5e7eb}
-    .actions, nav a[href^="#"]{display:none}
-    a{color:#000;text-decoration:underline}
-  }
+  @media(max-width:980px){.page{grid-template-columns:1fr}.rail{position:relative}nav{display:flex;gap:12px;flex-wrap:wrap}nav a{padding:0}}
+  @media print{body{background:#fff;color:#000}.rail,.title,.panel{background:#fff;box-shadow:none;border-color:#e5e7eb}.actions,nav a[href^="#"]{display:none}a{color:#000;text-decoration:underline}}
 </style>
 </head>
 <body>
-  <div class="page">
-    <!-- LEFT: Sidebar -->
-    <aside class="rail" aria-label="Sidebar">
-      <div class="name">
-        <div class="badge" aria-hidden="true">MA</div>
-        <div>
-          <strong>Michael Alibeaj</strong><br/>
-          <div class="role">M.Sc. Computer Science — Politecnico di Milano</div>
-        </div>
+<div class="page">
+  <aside class="rail">
+    <div class="name">
+      <div class="badge" aria-hidden="true">MA</div>
+      <div>
+        <strong>Michael Alibeaj</strong><br/>
+        <div class="role">M.Sc. Computer Science — Politecnico di Milano</div>
       </div>
-      <div class="meta">Milan, Italy · <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></div>
+    </div>
+    <div class="meta">Milan, Italy · <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></div>
+    <div class="actions">
+      <a href="cv.html">View CV</a>
+      <a class="secondary" href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="secondary" href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">LinkedIn</a>
+    </div>
+    <nav>
+      <a href="#about" class="active">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#awards">Awards</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </aside>
 
-      <div class="actions" aria-label="Actions">
-        <!-- Only View CV (no download here) -->
-        <a href="cv.html">View CV</a>
-        <a class="secondary" href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="secondary" href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">LinkedIn</a>
-      </div>
+  <main>
+    <div class="title">
+      <h1>Business Intelligence & Data — Student Portfolio</h1>
+      <p>Focused on Python/SQL data modeling and BI that enable clear, confident decisions.</p>
+    </div>
 
-      <nav aria-label="Sections">
-        <a href="#about" class="active">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </aside>
+    <section id="about" class="panel">
+      <h2>About</h2>
+      <p class="lead">I turn messy datasets into reliable metrics and readable dashboards.</p>
+      <p class="muted">Strengths: Python (Pandas), SQL, pragmatic BI delivery. I care about crisp metric definitions, data quality checks, and shipping insights that non-technical stakeholders can actually use.</p>
+      <ul class="list">
+        <li>Solid foundations in statistics, performance modeling, and software engineering.</li>
+        <li>End-to-end ownership of small data stacks (ingest → transform → validate → publish).</li>
+      </ul>
+    </section>
 
-    <!-- RIGHT: Title + About + Contact -->
-    <main>
-      <div class="title" role="banner" aria-label="Page title">
-        <h1>Business Intelligence & Data — Student Portfolio</h1>
-        <p>Focused on Python/SQL data modeling and BI that enable clear, confident decisions.</p>
-      </div>
+    <!-- Skills -->
+    <section id="skills" class="panel">
+      <h2>Skills</h2>
+      <ul class="list">
+        <li><strong>Analytics & BI:</strong> SQL, Power BI, Excel (PowerQuery), Matplotlib</li>
+        <li><strong>Data Engineering:</strong> Python (Pandas), ETL/ELT, REST APIs, Git/GitHub</li>
+        <li><strong>ML & Statistics:</strong> scikit-learn, TensorFlow/Keras, NLP basics</li>
+        <li><strong>Tools & Languages:</strong> GitHub Actions, Linux, English (C1), Italian/Albanian (Native)</li>
+      </ul>
+    </section>
 
-      <section id="about" class="panel">
-        <h2>About</h2>
-        <p class="lead">I turn messy datasets into reliable metrics and readable dashboards.</p>
-        <p class="muted">Strengths: Python (Pandas), SQL, pragmatic BI delivery. I care about crisp metric definitions, data quality checks, and shipping insights that non-technical stakeholders can actually use.</p>
-        <ul class="list">
-          <li>Solid foundations in statistics, performance modeling, and software engineering.</li>
-          <li>End-to-end ownership of small data stacks (ingest → transform → validate → publish).</li>
-        </ul>
-      </section>
+    <!-- Awards -->
+    <section id="awards" class="panel">
+      <h2>Awards</h2>
+      <ul class="list">
+        <li><strong>Data Management for the Web (DMFW)</strong> — 1st Place, Politecnico di Milano</li>
+        <li><strong>Artificial Neural Networks & Deep Learning (AN2DL)</strong> — 2nd Place</li>
+        <li><strong>Italian Mathematical Olympiad</strong> — Top 10% (Regional)</li>
+      </ul>
+    </section>
 
-      <section id="contact" class="panel">
-        <h2>Contact</h2>
-        <p class="muted">Open to Business Intelligence / Data internships — Milan or remote.</p>
-        <ul class="list" style="list-style:none;padding-left:0">
-          <li>Email: <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></li>
-          <li>GitHub: <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></li>
-          <li>LinkedIn: <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">linkedin.com/in/michael-alibeaj-9810771a6</a></li>
-          <li>Location: Milan, Italy</li>
-        </ul>
-      </section>
+    <!-- Contact -->
+    <section id="contact" class="panel">
+      <h2>Contact</h2>
+      <p class="muted">Open to Business Intelligence / Data internships — Milan or remote.</p>
+      <ul class="list" style="list-style:none;padding-left:0">
+        <li>Email: <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></li>
+        <li>GitHub: <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">linkedin.com/in/michael-alibeaj-9810771a6</a></li>
+        <li>Location: Milan, Italy</li>
+      </ul>
+    </section>
 
-      <footer>© <span id="year"></span> Michael Alibeaj · Built for GitHub Pages</footer>
-    </main>
-  </div>
+    <footer>© <span id="year"></span> Michael Alibeaj · Built for GitHub Pages</footer>
+  </main>
+</div>
 
 <script>
-  // Year
   document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Sidebar active link sync
   const links = Array.from(document.querySelectorAll('nav a'));
   const sections = links.map(a => document.querySelector(a.getAttribute('href')));
   const onScroll = () => {
