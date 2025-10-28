@@ -43,6 +43,15 @@ a:hover{text-decoration:underline}
 #toggle-rail{left:16px;} #theme-toggle{right:16px;}
 #toggle-rail:focus-visible,#theme-toggle:focus-visible{ outline:3px solid rgba(20,110,180,.45); outline-offset:2px }
 
+/* Collapsed sidebar state (add this in your <style>, e.g. after .rail) */
+body.sidebar-collapsed .page { 
+  grid-template-columns: 1fr; 
+}
+body.sidebar-collapsed .rail { 
+  display: none; 
+}
+
+
 /* Layout */
 .page{max-width:var(--max);margin:0 auto;display:grid;
   grid-template-columns:var(--rail) 1fr;gap:28px;padding:28px}
@@ -391,6 +400,20 @@ document.getElementById('year').textContent = new Date().getFullYear();
       requestAnimationFrame(()=>{ document.documentElement.style.transform = ''; });
       setTimeout(()=>window.renderSnapshot && window.renderSnapshot(true),150);
     });
+
+    <script>
+  // inside the Sidebar + Theme toggle script
+  function applySidebar(collapsed){
+    document.body.classList.toggle('sidebar-collapsed', collapsed);
+    const btn = document.getElementById('toggle-rail');
+    if (btn) {
+      btn.textContent = collapsed ? '☰' : '✕';
+      btn.setAttribute('aria-expanded', String(!collapsed));
+      btn.setAttribute('aria-label', collapsed ? 'Open sidebar' : 'Close sidebar');
+      btn.title = collapsed ? 'Open sidebar' : 'Close sidebar';
+    }
+  }
+</script>
 
     // Shortcuts
     window.addEventListener('keydown', (e)=>{
