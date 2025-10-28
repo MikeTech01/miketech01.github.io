@@ -7,6 +7,10 @@
 <meta name="description" content="Portfolio and contact for Michael Alibeaj, M.Sc. Computer Science — Business Intelligence & Data Engineering student." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2712%27 fill=%27%23232F3E%27/><text x=%2750%25%27 y=%2757%25%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23FF9900%27 font-family=%27Arial%27>MA</text></svg>">
 
+<!-- 🧪 Privacy-friendly analytics (enable by setting your domain below) -->
+<script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script>
+<!-- If using GitHub Pages without a custom domain, set data-domain="miketech01.github.io" (or your username). -->
+
 <style>
 :root{
   /* Default Dark Theme */
@@ -99,6 +103,26 @@ figure.chart h3{margin:0 0 8px;font-size:1.15rem;color:#dbe7ff}
 .chart-svg{width:100%;height:300px;display:block}
 .chart-legend{color:#cfd8ea;font-size:1.05rem;margin-top:6px}
 
+/* Contact form */
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 0}
+.form .full{grid-column:1/-1}
+.input, .textarea, .select, .checkbox{
+  width:100%; padding:12px 12px; border-radius:10px; border:1px solid var(--line);
+  background:#233042; color:#fff; outline:none;
+}
+.textarea{ min-height:140px; resize:vertical }
+.checkbox{ width:auto; display:inline-block }
+label{ display:block; font-weight:600; margin:8px 0 6px; color:#dbe7ff }
+.btn{
+  padding:12px 16px; border:1px solid #3a4a5f; border-radius:10px;
+  background:#ffb347; color:#0f172a; font-weight:800; cursor:pointer;
+}
+.btn[disabled]{ opacity:.6; cursor:not-allowed }
+.note{ color:#cfe0ff; font-size:0.95rem; margin-top:6px }
+.alert{ margin-top:10px; padding:10px 12px; border-radius:10px; border:1px solid var(--line); display:none }
+.alert.ok{ background:#173a2a; color:#d7ffe6; border-color:#235a40; display:block }
+.alert.err{ background:#3a1a1a; color:#ffd7d7; border-color:#5a2323; display:block }
+
 /* LIGHT THEME */
 body.theme-light{
   --ink:#1B2532; --muted:#516074;
@@ -111,6 +135,7 @@ body.theme-light .kpi{ background:#f5f9ff }
 body.theme-light .title h1, body.theme-light .title p{ color:#1B2532 }
 body.theme-light nav a{ color:#2a3a4f }
 body.theme-light .actions a.secondary{ background:#eaf2ff; color:#1B2532; border-color:#d0dbeb }
+body.theme-light .input, body.theme-light .textarea{ background:#f8fbff; color:#0f172a }
 
 /* Responsive */
 @media (max-width:980px){
@@ -122,6 +147,7 @@ body.theme-light .actions a.secondary{ background:#eaf2ff; color:#1B2532; border
   .charts{grid-template-columns:1fr}
   .chart-grid{grid-template-columns:1fr}
   .chart-svg{height:260px}
+  .form{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -195,17 +221,43 @@ body.theme-light .actions a.secondary{ background:#eaf2ff; color:#1B2532; border
       </div>
     </section>
 
-    <section id="awards" class="panel">
-      <h2>Awards</h2>
-      <ul class="list">
-        <li><strong>Data Management for the Web</strong> — 1st Place</li>
-        <li><strong>Artificial Neural Networks & Deep Learning</strong> — 2nd Place</li>
-      </ul>
-    </section>
-
+    <!-- Contact with Form -->
     <section id="contact" class="panel">
       <h2>Contact</h2>
-      <ul class="list" style="list-style:none;padding-left:0">
+      <form id="contactForm" class="form" novalidate>
+        <!-- Honeypot -->
+        <input type="text" name="company" autocomplete="off" tabindex="-1" style="position:absolute;left:-5000px;opacity:0" aria-hidden="true">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" class="input" placeholder="Your name" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" class="input" type="email" placeholder="you@example.com" required />
+        </div>
+        <div class="full">
+          <label for="subject">Subject <span style="opacity:.6">(optional)</span></label>
+          <input id="subject" name="subject" class="input" placeholder="e.g., Internship opportunity" />
+        </div>
+        <div class="full">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" class="textarea" placeholder="Write your message…" required></textarea>
+        </div>
+        <div class="full">
+          <label>
+            <input type="checkbox" id="consent" required />
+            I consent to be contacted about my inquiry.
+          </label>
+          <div class="note">We’ll only use your details to reply to this message. No newsletter, no tracking pixels.</div>
+        </div>
+        <div class="full">
+          <button id="sendBtn" class="btn" type="submit">Send message</button>
+          <span id="formStatus" class="note" role="status" aria-live="polite" style="margin-left:10px"></span>
+        </div>
+        <div id="formAlert" class="alert" aria-live="assertive"></div>
+      </form>
+
+      <ul class="list" style="list-style:none;padding-left:0;margin-top:14px">
         <li>Email: <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></li>
         <li>GitHub: <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></li>
         <li>LinkedIn: <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">linkedin.com/in/michael-alibeaj-9810771a6</a></li>
@@ -237,6 +289,68 @@ document.getElementById('year').textContent = new Date().getFullYear();
 })();
 </script>
 
+<!-- Contact form handler (Formspree) -->
+<script>
+(function(){
+  const FORM_ENDPOINT = 'https://formspree.io/f/your_form_id'; // <-- Replace with your Formspree endpoint
+  const form = document.getElementById('contactForm');
+  const btn  = document.getElementById('sendBtn');
+  const status = document.getElementById('formStatus');
+  const alertBox = document.getElementById('formAlert');
+
+  function showAlert(type, msg){
+    alertBox.className = 'alert ' + (type === 'ok' ? 'ok' : 'err');
+    alertBox.textContent = msg;
+    alertBox.style.display = 'block';
+  }
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    alertBox.style.display = 'none';
+    status.textContent = '';
+    // Honeypot
+    if (form.company && form.company.value) return; 
+
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const subject = form.subject.value.trim();
+    const message = form.message.value.trim();
+    const consent = document.getElementById('consent').checked;
+
+    if(!name || !email || !message || !consent){
+      showAlert('err','Please fill required fields and accept consent.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.textContent = 'Sending your message…';
+
+    try{
+      const res = await fetch(FORM_ENDPOINT, {
+        method:'POST',
+        headers:{ 'Accept':'application/json', 'Content-Type':'application/json' },
+        body: JSON.stringify({ name, email, subject, message })
+      });
+      const data = await res.json().catch(()=>({}));
+      if(res.ok){
+        form.reset();
+        status.textContent = '';
+        showAlert('ok','Thanks! Your message has been sent.');
+      }else{
+        const msg = (data && data.error) ? data.error : 'There was a problem sending your message.';
+        showAlert('err', msg);
+      }
+    }catch(err){
+      showAlert('err','Network error. Please try again in a moment.');
+    }finally{
+      btn.disabled = false;
+      btn.textContent = 'Send message';
+    }
+  });
+})();
+</script>
+
 <!-- GitHub Snapshot: owned + shared repos, stars, CI/README coverage, charts -->
 <script>
 /* ============== CONFIG ============== */
@@ -256,7 +370,7 @@ const cacheSet = (k,data)=>{ try{localStorage.setItem(k, JSON.stringify({t:Date.
 const fmt = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
 const short = (name,max=26)=> name.length>max ? name.slice(0,max-1)+'…' : name;
 
-// theme-aware chart colors from CSS variables
+// theme-aware chart colors
 function chartColors(){
   const cs = getComputedStyle(document.body);
   return {
@@ -407,7 +521,7 @@ function last12MonthLabels(){
 }
 
 async function renderSnapshot(forceRedraw=false){
-  const cacheKey='gh_snapshot_v10';
+  const cacheKey='gh_snapshot_v11';
   let data = forceRedraw ? (cacheGet(cacheKey, Infinity)) : cacheGet(cacheKey, CACHE_TTL_MS);
 
   try{
