@@ -23,6 +23,7 @@
   --radius:14px; --max:1360px; --rail:290px;
   --shadow:0 10px 28px rgba(0,0,0,.25);
   --font: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -299,105 +300,90 @@ body[data-theme="light"] .info-card, body[data-theme="light"] .form-card{ backgr
       </div>
     </section>
 
+    /* --- Modal --- */
+.modal{position:fixed;inset:0;display:none;z-index:1000}
+.modal.is-open{display:block}
+.modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:saturate(120%) blur(2px)}
+.modal__card{
+  position:relative;margin:6vh auto 0;max-width:680px;background:var(--card);
+  border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 64px rgba(0,0,0,.4);
+  display:flex;flex-direction:column;overflow:hidden
+}
+.modal__hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
+.modal__hdr h3{margin:0;font-size:1.2rem}
+.modal__close{border:1px solid var(--line);background:#243142;color:#e9f2ff;border-radius:8px;padding:6px 10px;cursor:pointer}
+.modal__body{padding:16px}
+
+/* --- Buttons: spinner + success --- */
+.btn{position:relative;min-width:160px}
+.btn.loading{color:transparent!important}
+.btn.loading::after{
+  content:"";position:absolute;inset:0;margin:auto;width:18px;height:18px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .9s linear infinite
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn.success{background:linear-gradient(180deg,#2ecc71,#27ae60)!important;color:#fff!important;border-color:#1f8a53!important}
+.btn .icon-check{width:20px;height:20px;margin-right:8px;vertical-align:-3px}
+.btn .icon-check circle,.btn .icon-check path{
+  fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:48;stroke-dashoffset:48
+}
+.btn.success .icon-check circle,.btn.success .icon-check path{animation:btn-check .6s ease forwards}
+@keyframes btn-check{to{stroke-dashoffset:0}}
+
+/* Floating labels (re-use your current input/textarea styles) */
+.fg{position:relative;margin-top:12px}
+label.floating{
+  position:absolute;left:12px;top:12px;color:#9fb2cc;font-size:14px;padding:0 4px;pointer-events:none;
+  transition:transform .18s,font-size .18s,top .18s,color .18s
+}
+.input:not(:placeholder-shown)+.floating,.textarea:not(:placeholder-shown)+.floating,
+.input:focus+.floating,.textarea:focus+.floating{
+  top:-8px;transform:translateY(-50%);font-size:12px;color:#cfe0ff
+}
+
+/* Footer icons stay subtle in light/dark */
+.footer-icons a{color:inherit;opacity:.9}
+.footer-icons a:hover{opacity:1}
+
+
     <!-- Contact -->
-    <section id="contact" class="panel reveal d4">
-      <h2>Contact</h2>
+<section id="contact" class="panel">
+  <h2>Contact</h2>
 
-      <div class="contact-grid">
-        <!-- Left: Contact Info -->
-        <aside class="info-card">
-          <h3>Contact Info</h3>
-          <p class="info-sub">Prefer email? I usually reply within 24 hours.</p>
+  <div class="info-card" style="display:flex;justify-content:space-between;align-items:center;gap:14px">
+    <div>
+      <h3 style="margin:0 0 6px">Let’s talk</h3>
+      <p class="info-sub" style="margin:0;color:#cfe0ff">Prefer email? I usually reply within 24 hours.</p>
 
-          <dl class="info-list">
-            <div class="row">
-              <dt>Email</dt>
-              <dd><a id="emailLink" href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a>
-                <button id="copyMail" class="btn ghost sm" type="button">Copy</button>
-              </dd>
-            </div>
-            <div class="row">
-              <dt>GitHub</dt>
-              <dd><a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></dd>
-            </div>
-            <div class="row">
-              <dt>LinkedIn</dt>
-              <dd><a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">/in/michael-alibeaj-9810771a6/</a></dd>
-            </div>
-            <div class="row">
-              <dt>Location</dt>
-              <dd>Milan, Italy (CET/CEST)</dd>
-            </div>
-          </dl>
+      <dl class="info-list" style="margin-top:10px">
+        <div class="row"><dt>Email</dt><dd><a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></dd></div>
+        <div class="row"><dt>GitHub</dt><dd><a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></dd></div>
+        <div class="row"><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">/in/michael-alibeaj-9810771a6/</a></dd></div>
+        <div class="row"><dt>Location</dt><dd>Milan, Italy (CET/CEST)</dd></div>
+      </dl>
+    </div>
 
-          <!-- Theme-safe QR accent -->
-          <div class="qr">
-            <div class="qr-title">Scan my LinkedIn</div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="140" height="140" role="img" aria-label="LinkedIn QR accent">
-              <rect width="100" height="100" fill="#fff" rx="8"/>
-              <rect x="10" y="10" width="20" height="20" fill="#232F3E"/>
-              <rect x="70" y="10" width="20" height="20" fill="#232F3E"/>
-              <rect x="10" y="70" width="20" height="20" fill="#232F3E"/>
-              <circle cx="50" cy="50" r="8" fill="#FF9900"/>
-              <rect x="44" y="44" width="12" height="12" fill="#232F3E"/>
-            </svg>
-          </div>
-        </aside>
+    <button id="openContact" class="btn" type="button" aria-haspopup="dialog" aria-controls="contactModal">
+      Contact me
+    </button>
+  </div>
+</section>
 
-        <!-- Right: Form -->
-        <div class="card form-card">
-          <form id="contactForm" novalidate>
-            <input type="hidden" id="formTime" name="formTime" value="">
-            <input type="text" name="company" autocomplete="off" tabindex="-1" style="position:absolute;left:-5000px;opacity:0" aria-hidden="true">
+    <footer style="margin-top:16px">
+  <div class="footer-icons" style="display:flex;gap:14px;justify-content:center;margin-bottom:8px">
+    <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer" title="GitHub" aria-label="GitHub">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58 0-.29-.01-1.06-.02-2.09-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.25 1.84 1.25 1.07 1.83 2.8 1.3 3.48.99.11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.94 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.62-2.81 5.64-5.49 5.93.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.29 0 .32.21.69.83.57A12 12 0 0 0 12 .5z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer" title="LinkedIn" aria-label="LinkedIn">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.6c0-1.34-.02-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.95v5.71H9.35V9h3.41v1.56h.05c.48-.9 1.66-1.86 3.42-1.86 3.66 0 4.33 2.41 4.33 5.55v6.2zM5.34 7.43A2.06 2.06 0 1 1 5.33 3.3a2.06 2.06 0 0 1 .01 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+    </a>
+    <a href="mailto:malibeaj01@outlook.com" title="Email" aria-label="Email">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    </a>
+  </div>
+  © <span id="year"></span> Michael Alibeaj
+</footer>
 
-            <div class="grid-2">
-              <div class="fg">
-                <input id="firstName" name="firstName" class="input" placeholder=" " required>
-                <label for="firstName" class="floating">Name</label>
-              </div>
-              <div class="fg">
-                <input id="lastName" name="lastName" class="input" placeholder=" " required>
-                <label for="lastName" class="floating">Surname</label>
-              </div>
-            </div>
-
-            <div class="grid-2">
-              <div class="fg">
-                <input id="email" name="email" class="input" type="email" placeholder=" " required>
-                <label for="email" class="floating">Mail</label>
-              </div>
-              <div class="fg">
-                <input id="subject" name="subject" class="input" placeholder=" ">
-                <label for="subject" class="floating">Object</label>
-              </div>
-            </div>
-
-            <div class="fg">
-              <textarea id="message" name="message" class="textarea" placeholder=" " required></textarea>
-              <label for="message" class="floating">Text</label>
-            </div>
-
-            <div class="form-actions">
-              <label class="consent">
-                <input type="checkbox" id="consent" required>
-                <span>I consent to be contacted about my inquiry.</span>
-              </label>
-            </div>
-
-            <div class="form-actions">
-              <button id="sendBtn" class="btn" type="submit">Send message</button>
-              <button id="clearBtn" class="btn secondary" type="button">Clear</button>
-              <span class="badge-pill">No spam · No tracking</span>
-              <span id="formStatus" class="helper" role="status" aria-live="polite"></span>
-            </div>
-
-            <div id="formAlert" class="alert" aria-live="assertive"></div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <footer>© <span id="year"></span> Michael Alibeaj</footer>
   </main>
 </div>
 
@@ -442,17 +428,46 @@ document.getElementById('year').textContent = new Date().getFullYear();
 })();
 </script>
 
-<!-- Contact form handler (sanitized + simple captcha + toast + button success + spinner) -->
 <script>
 (function(){
-  const FORM_ENDPOINT = 'https://formspree.io/f/mgvpanqe'; // <-- Replace
-  const form = document.getElementById('contactForm');
+  // -------- Modal controls --------
+  const openBtn = document.getElementById('openContact');
+  const modal = document.getElementById('contactModal');
+  const closeEls = modal.querySelectorAll('[data-close]');
+  const firstField = document.getElementById('firstName');
+  let lastActive = null;
+
+  function openModal(){
+    lastActive = document.activeElement;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    setTimeout(()=>firstField?.focus(), 40);
+    document.body.style.overflow='hidden';
+  }
+  function closeModal(){
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    lastActive?.focus();
+  }
+
+  openBtn?.addEventListener('click', openModal);
+  closeEls.forEach(el=>el.addEventListener('click', closeModal));
+  document.addEventListener('keydown', e=>{
+    if(!modal.classList.contains('is-open')) return;
+    if(e.key === 'Escape') closeModal();
+  });
+
+  // -------- Form handler (AJAX; Formspree Option 1) --------
+  // IMPORTANT: In Formspree settings, disable "reCAPTCHA / custom key required for AJAX".
+  const FORM_ENDPOINT = 'https://formspree.io/f/your_form_id'; // <-- replace with your endpoint
+  const form = document.getElementById('contactFormModal');
   const btn  = document.getElementById('sendBtn');
   const status = document.getElementById('formStatus');
   const alertBox = document.getElementById('formAlert');
   const toast = document.getElementById('toast');
   const tsField = document.getElementById('formTime');
-  const clearBtn = document.getElementById('clearBtn');
+  const clearBtn = document.querySelector('[data-clear]');
   tsField.value = String(Date.now());
 
   const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -471,7 +486,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
     if(!toast) return;
     toast.textContent = msg;
     toast.classList.add('show');
-    setTimeout(()=>toast.classList.remove('show'), 2500);
+    setTimeout(()=>toast.classList.remove('show'), 2400);
   };
 
   clearBtn?.addEventListener('click', ()=>{
@@ -480,17 +495,14 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
   form.addEventListener('submit', async (e)=>{
     e.preventDefault();
-    alertBox.style.display='none';
-    status.textContent='';
+    alertBox.style.display='none'; status.textContent='';
 
-    // honeypot
+    // honeypot + simple 5s anti-bot
     if (form.company && form.company.value) return;
-
-    // 5s anti-bot
     const elapsed = (Date.now() - Number(tsField.value||0))/1000;
     if (elapsed < 5){ showAlert(false, 'Please wait a few seconds before sending.'); return; }
 
-    // collect + sanitize (Name, Surname, Mail, Object, Text)
+    // collect + sanitize
     const firstName = sanitize(form.firstName?.value);
     const lastName  = sanitize(form.lastName?.value);
     const email     = sanitize(form.email?.value);
@@ -500,16 +512,13 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
     // validate
     if(!firstName || !lastName || !email || !message || !consent){
-      showAlert(false, 'Please complete all required fields and accept consent.');
-      return;
+      showAlert(false, 'Please complete all required fields and accept consent.'); return;
     }
     if(!emailRe.test(email)){ showAlert(false, 'Please enter a valid email address.'); return; }
     if(message.length < 10){ showAlert(false, 'Message is a bit short — please add a few details.'); return; }
 
-    // send — show spinner on button
-    btn.disabled = true;
-    btn.classList.add('loading');
-    status.textContent = 'Sending…';
+    // send + spinner
+    btn.disabled = true; btn.classList.add('loading'); status.textContent = 'Sending…';
 
     try{
       const res = await fetch(FORM_ENDPOINT, {
@@ -517,35 +526,31 @@ document.getElementById('year').textContent = new Date().getFullYear();
         headers:{ 'Accept':'application/json', 'Content-Type':'application/json' },
         body: JSON.stringify({ firstName, lastName, email, subject, message })
       });
-
       if(res.ok){
-        form.reset();
-        tsField.value = String(Date.now());
+        form.reset(); tsField.value = String(Date.now());
         showAlert(true, 'Thanks! Your message has been sent.');
         showToast('Message sent ✅');
 
-        // success animation (green + checkmark)
+        // Green success + checkmark
         btn.classList.remove('loading');
         btn.classList.add('success');
         btn.innerHTML = `
           <svg class="icon-check" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="9"></circle>
             <path d="M8 12l3 3 5-6"></path>
-          </svg>
-          Sent!
+          </svg> Sent!
         `;
         setTimeout(()=>{
           btn.classList.remove('success');
-          btn.innerHTML = 'Send message';
-          btn.disabled = false;
-          status.textContent = '';
-        }, 1600);
-        return; // skip finally branch
+          btn.innerHTML='Send message';
+          btn.disabled=false;
+          status.textContent='';
+          closeModal();
+        }, 1500);
+        return;
       }
-
-      // non-OK
-      let msg='There was a problem sending your message.';
-      try{ const j = await res.json(); if(j && j.error) msg = j.error; }catch{}
+      let msg = 'There was a problem sending your message.';
+      try{ const j = await res.json(); if(j?.error) msg = j.error; }catch{}
       showAlert(false, msg);
     }catch{
       showAlert(false, 'Network error. Please try again later.');
@@ -557,14 +562,9 @@ document.getElementById('year').textContent = new Date().getFullYear();
       }
     }
   });
-
-  // quick copy
-  document.getElementById('copyMail')?.addEventListener('click', async ()=>{
-    try{ await navigator.clipboard.writeText('malibeaj01@outlook.com'); showToast('Email copied 📋'); }
-    catch{ showAlert(false, 'Copy failed.'); }
-  });
 })();
 </script>
+
 
 <!-- GitHub Snapshot: owned + shared repos, stars, CI/README coverage, charts -->
 <script>
@@ -835,6 +835,65 @@ async function renderSnapshot(forceRedraw=false){
 window.renderSnapshot = renderSnapshot;
 renderSnapshot();
 </script>
+
+  <!-- Contact Modal -->
+<div id="contactModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__card" role="document">
+    <header class="modal__hdr">
+      <h3 id="contactTitle">Send a message</h3>
+      <button class="modal__close" type="button" title="Close" aria-label="Close" data-close>✕</button>
+    </header>
+
+    <form id="contactFormModal" class="modal__body" novalidate>
+      <input type="hidden" id="formTime" name="formTime" value="">
+      <input type="text" name="company" autocomplete="off" tabindex="-1" style="position:absolute;left:-5000px;opacity:0" aria-hidden="true">
+
+      <div class="grid-2">
+        <div class="fg">
+          <input id="firstName" name="firstName" class="input" placeholder=" " required>
+          <label for="firstName" class="floating">Name</label>
+        </div>
+        <div class="fg">
+          <input id="lastName" name="lastName" class="input" placeholder=" " required>
+          <label for="lastName" class="floating">Surname</label>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="fg">
+          <input id="email" name="email" class="input" type="email" placeholder=" " required>
+          <label for="email" class="floating">Mail</label>
+        </div>
+        <div class="fg">
+          <input id="subject" name="subject" class="input" placeholder=" ">
+          <label for="subject" class="floating">Object</label>
+        </div>
+      </div>
+
+      <div class="fg">
+        <textarea id="message" name="message" class="textarea" placeholder=" " required></textarea>
+        <label for="message" class="floating">Text</label>
+      </div>
+
+      <div class="form-actions" style="margin-top:10px">
+        <label class="consent"><input type="checkbox" id="consent" required> <span>I consent to be contacted about my inquiry.</span></label>
+      </div>
+
+      <div class="form-actions">
+        <button id="sendBtn" class="btn" type="submit">Send message</button>
+        <button class="btn secondary" type="button" data-clear>Clear</button>
+        <span class="badge-pill">No spam · No tracking</span>
+        <span id="formStatus" class="helper" role="status" aria-live="polite"></span>
+      </div>
+
+      <div id="formAlert" class="alert" aria-live="assertive"></div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast (once per page) -->
+<div id="toast" class="toast" style="display:block">Message sent successfully ✅</div>
 
 </body>
 </html>
