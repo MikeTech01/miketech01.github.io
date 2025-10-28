@@ -10,7 +10,7 @@
 <!-- Inter font -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<!-- GoatCounter (free analytics) — replace GOAT_NAME -->
+<!-- GoatCounter (free analytics) -->
 <script data-goatcounter="https://miketech01.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 
 <style>
@@ -116,67 +116,10 @@ figure.chart h3{margin:0 0 8px;font-size:1.15rem;color:#dbe7ff}
 .info-list .row{ display:grid; grid-template-columns:110px 1fr; gap:6px 10px; padding:8px 0; border-top:1px dashed rgba(255,255,255,.06) }
 .info-list .row:first-child{ border-top:none }
 
-/* Buttons + success + spinner */
+/* Buttons + toast */
 .btn{ position:relative; min-width:160px; padding:12px 16px; border:1px solid #3a4a5f; border-radius:10px; cursor:pointer;
   background:linear-gradient(180deg,#ffb347,#ff9900); color:#0f172a; font-weight:800; }
 .btn.secondary{ background:#243142; color:#e9f2ff }
-.btn[disabled]{ opacity:.65; cursor:not-allowed }
-.btn.success{
-  background: linear-gradient(180deg,#2ecc71,#27ae60) !important;
-  color:#ffffff !important; border-color:#1f8a53 !important;
-}
-.btn .icon-check{ width:20px; height:20px; margin-right:8px; vertical-align:-3px; }
-.btn .icon-check circle, .btn .icon-check path{
-  fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
-  stroke-dasharray:48; stroke-dashoffset:48;
-}
-.btn.success .icon-check circle, .btn.success .icon-check path{ animation:btn-check-draw .6s ease forwards; }
-@keyframes btn-check-draw{ to { stroke-dashoffset:0; } }
-.btn.loading{ color:transparent !important; }
-.btn.loading::after{
-  content:""; position:absolute; inset:0; display:inline-block; margin:auto; width:18px; height:18px;
-  border-radius:50%; border:2px solid rgba(255,255,255,.35); border-top-color:#fff; animation:spin .9s linear infinite;
-}
-@keyframes spin{ to { transform:rotate(360deg); } }
-
-/* Inputs (modal form) */
-.fg{ position:relative; margin-top:12px }
-.input,.textarea{
-  width:100%; padding:16px 14px 12px; border-radius:12px; border:1px solid var(--line);
-  background:#233042; color:#fff; outline:none; transition:border .18s, box-shadow .18s, background .18s; font-size:16px;
-}
-.textarea{ min-height:150px; resize:vertical }
-.input:focus,.textarea:focus{ border-color:#4aa3e0; box-shadow:0 0 0 3px rgba(74,163,224,.22) }
-label.floating{
-  position:absolute; left:12px; top:12px; color:#9fb2cc; font-size:14px; padding:0 4px; pointer-events:none;
-  transition: transform .18s ease, font-size .18s ease, top .18s ease, color .18s ease;
-}
-.input:not(:placeholder-shown)+.floating,
-.textarea:not(:placeholder-shown)+.floating,
-.input:focus + .floating, .textarea:focus + .floating{ top:-8px; transform:translateY(-50%); font-size:12px; color:#cfe0ff; }
-.form-actions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:10px }
-.helper{ color:#cfe0ff; font-size:.95rem }
-.badge-pill{ font-size:.85rem; padding:6px 10px; border-radius:999px; border:1px solid var(--line); color:#cfe0ff }
-.alert{ margin-top:12px; padding:10px 12px; border-radius:10px; border:1px solid var(--line); display:none }
-.alert.ok{ background:#173a2a; color:#d7ffe6; border-color:#235a40; display:block }
-.alert.err{ background:#3a1a1a; color:#ffd7d7; border-color:#5a2323; display:block }
-.consent{ display:flex; gap:8px; align-items:center; color:#cfe0ff; font-size:.98rem }
-
-/* Modal */
-.modal{position:fixed;inset:0;display:none;z-index:1000}
-.modal.is-open{display:block}
-.modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:saturate(120%) blur(2px)}
-.modal__card{
-  position:relative; margin:6vh auto 0; max-width:680px; background:var(--card);
-  border:1px solid var(--line); border-radius:16px; box-shadow:0 24px 64px rgba(0,0,0,.4);
-  display:flex; flex-direction:column; overflow:hidden;
-}
-.modal__hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
-.modal__hdr h3{margin:0;font-size:1.2rem}
-.modal__close{border:1px solid var(--line);background:#243142;color:#e9f2ff;border-radius:8px;padding:6px 10px;cursor:pointer}
-.modal__body{padding:16px}
-
-/* Toast */
 .toast{position:fixed;bottom:26px;right:26px;background:#173a2a;color:#d7ffe6;
   padding:12px 14px;border-radius:10px;opacity:0;transform:translateY(16px);
   transition:opacity .35s ease,transform .35s ease;z-index:9999;font-weight:700; display:block}
@@ -195,7 +138,6 @@ body[data-theme="light"] .title h1, body[data-theme="light"] .title p{ color:#1B
 body[data-theme="light"] nav a{ color:#2a3a4f }
 body[data-theme="light"] .actions a.secondary{ background:#eaf2ff; color:#1B2532; border-color:#d0dbeb }
 body[data-theme="light"] .info-card{ background:#ffffff }
-body[data-theme="light"] .modal__card{ background:#ffffff }
 
 /* Reveal */
 .reveal{opacity:0;transform:translateY(10px);animation:reveal .45s ease forwards}
@@ -241,7 +183,7 @@ body[data-theme="light"] .modal__card{ background:#ffffff }
       <a href="#skills">Skills</a>
       <a href="#metrics">Snapshot</a>
       <a href="#awards">Awards</a>
-      <a href="#contact">Contact</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </aside>
 
@@ -298,7 +240,7 @@ body[data-theme="light"] .modal__card{ background:#ffffff }
             <div class="row"><dt>Location</dt><dd>Milan, Italy (CET/CEST)</dd></div>
           </dl>
         </div>
-        <button id="openContact" class="btn" type="button" aria-haspopup="dialog" aria-controls="contactModal">Contact me</button>
+        <a class="btn" href="contact.html">Contact page</a>
       </div>
     </section>
 
@@ -319,11 +261,7 @@ body[data-theme="light"] .modal__card{ background:#ffffff }
   </main>
 </div>
 
-<!-- Contact Modal -->
-<a class="btn" href="contact.html">Contact page</a>
-
-
-<!-- Toast -->
+<!-- Toast (success after contact redirect) -->
 <script>
 (function(){
   const params = new URLSearchParams(location.search);
@@ -346,7 +284,6 @@ body[data-theme="light"] .modal__card{ background:#ffffff }
   }
 })();
 </script>
-
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -382,7 +319,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
   });
 })();
 </script>
-
 
 <!-- GitHub Snapshot scripts -->
 <script>
