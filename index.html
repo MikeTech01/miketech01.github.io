@@ -300,52 +300,6 @@ body[data-theme="light"] .info-card, body[data-theme="light"] .form-card{ backgr
       </div>
     </section>
 
-    /* --- Modal --- */
-.modal{position:fixed;inset:0;display:none;z-index:1000}
-.modal.is-open{display:block}
-.modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:saturate(120%) blur(2px)}
-.modal__card{
-  position:relative;margin:6vh auto 0;max-width:680px;background:var(--card);
-  border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 64px rgba(0,0,0,.4);
-  display:flex;flex-direction:column;overflow:hidden
-}
-.modal__hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
-.modal__hdr h3{margin:0;font-size:1.2rem}
-.modal__close{border:1px solid var(--line);background:#243142;color:#e9f2ff;border-radius:8px;padding:6px 10px;cursor:pointer}
-.modal__body{padding:16px}
-
-/* --- Buttons: spinner + success --- */
-.btn{position:relative;min-width:160px}
-.btn.loading{color:transparent!important}
-.btn.loading::after{
-  content:"";position:absolute;inset:0;margin:auto;width:18px;height:18px;border-radius:50%;
-  border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .9s linear infinite
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-.btn.success{background:linear-gradient(180deg,#2ecc71,#27ae60)!important;color:#fff!important;border-color:#1f8a53!important}
-.btn .icon-check{width:20px;height:20px;margin-right:8px;vertical-align:-3px}
-.btn .icon-check circle,.btn .icon-check path{
-  fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:48;stroke-dashoffset:48
-}
-.btn.success .icon-check circle,.btn.success .icon-check path{animation:btn-check .6s ease forwards}
-@keyframes btn-check{to{stroke-dashoffset:0}}
-
-/* Floating labels (re-use your current input/textarea styles) */
-.fg{position:relative;margin-top:12px}
-label.floating{
-  position:absolute;left:12px;top:12px;color:#9fb2cc;font-size:14px;padding:0 4px;pointer-events:none;
-  transition:transform .18s,font-size .18s,top .18s,color .18s
-}
-.input:not(:placeholder-shown)+.floating,.textarea:not(:placeholder-shown)+.floating,
-.input:focus+.floating,.textarea:focus+.floating{
-  top:-8px;transform:translateY(-50%);font-size:12px;color:#cfe0ff
-}
-
-/* Footer icons stay subtle in light/dark */
-.footer-icons a{color:inherit;opacity:.9}
-.footer-icons a:hover{opacity:1}
-
-
     <!-- Contact -->
 <section id="contact" class="panel">
   <h2>Contact</h2>
@@ -457,7 +411,50 @@ document.getElementById('year').textContent = new Date().getFullYear();
     if(!modal.classList.contains('is-open')) return;
     if(e.key === 'Escape') closeModal();
   });
+ /* --- Modal --- */
+.modal{position:fixed;inset:0;display:none;z-index:1000}
+.modal.is-open{display:block}
+.modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:saturate(120%) blur(2px)}
+.modal__card{
+  position:relative;margin:6vh auto 0;max-width:680px;background:var(--card);
+  border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 64px rgba(0,0,0,.4);
+  display:flex;flex-direction:column;overflow:hidden
+}
+.modal__hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
+.modal__hdr h3{margin:0;font-size:1.2rem}
+.modal__close{border:1px solid var(--line);background:#243142;color:#e9f2ff;border-radius:8px;padding:6px 10px;cursor:pointer}
+.modal__body{padding:16px}
 
+/* --- Buttons: spinner + success --- */
+.btn{position:relative;min-width:160px}
+.btn.loading{color:transparent!important}
+.btn.loading::after{
+  content:"";position:absolute;inset:0;margin:auto;width:18px;height:18px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .9s linear infinite
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn.success{background:linear-gradient(180deg,#2ecc71,#27ae60)!important;color:#fff!important;border-color:#1f8a53!important}
+.btn .icon-check{width:20px;height:20px;margin-right:8px;vertical-align:-3px}
+.btn .icon-check circle,.btn .icon-check path{
+  fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:48;stroke-dashoffset:48
+}
+.btn.success .icon-check circle,.btn.success .icon-check path{animation:btn-check .6s ease forwards}
+@keyframes btn-check{to{stroke-dashoffset:0}}
+
+/* Floating labels (re-use your current input/textarea styles) */
+.fg{position:relative;margin-top:12px}
+label.floating{
+  position:absolute;left:12px;top:12px;color:#9fb2cc;font-size:14px;padding:0 4px;pointer-events:none;
+  transition:transform .18s,font-size .18s,top .18s,color .18s
+}
+.input:not(:placeholder-shown)+.floating,.textarea:not(:placeholder-shown)+.floating,
+.input:focus+.floating,.textarea:focus+.floating{
+  top:-8px;transform:translateY(-50%);font-size:12px;color:#cfe0ff
+}
+
+/* Footer icons stay subtle in light/dark */
+.footer-icons a{color:inherit;opacity:.9}
+.footer-icons a:hover{opacity:1}
   // -------- Form handler (AJAX; Formspree Option 1) --------
   // IMPORTANT: In Formspree settings, disable "reCAPTCHA / custom key required for AJAX".
   const FORM_ENDPOINT = 'https://formspree.io/f/your_form_id'; // <-- replace with your endpoint
