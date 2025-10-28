@@ -35,11 +35,15 @@ a:hover{text-decoration:underline}
 
 /* Sidebar + Theme buttons */
     
-#toggle-rail,#theme-toggle{
-  position:fixed;top:16px;z-index:60;width:42px;height:42px;border-radius:10px;
-  border:1px solid #3a4a5f;background:#243142;color:#e9f2ff;
-  font-size:18px;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.25);
-  cursor:pointer;transition:background .35s ease,color .35s ease;
+#toggle-rail{
+  position: fixed; top: 16px; left: 16px;
+  z-index: 10010;                /* was 60 — raise above anything */
+  width: 42px; height: 42px; border-radius: 10px;
+  border: 1px solid #3a4a5f; background: #243142; color: #e9f2ff;
+  font-size: 18px; line-height: 1; display: grid; place-items: center;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25); cursor: pointer;
+  transition: background .35s ease, color .35s ease;
+  pointer-events: auto;          /* ensure clicks are received */
 }
 #toggle-rail{left:16px;} #theme-toggle{right:16px;}
 #toggle-rail:focus-visible,#theme-toggle:focus-visible{ outline:3px solid rgba(20,110,180,.45); outline-offset:2px }
@@ -226,7 +230,7 @@ body[data-theme="light"] .info-card{ background:#ffffff }
 <body data-theme="dark">
 
 <!-- UI controls -->
-<button id="toggle-rail" aria-label="Toggle sidebar" aria-expanded="true" title="Toggle sidebar">☰</button>
+<button id="toggle-rail" title="Toggle sidebar" onclick="window._toggleSidebar && window._toggleSidebar()">☰</button>
 <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">🌗</button>
 
 <div class="page">
@@ -692,6 +696,41 @@ async function renderSnapshot(forceRedraw=false){
 
 window.renderSnapshot = renderSnapshot;
 renderSnapshot();
+</script>
+<script>
+(function(){
+  const KEY_SIDEBAR='sidebar_collapsed_v1';
+
+  function applySidebar(collapsed){
+    document.body.classList.toggle('sidebar-collapsed', collapsed);
+    const btn = document.getElementById('toggle-rail');
+    if (btn) btn.textContent = collapsed ? '☰' : '✕';
+  }
+
+  // Expose a safe global fallback the button can call inline
+  window._toggleSidebar = function(){
+    const next = !document.body.classList.contains('sidebar-collapsed');
+    applySidebar(next);
+    try{ localStorage.setItem(KEY_SIDEBAR, next ? '1' : '0'); }catch{}
+  };
+
+  // Bind after DOM is ready so the element definitely exists
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const btn = document.getElementById('toggle-rail');
+    // Initialize from saved state
+    const saved = localStorage.getItem(KEY_SIDEBAR) === '1';
+    applySidebar(saved);
+
+    // Primary click handler
+    if (btn) btn.addEventListener('click', window._toggleSidebar);
+
+    // Extra safety: delegate if something replaces the button dynamically
+    document.addEventListener('click', (e)=>{
+      const t = e.target.closest && e.target.closest('#toggle-rail');
+      if (t) { e.preventDefault(); window._toggleSidebar(); }
+    });
+  });
+})();
 </script>
 
 </body>
