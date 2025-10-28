@@ -53,7 +53,7 @@ a:hover{text-decoration:underline}
 .badge{width:48px;height:48px;border-radius:10px;display:grid;place-items:center;font-weight:900;color:#0f172a;
   background:linear-gradient(180deg,#ffd89a 0%,#ffb347 60%),linear-gradient(90deg,#4aa3e0,#146EB4);
   border:1px solid #39485b;}
-.role{color:#e6eefc;opacity:.92;margin:6px 0 12px;font-size:1rem}
+.role{color:var(--muted);opacity:.92;margin:6px 0 12px;font-size:1rem}
 .meta{color:#cfe0ff;font-size:.95rem}
 .actions a{display:block;text-align:center;margin-top:10px;padding:12px 14px;
   border-radius:10px;border:1px solid #3a4a5f;background:#ffb347;color:#0f172a;font-weight:800;text-decoration:none}
@@ -62,11 +62,11 @@ nav{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
 nav a{display:block;padding:8px 0;color:#d7e5ff}
 nav a.active{color:#fff;font-weight:800}
 
-/* Collapsed sidebar */
+/* Collapsed sidebar (for toggle) */
 body.sidebar-collapsed .page { grid-template-columns: 1fr; }
 body.sidebar-collapsed .rail { display: none; }
 
-/* Fancy CTA (shiny) */
+/* Fancy CTA (keeps shine) */
 .cta{
   --h:54px;
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
@@ -138,21 +138,45 @@ figure.chart h3{margin:0 0 8px;font-size:1.15rem;color:#dbe7ff}
   transition:opacity .35s ease,transform .35s ease;z-index:9999;font-weight:700;}
 .toast.show{opacity:1;transform:translateY(0)}
 
-/* LIGHT THEME — higher contrast */
+/* LIGHT THEME — higher contrast for readability */
 body[data-theme="light"]{
-  --ink:#0f172a; --muted:#334155;
-  --bg0:#eef2f7; --navy:#f3f6fb; --bg1:#ffffff;
-  --card:#ffffff; --railbg:#ffffff; --line:#c8d2e1;
-  --chart-axis:#b7c4d7; --chart-text:#0f172a; --chart-label:#334155;
+  --ink:#0f172a;            /* main text (very dark slate) */
+  --muted:#334155;          /* secondary text */
+  --bg0:#eef2f7;            /* page gradient top */
+  --navy:#f3f6fb;           /* page gradient mid */
+  --bg1:#ffffff;            /* page gradient bottom */
+  --card:#ffffff;           /* panels/cards */
+  --railbg:#ffffff;         /* sidebar card */
+  --line:#c8d2e1;           /* borders (a bit darker) */
+  --chart-axis:#b7c4d7;
+  --chart-text:#0f172a;     /* chart value labels */
+  --chart-label:#334155;    /* chart axes labels */
 }
 body[data-theme="light"] a{ color:#0f62fe; }
 body[data-theme="light"] a:hover{ color:#0043ce; }
 body[data-theme="light"] .kpi{ background:#f7faff }
 body[data-theme="light"] .actions a.secondary{ background:#f3f7ff; color:#0f172a; border-color:#c8d2e1 }
-body[data-theme="light"] nav a{ color:#0b1526; }
-body[data-theme="light"] nav a.active{ color:#000; }
-body[data-theme="light"] .info-card{ background:linear-gradient(180deg,#ffffff,#f7f9fc); }
-body[data-theme="light"] .chart-legend{ color:#334155; }
+body[data-theme="light"] .info-card{ background:linear-gradient(180deg,#ffffff,#f7f9fc) }
+body[data-theme="light"] #toggle-rail,
+body[data-theme="light"] #theme-toggle{ background:#f7f9fc; color:#0f172a; border-color:#c8d2e1 }
+
+/* THEMEABLE TEXT (forces all text to follow variables) */
+.title h1 { color: var(--ink); }
+.title p { color: var(--muted); }
+section.panel,
+section.panel p,
+section.panel li { color: var(--ink); }
+.role,
+.meta,
+.list,
+.chart-legend,
+.kpi .label,
+.kpi .delta,
+nav a { color: var(--muted); }
+.kpi .value { color: var(--ink); }
+.info-card,
+.info-card h3 { color: var(--ink); }
+.info-sub { color: var(--muted) !important; } /* beats old inline color */
 
 /* Responsive */
 @media (max-width:980px){
@@ -165,19 +189,6 @@ body[data-theme="light"] .chart-legend{ color:#334155; }
   .chart-grid{grid-template-columns:1fr}
   .chart-svg{height:260px}
 }
-
-/* THEMEABLE TEXT — ensure all text respects theme vars */
-.title h1 { color: var(--ink); }
-.title p { color: var(--muted); }
-section.panel,
-section.panel p,
-section.panel li { color: var(--ink); }
-.role, .meta, .list, .chart-legend, .kpi .label, .kpi .delta, nav a { color: var(--muted); }
-.kpi .value { color: var(--ink); }
-.info-card, .info-card h3 { color: var(--ink); }
-.info-sub { color: var(--muted) !important; } /* override old inline color */
-body[data-theme="light"] .actions a,
-body[data-theme="light"] .cta { color: #0f172a; }
 </style>
 
 <!-- Early theme init (prevents flash) -->
@@ -220,7 +231,7 @@ body[data-theme="light"] .cta { color: #0f172a; }
             <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" />
           </svg>
         </span>
-        Contact page <span class="hint">↵ opens form</span>
+        Contact page
       </a>
       <a class="secondary" href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">GitHub</a>
       <a class="secondary" href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -299,7 +310,6 @@ body[data-theme="light"] .cta { color: #0f172a; }
       <div class="info-card" style="display:flex;justify-content:space-between;align-items:center;gap:14px">
         <div>
           <h3 style="margin:0 0 6px">Let’s talk</h3>
-          <!-- removed inline color; theme controls it -->
           <p class="info-sub" style="margin:0">Prefer email? I usually reply within 24 hours.</p>
           <dl class="info-list" style="margin-top:10px">
             <div class="row"><dt>Email</dt><dd><a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></dd></div>
@@ -366,7 +376,7 @@ body[data-theme="light"] .cta { color: #0f172a; }
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
-<!-- Sidebar + Theme toggle -->
+<!-- Sidebar + Theme toggle (single, resilient) -->
 <script>
 (function(){
   const KEY_SIDEBAR='sidebar_collapsed_v1';
@@ -393,6 +403,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
     const railBtn=document.getElementById('toggle-rail');
     const themeBtn=document.getElementById('theme-toggle');
 
+    // Sidebar init + click
     const savedSb=localStorage.getItem(KEY_SIDEBAR)==='1';
     applySidebar(savedSb);
     if (railBtn) railBtn.addEventListener('click', ()=>{
@@ -401,17 +412,20 @@ document.getElementById('year').textContent = new Date().getFullYear();
       try{localStorage.setItem(KEY_SIDEBAR,next?'1':'0')}catch{}
     });
 
+    // Theme init + click
     const savedTheme=localStorage.getItem(KEY_THEME) || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
     setTheme(savedTheme);
     if (themeBtn) themeBtn.addEventListener('click', ()=>{
       const next=(document.body.getAttribute('data-theme')==='light')?'dark':'light';
       setTheme(next);
       try{localStorage.setItem(KEY_THEME,next)}catch{}
+      // repaint + refresh charts
       document.documentElement.style.transform = 'translateZ(0)';
       requestAnimationFrame(()=>{ document.documentElement.style.transform = ''; });
       setTimeout(()=>window.renderSnapshot && window.renderSnapshot(true),150);
     });
 
+    // Shortcuts
     window.addEventListener('keydown', (e)=>{
       if(/input|textarea|select/i.test(e.target.tagName)) return;
       if(e.key==='s'||e.key==='S'){ e.preventDefault(); railBtn?.click(); }
@@ -424,11 +438,13 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 <!-- GitHub Snapshot: data + charts -->
 <script>
+/* ============== CONFIG ============== */
 const GH_USER = 'MikeTech01';
 const MAX_HEALTH_REPOS = 15;
 const EVENTS_LIMIT = 30;
 const CACHE_TTL_MS = 15 * 60 * 1000;
 
+/* ============== UTIL ============== */
 const $ = s => document.querySelector(s);
 const setText = (sel,val)=>{ const n=$(sel); if(n) n.textContent = val; };
 const rmSkel = ()=> document.querySelectorAll('.kpi.skeleton').forEach(k=>k.classList.remove('skeleton'));
@@ -439,6 +455,7 @@ const cacheSet = (k,data)=>{ try{localStorage.setItem(k, JSON.stringify({t:Date.
 const fmt = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
 const short = (name,max=26)=> name.length>max ? name.slice(0,max-1)+'…' : name;
 
+// theme-aware chart colors
 function chartColors(){
   const cs = getComputedStyle(document.body);
   return {
@@ -448,6 +465,7 @@ function chartColors(){
   };
 }
 
+/* ============== SVG HELPERS ============== */
 function drawColumns(svgId, series){
   const svg=document.getElementById(svgId); if(!svg||!series?.length)return;
   while(svg.lastChild) svg.removeChild(svg.lastChild);
@@ -527,7 +545,7 @@ function drawHBars(svgId, series){
   }
 }
 
-/* Fetch + render snapshot */
+/* ============== DATA FETCH ============== */
 async function fetchJSON(url){
   const res = await fetch(url, { headers:{'Accept':'application/vnd.github+json'} });
   if(!res.ok) throw new Error(res.status+' '+res.statusText);
@@ -553,22 +571,28 @@ async function hasWorkflows(owner, repo){
   return (j.total_count||0) > 0;
 }
 
+/* ============== COMBINE OWNED + SHARED ============== */
 async function fetchOwnedAndShared(user){
   const [owned, events] = await Promise.all([ fetchOwnedRepos(user), fetchEvents(user) ]);
-  const pushed = events.filter(e => e.type === 'PushEvent').slice(0, 30);
+
+  const pushed = events.filter(e => e.type === 'PushEvent').slice(0, EVENTS_LIMIT);
   const sharedFullNames = Array.from(new Set(pushed.map(e => e.repo?.name).filter(Boolean)));
+
   const sharedSubset = sharedFullNames.slice(0, 15);
   const sharedDetails = [];
   for (const full of sharedSubset){
     const rep = await fetchRepoByFullName(full).catch(()=>null);
     if(rep && !rep.fork) sharedDetails.push(rep);
   }
+
   const byFull = {};
   [...owned, ...sharedDetails].forEach(r => { if(r && r.full_name) byFull[r.full_name] = r; });
   const combined = Object.values(byFull);
+
   return { owned, combined };
 }
 
+/* ============== RENDER ============== */
 function monthKey(d){ return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0'); }
 function last12MonthLabels(){
   const names=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -582,7 +606,7 @@ function last12MonthLabels(){
 
 async function renderSnapshot(forceRedraw=false){
   const cacheKey='gh_snapshot_v12';
-  let data = forceRedraw ? (cacheGet(cacheKey, Infinity)) : cacheGet(cacheKey, 15*60*1000);
+  let data = forceRedraw ? (cacheGet(cacheKey, Infinity)) : cacheGet(cacheKey, CACHE_TTL_MS);
 
   try{
     if(!data){
@@ -630,6 +654,7 @@ async function renderSnapshot(forceRedraw=false){
       cacheSet(cacheKey, data);
     }
 
+    // KPIs
     countTo(document.getElementById('kpi-projects'), data.projectsCombined);
     countTo(document.getElementById('kpi-stars'), data.starsOwned);
     countTo(document.getElementById('kpi-ci'), data.ciPct, '%');
@@ -640,13 +665,16 @@ async function renderSnapshot(forceRedraw=false){
     setText('#kpi-ci-note', `Checked top ${MAX_HEALTH_REPOS} repos`);
     setText('#kpi-readme-note', `Checked top ${MAX_HEALTH_REPOS} repos`);
 
+    // visual cues
     if (data.ciPct >= 70) addGood(document.getElementById('kpi-ci'));
     if (data.readmePct >= 80) addGood(document.getElementById('kpi-readme'));
 
+    // Charts
     drawColumns('monthchart', data.monthSeries);
     drawColumns('langchart', data.langSeries);
     drawHBars('topstars', data.topStarsSeries);
 
+    // Featured list
     const UL = document.getElementById('featured-list');
     if (UL){
       UL.innerHTML = '';
@@ -659,6 +687,7 @@ async function renderSnapshot(forceRedraw=false){
 
     setText('#month-legend', 'Repos updated per month (owned + shared, last 12)');
     setText('#api-status', 'GitHub API: OK');
+
     rmSkel();
   } catch (err){
     console.warn(err);
