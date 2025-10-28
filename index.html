@@ -7,8 +7,11 @@
 <meta name="description" content="Portfolio and contact for Michael Alibeaj, M.Sc. Computer Science — Business Intelligence & Data Engineering student." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2712%27 fill=%27%23232F3E%27/><text x=%2750%25%27 y=%2757%25%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23FF9900%27 font-family=%27Arial%27>MA</text></svg>">
 
+<!-- Inter font (modern typography) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
 <!-- 🐐 GoatCounter (free analytics) — replace GOAT_NAME -->
-<script data-goatcounter="https://GOAT_NAME.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://miketech01.goatcounter.com" async src="https://gc.zgo.at/count.js"></script>
 
 <style>
 :root{
@@ -19,12 +22,12 @@
   --chart-axis:#2e3a4a; --chart-text:#ffffff; --chart-label:#D6DEEE;
   --radius:14px; --max:1360px; --rail:290px;
   --shadow:0 10px 28px rgba(0,0,0,.25);
-  --font:ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  --font: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0;color:var(--ink);font:17px/1.7 var(--font);
+  margin:0;color:var(--ink);font:17px/1.65 var(--font);
   background:linear-gradient(180deg,var(--bg0),var(--navy) 50%,var(--bg1));
   transition: background-color .35s ease, color .35s ease;
 }
@@ -101,48 +104,91 @@ figure.chart h3{margin:0 0 8px;font-size:1.15rem;color:#dbe7ff}
 .chart-svg{width:100%;height:300px;display:block}
 .chart-legend{color:#cfd8ea;font-size:1.05rem;margin-top:6px}
 
-/* -------- Modern Contact layout -------- */
-.contact-wrap{
-  display:grid; grid-template-columns:1.3fr .9fr; gap:18px;
+/* -------- Contact: split layout -------- */
+.contact-grid{
+  display:grid; grid-template-columns:.95fr 1.05fr; gap:22px; align-items:start;
 }
+.info-card{
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:linear-gradient(180deg,#222f43,#1f2a3d);
+  box-shadow:var(--shadow);
+  padding:18px;
+}
+.info-card h3{ margin:0 0 6px; font-size:1.15rem; color:#fff }
+.info-sub{ margin:0 0 12px; color:#cfe0ff }
+.info-list{ margin:0; padding:0 }
+.info-list .row{ display:grid; grid-template-columns:110px 1fr; gap:6px 10px; padding:8px 0; border-top:1px dashed rgba(255,255,255,.06) }
+.info-list .row:first-child{ border-top:none }
+.info-list dt{ color:#9fb2cc }
+.info-list dd{ margin:0; color:#eaf2ff }
+.btn.ghost.sm{ padding:6px 10px; font-weight:700; border:1px solid #3a4a5f; background:transparent; color:#e9f2ff; border-radius:8px; margin-left:8px }
+.btn.ghost.sm:hover{ background:#243142 }
+.qr{ margin-top:14px; text-align:center; border:1px dashed #38506c; border-radius:12px; padding:10px }
+.qr .qr-title{ font-weight:800; margin-bottom:6px }
+
+/* Form (right) */
 .card{border:1px solid var(--line);border-radius:12px;background:#223044;box-shadow:var(--shadow);padding:16px}
-.fg{position:relative;margin-top:10px}
+.form-card{ background:#223044 }
+.grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:12px }
+@media (max-width:780px){ .contact-grid{ grid-template-columns:1fr } .grid-2{ grid-template-columns:1fr } }
+.fg{ position:relative; margin-top:12px }
 .input,.textarea{
-  width:100%; padding:16px 14px 12px; border-radius:10px; border:1px solid var(--line);
-  background:#233042; color:#fff; outline:none; transition:border .2s, box-shadow .2s, background .2s;
+  width:100%; padding:16px 14px 12px;
+  border-radius:12px; border:1px solid var(--line);
+  background:#233042; color:#fff; outline:none;
+  transition:border .18s, box-shadow .18s, background .18s;
+  font-size:16px;
 }
-.textarea{ min-height:140px; resize:vertical }
+.textarea{ min-height:150px; resize:vertical }
+.input:focus,.textarea:focus{ border-color:#4aa3e0; box-shadow:0 0 0 3px rgba(74,163,224,.22) }
 label.floating{
-  position:absolute; left:12px; top:12px; color:#a3b3cc; font-size:14px; padding:0 4px; pointer-events:none;
+  position:absolute; left:12px; top:12px; color:#9fb2cc;
+  font-size:14px; padding:0 4px; pointer-events:none;
   transition: transform .18s ease, font-size .18s ease, top .18s ease, color .18s ease;
-  background:transparent;
 }
-.input:focus, .textarea:focus{ border-color:#4aa3e0; box-shadow:0 0 0 3px rgba(74,163,224,.25) }
-.input:not(:placeholder-shown) + .floating,
-.textarea:not(:placeholder-shown) + .floating,
+.input:not(:placeholder-shown)+.floating,
+.textarea:not(:placeholder-shown)+.floating,
 .input:focus + .floating, .textarea:focus + .floating{
-  top:-8px; transform:translateY(-50%); font-size:12px; color:#cfe0ff; background:transparent;
+  top:-8px; transform:translateY(-50%); font-size:12px; color:#cfe0ff;
 }
-.helper{ color:#cfe0ff; font-size:.95rem; margin:6px 0 0 }
-.form-actions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:8px }
-.btn{
-  padding:12px 16px; border:1px solid #3a4a5f; border-radius:10px; cursor:pointer;
-  background:linear-gradient(180deg,#ffb347,#ff9900); color:#0f172a; font-weight:800;
-}
-.btn.secondary{ background:#243142; color:#e9f2ff }
-.btn[disabled]{ opacity:.6; cursor:not-allowed }
+.form-actions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:10px }
+.helper{ color:#cfe0ff; font-size:.95rem }
 .badge-pill{ font-size:.85rem; padding:6px 10px; border-radius:999px; border:1px solid var(--line); color:#cfe0ff }
 .alert{ margin-top:12px; padding:10px 12px; border-radius:10px; border:1px solid var(--line); display:none }
 .alert.ok{ background:#173a2a; color:#d7ffe6; border-color:#235a40; display:block }
 .alert.err{ background:#3a1a1a; color:#ffd7d7; border-color:#5a2323; display:block }
+.consent{ display:flex; gap:8px; align-items:center; color:#cfe0ff; font-size:.98rem }
 
-/* Right contact card */
-.contact-card h3{ margin:0 0 8px }
-.kv{ display:grid; grid-template-columns:110px 1fr; gap:6px 10px; font-size:1rem; color:#eaf2ff }
-.btn-row{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap }
-.btn.ghost{ background:transparent; color:#e9f2ff; border:1px solid #3a4a5f }
-.btn.ghost:hover{ background:#243142 }
-.qr{ margin-top:12px; padding:10px; border:1px dashed #38506c; border-radius:12px; text-align:center }
+/* Buttons + success + spinner */
+.btn{ position:relative; min-width:160px; padding:12px 16px; border:1px solid #3a4a5f; border-radius:10px; cursor:pointer;
+  background:linear-gradient(180deg,#ffb347,#ff9900); color:#0f172a; font-weight:800; }
+.btn.secondary{ background:#243142; color:#e9f2ff }
+.btn[disabled]{ opacity:.65; cursor:not-allowed }
+.btn.success{
+  background: linear-gradient(180deg,#2ecc71,#27ae60) !important;
+  color:#ffffff !important;
+  border-color:#1f8a53 !important;
+}
+.btn .icon-check{ width:20px; height:20px; margin-right:8px; vertical-align:-3px; }
+.btn .icon-check circle,
+.btn .icon-check path{
+  fill:none; stroke:currentColor; stroke-width:2;
+  stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:48; stroke-dashoffset:48;
+}
+.btn.success .icon-check circle,
+.btn.success .icon-check path{ animation:btn-check-draw .6s ease forwards; }
+
+@keyframes btn-check-draw{ to { stroke-dashoffset:0; } }
+
+/* Spinner on button while sending */
+.btn.loading{ color:transparent !important; }
+.btn.loading::after{
+  content:""; position:absolute; inset:0; display:inline-block; margin:auto; width:18px; height:18px;
+  border-radius:50%; border:2px solid rgba(255,255,255,.35); border-top-color:#fff; animation:spin .9s linear infinite;
+}
+@keyframes spin{ to { transform:rotate(360deg); } }
 
 /* Success toast */
 .toast{position:fixed;bottom:26px;right:26px;background:#173a2a;color:#d7ffe6;
@@ -150,7 +196,7 @@ label.floating{
   transition:opacity .35s ease,transform .35s ease;z-index:9999;font-weight:700}
 .toast.show{opacity:1;transform:translateY(0)}
 
-/* LIGHT THEME (attribute-based!) */
+/* LIGHT THEME (attribute-based) */
 body[data-theme="light"]{
   --ink:#1B2532; --muted:#516074;
   --bg0:#f4f6fb; --navy:#f0f4fa; --bg1:#ffffff;
@@ -163,6 +209,7 @@ body[data-theme="light"] .title h1, body[data-theme="light"] .title p{ color:#1B
 body[data-theme="light"] nav a{ color:#2a3a4f }
 body[data-theme="light"] .actions a.secondary{ background:#eaf2ff; color:#1B2532; border-color:#d0dbeb }
 body[data-theme="light"] .input, body[data-theme="light"] .textarea{ background:#f8fbff; color:#0f172a }
+body[data-theme="light"] .info-card, body[data-theme="light"] .form-card{ background:#ffffff }
 
 /* Subtle load animation */
 .reveal{opacity:0;transform:translateY(10px);animation:reveal .45s ease forwards}
@@ -179,7 +226,6 @@ body[data-theme="light"] .input, body[data-theme="light"] .textarea{ background:
   .charts{grid-template-columns:1fr}
   .chart-grid{grid-template-columns:1fr}
   .chart-svg{height:260px}
-  .contact-wrap{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -253,35 +299,89 @@ body[data-theme="light"] .input, body[data-theme="light"] .textarea{ background:
       </div>
     </section>
 
-    <!-- Contact (modernized) -->
+    <!-- Contact -->
     <section id="contact" class="panel reveal d4">
       <h2>Contact</h2>
-      <div class="contact-wrap">
-        <!-- Left: form -->
-        <div class="card">
+
+      <div class="contact-grid">
+        <!-- Left: Contact Info -->
+        <aside class="info-card">
+          <h3>Contact Info</h3>
+          <p class="info-sub">Prefer email? I usually reply within 24 hours.</p>
+
+          <dl class="info-list">
+            <div class="row">
+              <dt>Email</dt>
+              <dd><a id="emailLink" href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a>
+                <button id="copyMail" class="btn ghost sm" type="button">Copy</button>
+              </dd>
+            </div>
+            <div class="row">
+              <dt>GitHub</dt>
+              <dd><a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></dd>
+            </div>
+            <div class="row">
+              <dt>LinkedIn</dt>
+              <dd><a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">/in/michael-alibeaj-9810771a6/</a></dd>
+            </div>
+            <div class="row">
+              <dt>Location</dt>
+              <dd>Milan, Italy (CET/CEST)</dd>
+            </div>
+          </dl>
+
+          <!-- Theme-safe QR accent -->
+          <div class="qr">
+            <div class="qr-title">Scan my LinkedIn</div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="140" height="140" role="img" aria-label="LinkedIn QR accent">
+              <rect width="100" height="100" fill="#fff" rx="8"/>
+              <rect x="10" y="10" width="20" height="20" fill="#232F3E"/>
+              <rect x="70" y="10" width="20" height="20" fill="#232F3E"/>
+              <rect x="10" y="70" width="20" height="20" fill="#232F3E"/>
+              <circle cx="50" cy="50" r="8" fill="#FF9900"/>
+              <rect x="44" y="44" width="12" height="12" fill="#232F3E"/>
+            </svg>
+          </div>
+        </aside>
+
+        <!-- Right: Form -->
+        <div class="card form-card">
           <form id="contactForm" novalidate>
             <input type="hidden" id="formTime" name="formTime" value="">
             <input type="text" name="company" autocomplete="off" tabindex="-1" style="position:absolute;left:-5000px;opacity:0" aria-hidden="true">
 
-            <div class="fg">
-              <input id="name" name="name" class="input" placeholder=" " required />
-              <label for="name" class="floating">Your name</label>
+            <div class="grid-2">
+              <div class="fg">
+                <input id="firstName" name="firstName" class="input" placeholder=" " required>
+                <label for="firstName" class="floating">Name</label>
+              </div>
+              <div class="fg">
+                <input id="lastName" name="lastName" class="input" placeholder=" " required>
+                <label for="lastName" class="floating">Surname</label>
+              </div>
             </div>
-            <div class="fg">
-              <input id="email" name="email" class="input" type="email" placeholder=" " required />
-              <label for="email" class="floating">Email</label>
+
+            <div class="grid-2">
+              <div class="fg">
+                <input id="email" name="email" class="input" type="email" placeholder=" " required>
+                <label for="email" class="floating">Mail</label>
+              </div>
+              <div class="fg">
+                <input id="subject" name="subject" class="input" placeholder=" ">
+                <label for="subject" class="floating">Object</label>
+              </div>
             </div>
-            <div class="fg">
-              <input id="subject" name="subject" class="input" placeholder=" " />
-              <label for="subject" class="floating">Subject (optional)</label>
-            </div>
+
             <div class="fg">
               <textarea id="message" name="message" class="textarea" placeholder=" " required></textarea>
-              <label for="message" class="floating">Message</label>
+              <label for="message" class="floating">Text</label>
             </div>
 
             <div class="form-actions">
-              <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="consent" required /> <span>I consent to be contacted about my inquiry.</span></label>
+              <label class="consent">
+                <input type="checkbox" id="consent" required>
+                <span>I consent to be contacted about my inquiry.</span>
+              </label>
             </div>
 
             <div class="form-actions">
@@ -293,35 +393,6 @@ body[data-theme="light"] .input, body[data-theme="light"] .textarea{ background:
 
             <div id="formAlert" class="alert" aria-live="assertive"></div>
           </form>
-        </div>
-
-        <!-- Right: contact card -->
-        <div class="card contact-card">
-          <h3>Reach me directly</h3>
-          <div class="kv" style="margin-top:8px">
-            <div>Email</div><div><a id="emailLink" href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a> <button id="copyMail" class="btn ghost" type="button" style="padding:6px 10px">Copy</button></div>
-            <div>GitHub</div><div><a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></div>
-            <div>LinkedIn</div><div><a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">/in/michael-alibeaj-9810771a6/</a></div>
-            <div>Location</div><div>Milan, Italy (CET/CEST)</div>
-          </div>
-          <div class="btn-row">
-            <a class="btn ghost" href="mailto:malibeaj01@outlook.com">Email</a>
-            <a class="btn ghost" href="cv.html">View CV</a>
-            <a class="btn ghost" href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">GitHub</a>
-            <a class="btn ghost" href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">LinkedIn</a>
-          </div>
-          <div class="qr">
-            <div style="font-weight:700;margin-bottom:6px">Scan my LinkedIn</div>
-            <!-- simple brand QR accent -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="140" height="140">
-              <rect width="100" height="100" fill="#fff" rx="8"/>
-              <rect x="10" y="10" width="20" height="20" fill="#232F3E"/>
-              <rect x="70" y="10" width="20" height="20" fill="#232F3E"/>
-              <rect x="10" y="70" width="20" height="20" fill="#232F3E"/>
-              <circle cx="50" cy="50" r="8" fill="#FF9900"/>
-              <rect x="44" y="44" width="12" height="12" fill="#232F3E"/>
-            </svg>
-          </div>
         </div>
       </div>
     </section>
@@ -337,7 +408,7 @@ body[data-theme="light"] .input, body[data-theme="light"] .textarea{ background:
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
-<!-- Sidebar toggle + Theme toggle + Keyboard shortcuts (uses data-theme) -->
+<!-- Sidebar + Theme toggle (uses data-theme) -->
 <script>
 (function(){
   const railBtn=document.getElementById('toggle-rail');
@@ -350,7 +421,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
   // sidebar init
   const savedSb=localStorage.getItem(KEY_SIDEBAR)==='1'; applySidebar(savedSb);
-  railBtn.onclick=()=>{const next=!document.body.classList.contains('sidebar-collapsed');applySidebar(next);try{localStorage.setItem(KEY_SIDEBAR',next?'1':'0')}catch{}};
+  railBtn.onclick=()=>{const next=!document.body.classList.contains('sidebar-collapsed');applySidebar(next);try{localStorage.setItem(KEY_SIDEBAR,next?'1':'0')}catch{}};
 
   // theme init (saved → prefers → dark)
   const saved=localStorage.getItem(KEY_THEME) || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
@@ -371,79 +442,137 @@ document.getElementById('year').textContent = new Date().getFullYear();
 })();
 </script>
 
-<!-- Contact form handler (sanitized + simple captcha + toast) -->
+<!-- Contact form handler (sanitized + simple captcha + toast + button success + spinner) -->
 <script>
 (function(){
-  const FORM_ENDPOINT = 'https://formspree.io/f/your_form_id'; // <-- Replace with your Formspree endpoint
+  const FORM_ENDPOINT = 'https://formspree.io/f/mgvpanqe'; // <-- Replace
   const form = document.getElementById('contactForm');
   const btn  = document.getElementById('sendBtn');
   const status = document.getElementById('formStatus');
   const alertBox = document.getElementById('formAlert');
   const toast = document.getElementById('toast');
   const tsField = document.getElementById('formTime');
-  const clearBtn=document.getElementById('clearBtn');
+  const clearBtn = document.getElementById('clearBtn');
   tsField.value = String(Date.now());
 
-  const sanitize = s => s
-    .replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c]))
-    .replace(/https?:\/\//gi,'[link removed]')
-    .replace(/\n{3,}/g,'\n\n')
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  const sanitize = (s='') => s
+    .replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c]))
+    .replace(/https?:\/\//gi, '[link removed]')
+    .replace(/\n{3,}/g, '\n\n')
     .trim();
 
-  function showAlert(ok,msg){
-    alertBox.className='alert '+(ok?'ok':'err');
-    alertBox.textContent=msg;
-    alertBox.style.display='block';
-  }
-  function showToast(msg){
-    toast.textContent=msg; toast.classList.add('show');
-    setTimeout(()=>toast.classList.remove('show'),2500);
-  }
+  const showAlert = (ok,msg) => {
+    alertBox.className = 'alert ' + (ok ? 'ok' : 'err');
+    alertBox.textContent = msg;
+    alertBox.style.display = 'block';
+  };
+  const showToast = (msg) => {
+    if(!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 2500);
+  };
 
-  clearBtn?.addEventListener('click', ()=>{ form.reset(); alertBox.style.display='none'; status.textContent=''; });
-
-  form.addEventListener('submit', async (e)=>{
-    e.preventDefault(); alertBox.style.display='none'; status.textContent='';
-    if(form.company && form.company.value) return; // honeypot
-    const elapsed=(Date.now()-Number(tsField.value||0))/1000;
-    if(elapsed<5){ showAlert(false,'Please wait a few seconds before sending.'); return; }
-
-    const payload={
-      name:sanitize(form.name.value),
-      email:sanitize(form.email.value),
-      subject:sanitize(form.subject.value),
-      message:sanitize(form.message.value)
-    };
-    const consent=document.getElementById('consent')?.checked;
-    if(!payload.name||!payload.email||!payload.message||!consent){
-      showAlert(false,'Please fill required fields and accept consent.'); return;
-    }
-
-    btn.disabled=true; btn.textContent='Sending…'; status.textContent='Sending…';
-    try{
-      const res=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(payload)});
-      const data=await res.json().catch(()=>({}));
-      if(res.ok){ form.reset(); tsField.value=String(Date.now()); showAlert(true,'Thanks! Your message has been sent.'); showToast('Message sent ✅'); status.textContent=''; }
-      else{ showAlert(false, data?.error || 'There was a problem sending your message.'); }
-    }catch{ showAlert(false,'Network error. Please try again.'); }
-    finally{ btn.disabled=false; btn.textContent='Send message'; }
+  clearBtn?.addEventListener('click', ()=>{
+    form.reset(); alertBox.style.display='none'; status.textContent='';
   });
 
-  // copy email quick action
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    alertBox.style.display='none';
+    status.textContent='';
+
+    // honeypot
+    if (form.company && form.company.value) return;
+
+    // 5s anti-bot
+    const elapsed = (Date.now() - Number(tsField.value||0))/1000;
+    if (elapsed < 5){ showAlert(false, 'Please wait a few seconds before sending.'); return; }
+
+    // collect + sanitize (Name, Surname, Mail, Object, Text)
+    const firstName = sanitize(form.firstName?.value);
+    const lastName  = sanitize(form.lastName?.value);
+    const email     = sanitize(form.email?.value);
+    const subject   = sanitize(form.subject?.value);
+    const message   = sanitize(form.message?.value);
+    const consent   = document.getElementById('consent')?.checked;
+
+    // validate
+    if(!firstName || !lastName || !email || !message || !consent){
+      showAlert(false, 'Please complete all required fields and accept consent.');
+      return;
+    }
+    if(!emailRe.test(email)){ showAlert(false, 'Please enter a valid email address.'); return; }
+    if(message.length < 10){ showAlert(false, 'Message is a bit short — please add a few details.'); return; }
+
+    // send — show spinner on button
+    btn.disabled = true;
+    btn.classList.add('loading');
+    status.textContent = 'Sending…';
+
+    try{
+      const res = await fetch(FORM_ENDPOINT, {
+        method:'POST',
+        headers:{ 'Accept':'application/json', 'Content-Type':'application/json' },
+        body: JSON.stringify({ firstName, lastName, email, subject, message })
+      });
+
+      if(res.ok){
+        form.reset();
+        tsField.value = String(Date.now());
+        showAlert(true, 'Thanks! Your message has been sent.');
+        showToast('Message sent ✅');
+
+        // success animation (green + checkmark)
+        btn.classList.remove('loading');
+        btn.classList.add('success');
+        btn.innerHTML = `
+          <svg class="icon-check" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M8 12l3 3 5-6"></path>
+          </svg>
+          Sent!
+        `;
+        setTimeout(()=>{
+          btn.classList.remove('success');
+          btn.innerHTML = 'Send message';
+          btn.disabled = false;
+          status.textContent = '';
+        }, 1600);
+        return; // skip finally branch
+      }
+
+      // non-OK
+      let msg='There was a problem sending your message.';
+      try{ const j = await res.json(); if(j && j.error) msg = j.error; }catch{}
+      showAlert(false, msg);
+    }catch{
+      showAlert(false, 'Network error. Please try again later.');
+    }finally{
+      if(btn.classList.contains('loading')){
+        btn.classList.remove('loading');
+        btn.disabled = false;
+        btn.textContent = 'Send message';
+      }
+    }
+  });
+
+  // quick copy
   document.getElementById('copyMail')?.addEventListener('click', async ()=>{
     try{ await navigator.clipboard.writeText('malibeaj01@outlook.com'); showToast('Email copied 📋'); }
-    catch{ showAlert(false,'Copy failed.'); }
+    catch{ showAlert(false, 'Copy failed.'); }
   });
 })();
 </script>
 
-<!-- GitHub Snapshot (unchanged core logic) -->
+<!-- GitHub Snapshot: owned + shared repos, stars, CI/README coverage, charts -->
 <script>
 /* ============== CONFIG ============== */
-const GH_USER = 'MikeTech01';
-const MAX_HEALTH_REPOS = 15;
-const EVENTS_LIMIT = 30;
-const CACHE_TTL_MS = 15 * 60 * 1000;
+const GH_USER = 'MikeTech01';          // <-- change if needed
+const MAX_HEALTH_REPOS = 15;           // how many recent repos to scan for CI/README
+const EVENTS_LIMIT = 30;               // how many Public Events to scan for shared repos
+const CACHE_TTL_MS = 15 * 60 * 1000;   // localStorage cache
 
 /* ============== UTIL ============== */
 const $ = s => document.querySelector(s);
@@ -466,7 +595,7 @@ function chartColors(){
   };
 }
 
-/* ============== SVG HELPERS ============== */
+/* ============== SVG HELPERS (larger, clearer, theme-aware) ============== */
 function drawColumns(svgId, series){
   const svg=document.getElementById(svgId); if(!svg||!series?.length)return;
   while(svg.lastChild) svg.removeChild(svg.lastChild);
@@ -505,6 +634,7 @@ function drawColumns(svgId, series){
     lbl.textContent=s.label; svg.appendChild(lbl);
   });
 }
+
 function drawHBars(svgId, series){
   const svg=document.getElementById(svgId); if(!svg||!series?.length)return;
   while(svg.lastChild) svg.removeChild(svg.lastChild);
@@ -616,6 +746,7 @@ async function renderSnapshot(forceRedraw=false){
       const projectsCombined = combined.length;
       const starsOwned = owned.reduce((s,r)=>s+(r.stargazers_count||0),0);
 
+      // Activity by Month (combined)
       const months = last12MonthLabels();
       const monthCount = Object.fromEntries(months.map(m=>[m.key,0]));
       combined.forEach(r=>{
@@ -625,17 +756,20 @@ async function renderSnapshot(forceRedraw=false){
       });
       const monthSeries = months.map((m,i)=>({ label:m.label, value:monthCount[m.key], color: i%2? '#3aa0ff':'#7fb8ff' }));
 
+      // Language split (top 3)
       const counts={}; combined.forEach(r=>{ const k=r.language||'Other'; counts[k]=(counts[k]||0)+1; });
       const langSeries = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([label,value],i)=>({
         label, value, color: i===0?'#FF9900':i===1?'#3aa0ff':'#7fb8ff'
       }));
 
+      // Top 3 by stars (combined)
       const top3 = combined
         .map(r=>({name:r.name, full:r.full_name, stars:r.stargazers_count||0, html_url:r.html_url}))
         .sort((a,b)=>b.stars-a.stars)
         .slice(0,3);
       const topStarsSeries = top3.map((r,i)=>({label:r.name, value:r.stars, color:i===0?'#FF9900':'#3aa0ff'}));
 
+      // Health checks on top N recent repos (combined)
       const healthSet = combined
         .sort((a,b)=> new Date(b.pushed_at||b.updated_at) - new Date(a.pushed_at||a.updated_at))
         .slice(0, MAX_HEALTH_REPOS);
@@ -656,7 +790,7 @@ async function renderSnapshot(forceRedraw=false){
       cacheSet(cacheKey, data);
     }
 
-    // KPIs
+    // KPIs (animate)
     countTo(document.getElementById('kpi-projects'), data.projectsCombined);
     countTo(document.getElementById('kpi-stars'), data.starsOwned);
     countTo(document.getElementById('kpi-ci'), data.ciPct, '%');
@@ -672,10 +806,12 @@ async function renderSnapshot(forceRedraw=false){
 
     rmSkel();
 
+    // Charts (theme-aware)
     drawColumns('monthchart', data.monthSeries);
     drawColumns('langchart', data.langSeries);
     drawHBars('topstars', data.topStarsSeries);
 
+    // Featured list
     const UL = document.getElementById('featured-list');
     if (UL){
       UL.innerHTML = '';
@@ -694,6 +830,8 @@ async function renderSnapshot(forceRedraw=false){
     rmSkel();
   }
 }
+
+// expose for theme redraw and render initially
 window.renderSnapshot = renderSnapshot;
 renderSnapshot();
 </script>
