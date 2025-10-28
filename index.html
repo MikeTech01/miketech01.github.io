@@ -140,19 +140,63 @@ figure.chart h3{margin:0 0 8px;font-size:1.15rem;color:#dbe7ff}
   transition:opacity .35s ease,transform .35s ease;z-index:9999;font-weight:700;}
 .toast.show{opacity:1;transform:translateY(0)}
 
-/* Light theme */
+/* LIGHT THEME — higher contrast for readability */
 body[data-theme="light"]{
-  --ink:#1B2532; --muted:#516074;
-  --bg0:#f4f6fb; --navy:#f0f4fa; --bg1:#ffffff;
-  --card:#ffffff; --railbg:#ffffff; --line:#d8e0ec;
-  --chart-axis:#cdd6e4; --chart-text:#1B2532; --chart-label:#516074;
+  --ink:#0f172a;            /* main text (very dark slate) */
+  --muted:#334155;          /* secondary text */
+  --bg0:#eef2f7;            /* page gradient top */
+  --navy:#f3f6fb;           /* page gradient mid */
+  --bg1:#ffffff;            /* page gradient bottom */
+  --card:#ffffff;           /* panels/cards */
+  --railbg:#ffffff;         /* sidebar card */
+  --line:#c8d2e1;           /* borders (a bit darker) */
+  --chart-axis:#b7c4d7;
+  --chart-text:#0f172a;     /* chart value labels */
+  --chart-label:#334155;    /* chart axes labels */
 }
-body[data-theme="light"] a{ color:#146EB4; }
-body[data-theme="light"] .kpi{ background:#f5f9ff }
-body[data-theme="light"] .title h1, body[data-theme="light"] .title p{ color:#1B2532 }
-body[data-theme="light"] nav a{ color:#2a3a4f }
-body[data-theme="light"] .actions a.secondary{ background:#eaf2ff; color:#1B2532; border-color:#d0dbeb }
-body[data-theme="light"] .info-card{ background:#ffffff }
+
+/* Links: darker default + clearer hover */
+body[data-theme="light"] a{ color:#0f62fe; }
+body[data-theme="light"] a:hover{ color:#0043ce; }
+
+/* Titles and headings */
+body[data-theme="light"] .title h1,
+body[data-theme="light"] section h2{
+  color:#0f172a;
+}
+
+/* KPI cards: subtle tint, darker text */
+body[data-theme="light"] .kpi{
+  background:#f7faff;
+}
+body[data-theme="light"] .kpi .label{ color:#475569; }
+body[data-theme="light"] .kpi .value{ color:#0f172a; }
+body[data-theme="light"] .kpi .delta{ color:#334155; }
+
+/* Sidebar links and buttons */
+body[data-theme="light"] nav a{ color:#334155; }
+body[data-theme="light"] nav a.active{ color:#0b1526; }
+
+body[data-theme="light"] .actions a.secondary{
+  background:#f3f7ff; color:#0f172a; border-color:#c8d2e1;
+}
+body[data-theme="light"] #toggle-rail,
+body[data-theme="light"] #theme-toggle{
+  background:#f7f9fc; color:#0f172a; border-color:#c8d2e1;
+}
+
+/* Info card (contact) */
+body[data-theme="light"] .info-card{
+  background:linear-gradient(180deg,#ffffff,#f7f9fc);
+}
+body[data-theme="light"] .info-sub{ color:#475569; }
+
+/* Charts: ensure text remains visible */
+body[data-theme="light"] .chart-legend{ color:#334155; }
+body[data-theme="light"] .title h1{
+  text-shadow:0 1px 0 rgba(255,255,255,.6);
+}
+
 
 /* Responsive */
 @media (max-width:980px){
