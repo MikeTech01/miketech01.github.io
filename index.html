@@ -6,10 +6,11 @@
 <title>Michael Alibeaj — M.Sc. Computer Science</title>
 <meta name="description" content="Portfolio and contact for Michael Alibeaj, M.Sc. Computer Science." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2712%27 fill=%27%23232F3E%27/><text x=%2750%25%27 y=%2757%25%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23FF9900%27 font-family=%27Arial%27>MA</text></svg>">
+
 <style>
 :root{
   --navy:#232F3E; --navy-2:#1B2532; --ink:#F5F7FB; --muted:#D6DEEE;
-  --line:#2e3a4a; --blue:#146EB4; --orange:#FF9900; --btn-text:#0f172a;
+  --line:#2e3a4a; --blue:#146EB4; --orange:#FF9900;
   --radius:14px; --max:1180px; --rail:330px;
   --shadow:0 10px 28px rgba(0,0,0,.25);
   --font:ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
@@ -22,47 +23,43 @@ body{
 }
 a{color:#9ccdfb;text-decoration:none}
 a:hover{text-decoration:underline}
-a:focus-visible{outline:3px solid rgba(20,110,180,.45);outline-offset:2px;border-radius:6px}
+
 .page{max-width:var(--max);margin:0 auto;display:grid;
   grid-template-columns:var(--rail) 1fr;gap:28px;padding:28px}
-.rail{
-  position:sticky;top:0;align-self:start;height:max-content;
+.rail{position:sticky;top:0;align-self:start;height:max-content;
   padding:22px;border:1px solid var(--line);border-radius:var(--radius);
-  background:var(--navy-2);box-shadow:var(--shadow)
-}
+  background:var(--navy-2);box-shadow:var(--shadow)}
 .name{display:flex;align-items:center;gap:12px}
-.badge{width:48px;height:48px;border-radius:10px;display:grid;place-items:center;font-weight:900;color:var(--btn-text);
+.badge{width:48px;height:48px;border-radius:10px;display:grid;place-items:center;font-weight:900;color:#0f172a;
   background:linear-gradient(180deg,#ffd89a 0%,#ffb347 60%),linear-gradient(90deg,#4aa3e0,#146EB4);
   border:1px solid #39485b;}
 .role{color:#e6eefc;opacity:.92;margin:6px 0 12px;font-size:1rem}
 .meta{color:#cfe0ff;font-size:0.95rem}
 .actions a{display:block;text-align:center;margin-top:10px;padding:12px 14px;
-  border-radius:10px;border:1px solid #3a4a5f;background:#ffb347;color:var(--btn-text);font-weight:800;text-decoration:none}
+  border-radius:10px;border:1px solid #3a4a5f;background:#ffb347;color:#0f172a;font-weight:800;text-decoration:none}
 .actions a.secondary{background:#243142;color:#e9f2ff;font-weight:700}
 nav{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
 nav a{display:block;padding:8px 0;color:#d7e5ff}
 nav a.active{color:#ffffff;font-weight:800}
 main{min-width:0}
+
 .title{padding:20px;border:1px solid var(--line);border-radius:var(--radius);
   background:#1e2836;box-shadow:var(--shadow)}
 .title h1{margin:0;font-size:clamp(24px,3.4vw,36px);letter-spacing:.2px;color:#fff}
 .title p{margin:8px 0 0;color:#eaf2ff;opacity:.95}
+
 section.panel{padding:24px 20px;border:1px solid var(--line);border-radius:var(--radius);
   background:#1e2836;box-shadow:var(--shadow);margin-top:16px}
-section h2{margin:0 0 10px;font-size:18px;letter-spacing:.2px;text-transform:uppercase;color:#dbe7ff}
-.lead{font-size:21px;margin:6px 0 8px}
-.muted{color:#d0dcf0}
+section h2{margin:0 0 10px;font-size:18px;text-transform:uppercase;color:#dbe7ff}
 .list{margin:10px 0 0;padding-left:18px;color:#e6eeff}
 footer{opacity:.85;color:#c6d1e3;font-size:15px;text-align:center;margin-top:12px}
 
-/* --- Snapshot (KPI + Charts) --- */
+/* --- Snapshot --- */
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:10px}
-.kpi{border:1px solid var(--line);border-radius:12px;background:#233042;padding:16px;min-height:104px;position:relative;overflow:hidden;transition:box-shadow .25s, transform .15s}
-.kpi:hover{transform:translateY(-1px);box-shadow:0 16px 32px rgba(0,0,0,.28)}
-.kpi.good{background:linear-gradient(180deg,#1f384f,#233042)}
+.kpi{border:1px solid var(--line);border-radius:12px;background:#233042;padding:16px;min-height:104px;position:relative;overflow:hidden}
 .kpi.good::after{content:"";position:absolute;inset:-2px;border-radius:12px;padding:1px;background:linear-gradient(135deg,#35d399,#ffb347);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.35}
 .kpi .label{color:var(--muted);font-size:1rem}
-.kpi .value{font-size:1.8rem;font-weight:800;color:#fff;margin-top:4px;letter-spacing:.2px}
+.kpi .value{font-size:1.8rem;font-weight:800;color:#fff;margin-top:4px}
 .kpi .delta{font-size:1rem;margin-top:2px}
 .kpi .delta.up{color:#35d399}
 .kpi .delta.down{color:#fcae66}
@@ -72,9 +69,9 @@ footer{opacity:.85;color:#c6d1e3;font-size:15px;text-align:center;margin-top:12p
 .charts{display:grid;grid-template-columns:1.15fr 0.85fr;gap:14px;margin-top:14px}
 .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 figure.chart{border:1px solid var(--line);border-radius:12px;background:#1e2836;padding:14px;margin:0}
-figure.chart h3{margin:0 0 8px;font-size:1.05rem;color:#dbe7ff}
-.chart-svg{width:100%;height:220px;display:block}
-.chart-legend{color:#cfd8ea;font-size:.95rem;margin-top:6px}
+figure.chart h3{margin:0 0 8px;font-size:1.08rem;color:#dbe7ff}
+.chart-svg{width:100%;height:240px;display:block}
+.chart-legend{color:#cfd8ea;font-size:1rem;margin-top:6px}
 
 /* responsive */
 @media (max-width:980px){
@@ -86,19 +83,13 @@ figure.chart h3{margin:0 0 8px;font-size:1.05rem;color:#dbe7ff}
   .charts{grid-template-columns:1fr}
   .chart-grid{grid-template-columns:1fr}
 }
-@media print{
-  body{background:#fff;color:#000}
-  .rail,.title,.panel{background:#fff;box-shadow:none;border-color:#e5e7eb}
-  .actions,nav a[href^="#"]{display:none}
-  a{color:#000;text-decoration:underline}
-}
 </style>
 </head>
 <body>
 <div class="page">
   <aside class="rail">
     <div class="name">
-      <div class="badge" aria-hidden="true">MA</div>
+      <div class="badge">MA</div>
       <div>
         <strong>Michael Alibeaj</strong><br/>
         <div class="role">M.Sc. Computer Science — Politecnico di Milano</div>
@@ -127,12 +118,7 @@ figure.chart h3{margin:0 0 8px;font-size:1.05rem;color:#dbe7ff}
 
     <section id="about" class="panel">
       <h2>About</h2>
-      <p class="lead">I turn messy datasets into reliable metrics and readable dashboards.</p>
-      <p class="muted">Strengths: Python (Pandas), SQL, pragmatic BI delivery. I care about crisp metric definitions, data quality checks, and shipping insights that non-technical stakeholders can actually use.</p>
-      <ul class="list">
-        <li>Solid foundations in statistics, performance modeling, and software engineering.</li>
-        <li>End-to-end ownership of small data stacks (ingest → transform → validate → publish).</li>
-      </ul>
+      <p>I turn messy datasets into reliable metrics and readable dashboards. Strengths: Python (Pandas), SQL, pragmatic BI delivery. I care about crisp metric definitions, data quality checks, and shipping insights that non-technical stakeholders can actually use.</p>
     </section>
 
     <section id="skills" class="panel">
@@ -141,7 +127,6 @@ figure.chart h3{margin:0 0 8px;font-size:1.05rem;color:#dbe7ff}
         <li><strong>Analytics & BI:</strong> SQL, Power BI, Excel (PowerQuery), Matplotlib</li>
         <li><strong>Data Engineering:</strong> Python (Pandas), ETL/ELT, REST APIs, Git/GitHub</li>
         <li><strong>ML & Statistics:</strong> scikit-learn, TensorFlow/Keras, NLP basics</li>
-        <li><strong>Tools & Languages:</strong> GitHub Actions, Linux, English (C1), Italian/Albanian (Native)</li>
       </ul>
     </section>
 
@@ -151,22 +136,22 @@ figure.chart h3{margin:0 0 8px;font-size:1.05rem;color:#dbe7ff}
 
       <!-- KPIs -->
       <div class="kpis" role="list">
-        <div class="kpi skeleton" role="listitem" aria-label="Projects (owned + shared)">
+        <div class="kpi skeleton" role="listitem">
           <div class="label">Projects (owned + shared)</div>
           <div class="value" id="kpi-projects">—</div>
-          <div class="delta up" id="kpi-projects-delta">loading…</div>
+          <div class="delta" id="kpi-projects-delta">loading…</div>
         </div>
-        <div class="kpi skeleton" role="listitem" aria-label="Stars">
-          <div class="label">Stars (owned)</div>
+        <div class="kpi skeleton" role="listitem">
+          <div class="label">Stars</div>
           <div class="value" id="kpi-stars">—</div>
-          <div class="delta up" id="kpi-stars-delta">loading…</div>
+          <div class="delta" id="kpi-stars-delta">loading…</div>
         </div>
-        <div class="kpi skeleton" role="listitem" aria-label="CI Hygiene">
+        <div class="kpi skeleton" role="listitem">
           <div class="label">CI Hygiene</div>
           <div class="value" id="kpi-ci">—</div>
           <div class="delta" id="kpi-ci-note">Repos with Actions</div>
         </div>
-        <div class="kpi skeleton" role="listitem" aria-label="README Coverage">
+        <div class="kpi skeleton" role="listitem">
           <div class="label">README Coverage</div>
           <div class="value" id="kpi-readme">—</div>
           <div class="delta" id="kpi-readme-note">Repos with README</div>
@@ -177,28 +162,26 @@ figure.chart h3{margin:0 0 8px;font-size:1.05rem;color:#dbe7ff}
       <div class="charts">
         <figure class="chart">
           <h3>Activity by Month (last 12)</h3>
-          <svg id="monthchart" class="chart-svg" viewBox="0 0 700 240" preserveAspectRatio="xMidYMid meet" aria-label="Repos updated per month"></svg>
+          <svg id="monthchart" class="chart-svg" viewBox="0 0 700 240" preserveAspectRatio="xMidYMid meet"></svg>
           <div class="chart-legend" id="month-legend">Repos updated per month</div>
         </figure>
 
         <div class="chart-grid">
           <figure class="chart">
             <h3>Skill Focus (from repos)</h3>
-            <svg id="langchart" class="chart-svg" viewBox="0 0 700 240" preserveAspectRatio="xMidYMid meet" aria-label="Top repository languages"></svg>
+            <svg id="langchart" class="chart-svg" viewBox="0 0 700 240" preserveAspectRatio="xMidYMid meet"></svg>
             <div class="chart-legend">Top repository languages</div>
           </figure>
 
           <figure class="chart">
             <h3>Top Repos by Stars</h3>
-            <svg id="topstars" class="chart-svg" viewBox="0 0 700 240" preserveAspectRatio="xMidYMid meet" aria-label="Top 3 repositories by stars"></svg>
-            <div class="chart-legend">Top 3 public repos (owned or shared)</div>
+            <svg id="topstars" class="chart-svg" viewBox="0 0 700 240" preserveAspectRatio="xMidYMid meet"></svg>
+            <div class="chart-legend">Top 3 public repos</div>
           </figure>
 
           <figure class="chart">
             <h3>Featured (Top 3)</h3>
-            <div class="chart-legend">
-              <ul id="featured-list" style="margin:0;padding-left:18px;font-size:1rem;line-height:1.5"></ul>
-            </div>
+            <div class="chart-legend"><ul id="featured-list" style="margin:0;padding-left:18px;font-size:1rem;line-height:1.5"></ul></div>
           </figure>
 
           <figure class="chart">
@@ -213,116 +196,124 @@ figure.chart h3{margin:0 0 8px;font-size:1.05rem;color:#dbe7ff}
     <section id="awards" class="panel">
       <h2>Awards</h2>
       <ul class="list">
-        <li><strong>Data Management for the Web (DMFW)</strong> — 1st Place, Politecnico di Milano</li>
-        <li><strong>Artificial Neural Networks & Deep Learning (AN2DL)</strong> — 2nd Place</li>
-        <li><strong>Italian Mathematical Olympiad</strong> — Top 10% (Regional)</li>
+        <li><strong>Data Management for the Web</strong> — 1st Place</li>
+        <li><strong>Artificial Neural Networks & Deep Learning</strong> — 2nd Place</li>
       </ul>
     </section>
 
     <section id="contact" class="panel">
       <h2>Contact</h2>
-      <p class="muted">Open to Business Intelligence / Data internships — Milan or remote.</p>
       <ul class="list" style="list-style:none;padding-left:0">
         <li>Email: <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></li>
         <li>GitHub: <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></li>
         <li>LinkedIn: <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">linkedin.com/in/michael-alibeaj-9810771a6</a></li>
-        <li>Location: Milan, Italy</li>
       </ul>
     </section>
 
-    <footer>© <span id="year"></span> Michael Alibeaj · Built for GitHub Pages</footer>
+    <footer>© <span id="year"></span> Michael Alibeaj</footer>
   </main>
 </div>
 
-<!-- Footer scripts -->
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-const links = Array.from(document.querySelectorAll('nav a'));
-const sections = links.map(a => document.querySelector(a.getAttribute('href')));
-const onScroll = () => {
-  const y = window.scrollY + 120; let active = 0;
-  sections.forEach((s,i)=>{ if(s && s.offsetTop <= y) active = i; });
-  links.forEach((a,i)=> a.classList.toggle('active', i===active));
-};
-document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 </script>
 
 <!-- === GitHub Snapshot Script (owned + shared, readable charts) === -->
 <script>
 /* ============== CONFIG ============== */
-const GH_USER = 'MikeTech01'; // <-- your username
-const MAX_HEALTH_REPOS = 15;  // CI/README checks cap (rate-safe)
-const EVENTS_LIMIT = 30;      // public events to scan for shared repos
+const GH_USER = 'MikeTech01';     // <-- change if needed
+const MAX_HEALTH_REPOS = 15;      // CI/README checks cap
+const EVENTS_LIMIT = 30;          // public events scanned for shared repos
+const CACHE_TTL_MS = 15 * 60 * 1000;
 
 /* ============== UTIL ============== */
 const $ = s => document.querySelector(s);
 const setText = (sel,val)=>{ const n=$(sel); if(n) n.textContent = val; };
 const rmSkel = ()=> document.querySelectorAll('.kpi.skeleton').forEach(k=>k.classList.remove('skeleton'));
-const addGood = (kpiBox)=>{ const n = kpiBox.closest('.kpi'); if(n) n.classList.add('good'); };
-const cacheGet = (k,maxAgeMs)=>{ try{const v=localStorage.getItem(k); if(!v) return null; const {t,data}=JSON.parse(v); return (Date.now()-t<maxAgeMs)?data:null;}catch{return null;} };
-const cacheSet = (k,data)=>{ try{localStorage.setItem(k, JSON.stringify({t:Date.now(),data}))}catch{} };
-function countTo(el, target, suffix=""){
-  if(!el) return; const startVal = Number(String(el.textContent).replace(/\D/g,'')) || 0;
-  const dur = 700 + Math.min(1300, Math.abs(target-startVal)*20);
-  const t0 = performance.now();
-  function frame(t){ const p=Math.min(1,(t-t0)/dur); el.textContent = Math.round(startVal+(target-startVal)*p)+suffix; if(p<1) requestAnimationFrame(frame); }
-  requestAnimationFrame(frame);
-}
-const short = (name,max=18)=> name.length>max ? name.slice(0,max-1)+'…' : name;
+const addGood = (el)=>{ const n = el?.closest('.kpi'); if(n) n.classList.add('good'); };
+function countTo(el, target, suffix=""){ if(!el) return; const start = +String(el.textContent).replace(/\D/g,'')||0; const dur=800; const t0=performance.now(); const step=t=>{const p=Math.min(1,(t-t0)/dur); el.textContent = Math.round(start+(target-start)*p)+suffix; if(p<1) requestAnimationFrame(step)}; requestAnimationFrame(step); }
+const cacheGet = (k,ttl)=>{ try{const v=localStorage.getItem(k); if(!v) return null; const {t,data}=JSON.parse(v); return (Date.now()-t < ttl)?data:null }catch{return null}};
+const cacheSet = (k,data)=>{ try{localStorage.setItem(k, JSON.stringify({t:Date.now(), data}))}catch{} };
+const fmt = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
+const short = (name,max=26)=> name.length>max ? name.slice(0,max-1)+'…' : name;
 
 /* ============== SVG HELPERS (larger, clearer) ============== */
-function drawColumns(svgId, series){ // vertical bars
+function drawColumns(svgId, series){
   const svg=document.getElementById(svgId); if(!svg||!series?.length)return;
   while(svg.lastChild) svg.removeChild(svg.lastChild);
   const W=700,H=240,L=56,R=24,T=16,B=40;
   const barW=((W-L-R)/series.length)*0.6, gap=((W-L-R)/series.length)*0.4;
-  const maxV=Math.max(1,...series.map(s=>s.value))*1.25;
+  const maxV=Math.max(1,...series.map(s=>s.value));
+  const niceMax=Math.max(1, Math.ceil(maxV/5)*5);
 
-  // axis
+  // x-axis
   const axisX=document.createElementNS('http://www.w3.org/2000/svg','line');
   axisX.setAttribute('x1',L);axisX.setAttribute('x2',W-R);axisX.setAttribute('y1',H-B);axisX.setAttribute('y2',H-B);
   axisX.setAttribute('stroke','#2e3a4a');svg.appendChild(axisX);
 
   series.forEach((s,i)=>{
-    const x=L+i*(barW+gap)+gap*0.5, h=(s.value/maxV)*(H-T-B), y=(H-B)-h;
-    const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
-    r.setAttribute('x',x);r.setAttribute('y',y);r.setAttribute('width',barW);r.setAttribute('height',h);
-    r.setAttribute('rx','7');r.setAttribute('fill',s.color||'#7fb8ff');r.setAttribute('opacity','0.94');svg.appendChild(r);
+    const x=L+i*(barW+gap)+gap*0.5;
+    const h=(s.value/niceMax)*(H-T-B);
+    const y=(H-B)-h;
 
-    const val=document.createElementNS('http://www.w3.org/2000/svg','text');
-    val.setAttribute('x',x+barW/2);val.setAttribute('y',y-8);val.setAttribute('text-anchor','middle');
-    val.setAttribute('fill','#ffffff');val.setAttribute('font-size','14');val.textContent=s.value;svg.appendChild(val);
+    const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    rect.setAttribute('x',x); rect.setAttribute('y',y);
+    rect.setAttribute('width',barW); rect.setAttribute('height',h);
+    rect.setAttribute('rx','7'); rect.setAttribute('fill',s.color||'#7fb8ff'); rect.setAttribute('opacity','0.94');
+    rect.appendChild(document.createElementNS('http://www.w3.org/2000/svg','title')).textContent = `${s.label}: ${fmt.format(s.value)}`;
+    svg.appendChild(rect);
+
+    if (s.value > 0){
+      const val=document.createElementNS('http://www.w3.org/2000/svg','text');
+      val.setAttribute('x',x+barW/2); val.setAttribute('y',y-8);
+      val.setAttribute('text-anchor','middle'); val.setAttribute('fill','#ffffff'); val.setAttribute('font-size','14');
+      val.textContent=fmt.format(s.value); svg.appendChild(val);
+    }
 
     const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
-    lbl.setAttribute('x',x+barW/2);lbl.setAttribute('y',H-B+20);lbl.setAttribute('text-anchor','middle');
-    lbl.setAttribute('fill','#D6DEEE');lbl.setAttribute('font-size','13');lbl.textContent=s.label;svg.appendChild(lbl);
+    lbl.setAttribute('x',x+barW/2); lbl.setAttribute('y',H-B+20);
+    lbl.setAttribute('text-anchor','middle'); lbl.setAttribute('fill','#D6DEEE'); lbl.setAttribute('font-size','13');
+    lbl.textContent=s.label; svg.appendChild(lbl);
   });
 }
 
-function drawHBars(svgId, series){ // horizontal bars
+function drawHBars(svgId, series){
   const svg=document.getElementById(svgId); if(!svg||!series?.length)return;
   while(svg.lastChild) svg.removeChild(svg.lastChild);
-  const W=700,H=240,L=180,R=28,T=18,B=18;
-  const rowH = Math.min(40, (H-T-B)/series.length - 8);
+  const W=700,H=240,L=200,R=28,T=18,B=18;
+  const rowH = Math.min(42, (H-T-B)/series.length - 8);
   const maxV=Math.max(1,...series.map(s=>s.value));
 
   series.forEach((s,i)=>{
     const y=T + i*(rowH+12);
-    const w = ((W-L-R)*(s.value/maxV));
+    const rawW = (W-L-R)*(s.value/maxV);
+    const w = Math.max(s.value>0 ? 8 : 4, rawW);
 
     const name=document.createElementNS('http://www.w3.org/2000/svg','text');
-    name.setAttribute('x',L-12); name.setAttribute('y',y+rowH/2+5); name.setAttribute('text-anchor','end');
-    name.setAttribute('fill','#D6DEEE'); name.setAttribute('font-size','14'); name.textContent=short(s.label); name.setAttribute('title', s.label);
+    name.setAttribute('x',L-12); name.setAttribute('y',y+rowH/2+5);
+    name.setAttribute('text-anchor','end'); name.setAttribute('fill','#D6DEEE'); name.setAttribute('font-size','14');
+    name.textContent=short(s.label); name.appendChild(document.createElementNS('http://www.w3.org/2000/svg','title')).textContent = s.label;
     svg.appendChild(name);
 
     const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
     r.setAttribute('x',L); r.setAttribute('y',y); r.setAttribute('width',w); r.setAttribute('height',rowH);
-    r.setAttribute('rx','7'); r.setAttribute('fill', s.color || '#FF9900'); r.setAttribute('opacity','0.94'); svg.appendChild(r);
+    r.setAttribute('rx','7'); r.setAttribute('fill', s.color || '#FF9900'); r.setAttribute('opacity','0.94');
+    r.appendChild(document.createElementNS('http://www.w3.org/2000/svg','title')).textContent = `${s.label}: ${fmt.format(s.value)} ★`;
+    svg.appendChild(r);
 
     const val=document.createElementNS('http://www.w3.org/2000/svg','text');
     val.setAttribute('x',L+w+8); val.setAttribute('y',y+rowH/2+5);
-    val.setAttribute('fill','#ffffff'); val.setAttribute('font-size','14'); val.textContent=s.value; svg.appendChild(val);
+    val.setAttribute('fill','#ffffff'); val.setAttribute('font-size','14'); val.textContent=fmt.format(s.value);
+    svg.appendChild(val);
   });
+
+  if (series.every(s=>s.value===0)){
+    const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('x',L); t.setAttribute('y',H/2);
+    t.setAttribute('fill','#cfd8ea'); t.setAttribute('font-size','14');
+    t.textContent='No stars yet — add a README & description to attract stars.';
+    svg.appendChild(t);
+  }
 }
 
 /* ============== DATA FETCH ============== */
@@ -332,7 +323,6 @@ async function fetchJSON(url){
   return res.json();
 }
 async function fetchOwnedRepos(user){
-  // Owner repos only (public), sorted by recent updates
   return (await fetchJSON(`https://api.github.com/users/${user}/repos?per_page=100&type=owner&sort=updated`)).filter(r=>!r.fork);
 }
 async function fetchEvents(user){
@@ -343,7 +333,7 @@ async function fetchRepoByFullName(fullName){
 }
 async function hasReadme(owner, repo){
   const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/readme`, { headers:{'Accept':'application/vnd.github+json'} });
-  return res.ok; // 200 = has readme, 404 = no
+  return res.ok;
 }
 async function hasWorkflows(owner, repo){
   const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows`, { headers:{'Accept':'application/vnd.github+json'} });
@@ -356,14 +346,9 @@ async function hasWorkflows(owner, repo){
 async function fetchOwnedAndShared(user){
   const [owned, events] = await Promise.all([ fetchOwnedRepos(user), fetchEvents(user) ]);
 
-  // Repos from PushEvents (shared/public you’ve contributed to)
-  const pushed = events
-    .filter(e => e.type === 'PushEvent')
-    .slice(0, EVENTS_LIMIT);
-
+  const pushed = events.filter(e => e.type === 'PushEvent').slice(0, EVENTS_LIMIT);
   const sharedFullNames = Array.from(new Set(pushed.map(e => e.repo?.name).filter(Boolean)));
 
-  // Fetch details of those shared repos (limit to 15 to be kind to rate limits)
   const sharedSubset = sharedFullNames.slice(0, 15);
   const sharedDetails = [];
   for (const full of sharedSubset){
@@ -372,7 +357,6 @@ async function fetchOwnedAndShared(user){
     if(rep && !rep.fork) sharedDetails.push(rep);
   }
 
-  // Merge + dedupe by full_name
   const byFull = {};
   [...owned, ...sharedDetails].forEach(r => { if(r && r.full_name) byFull[r.full_name] = r; });
   const combined = Object.values(byFull);
@@ -393,19 +377,18 @@ function last12MonthLabels(){
 }
 
 async function renderSnapshot(){
-  const cacheKey='gh_snapshot_v6';
-  const cached = cacheGet(cacheKey, 1000*60*15); // 15 min cache
+  const cacheKey='gh_snapshot_v7';
+  const cached = cacheGet(cacheKey, CACHE_TTL_MS);
   let data = cached;
 
   try{
     if(!data){
       const { owned, combined } = await fetchOwnedAndShared(GH_USER);
 
-      // KPIs
       const projectsCombined = combined.length;
       const starsOwned = owned.reduce((s,r)=>s+(r.stargazers_count||0),0);
 
-      // Activity by Month from combined list (pushed_at/updated_at)
+      // Activity by Month (combined)
       const months = last12MonthLabels();
       const monthCount = Object.fromEntries(months.map(m=>[m.key,0]));
       combined.forEach(r=>{
@@ -415,20 +398,20 @@ async function renderSnapshot(){
       });
       const monthSeries = months.map((m,i)=>({ label:m.label, value:monthCount[m.key], color: i%2? '#3aa0ff':'#7fb8ff' }));
 
-      // Language split (top 3) from combined
+      // Language split (top 3)
       const counts={}; combined.forEach(r=>{ const k=r.language||'Other'; counts[k]=(counts[k]||0)+1; });
       const langSeries = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([label,value],i)=>({
         label, value, color: i===0?'#FF9900':i===1?'#3aa0ff':'#7fb8ff'
       }));
 
-      // Top 3 repos by stars (owned + shared)
+      // Top 3 by stars (combined)
       const top3 = combined
         .map(r=>({name:r.name, full:r.full_name, stars:r.stargazers_count||0, html_url:r.html_url}))
         .sort((a,b)=>b.stars-a.stars)
         .slice(0,3);
       const topStarsSeries = top3.map((r,i)=>({label:r.name, value:r.stars, color:i===0?'#FF9900':'#3aa0ff'}));
 
-      // Health checks (CI/README) on top N most recently updated repos (combined)
+      // Health checks on top N recent repos (combined)
       const healthSet = combined
         .sort((a,b)=> new Date(b.pushed_at||b.updated_at) - new Date(a.pushed_at||a.updated_at))
         .slice(0, MAX_HEALTH_REPOS);
@@ -449,7 +432,7 @@ async function renderSnapshot(){
       cacheSet(cacheKey, data);
     }
 
-    /* KPIs (animated) */
+    // KPIs with animation
     countTo(document.getElementById('kpi-projects'), data.projectsCombined);
     countTo(document.getElementById('kpi-stars'), data.starsOwned);
     countTo(document.getElementById('kpi-ci'), data.ciPct, '%');
@@ -465,13 +448,13 @@ async function renderSnapshot(){
 
     rmSkel();
 
-    /* Charts (larger fonts/spacing) */
+    // Charts
     drawColumns('monthchart', data.monthSeries);
     drawColumns('langchart', data.langSeries);
     drawHBars('topstars', data.topStarsSeries);
 
-    /* Featured list with full names + links */
-    const UL = $('#featured-list');
+    // Featured list
+    const UL = document.getElementById('featured-list');
     if (UL){
       UL.innerHTML = '';
       data.top3.forEach(r=>{
@@ -481,10 +464,8 @@ async function renderSnapshot(){
       });
     }
 
-    /* Status */
     setText('#month-legend', 'Repos updated per month (owned + shared, last 12)');
-    setText('#api-status', 'GitHub API: OK' + (cacheGet('gh_snapshot_v6', 1e12)?' (cached ✓)':''));
-
+    setText('#api-status', 'GitHub API: OK' + (cacheGet('gh_snapshot_v7', 1e12)?' (cached ✓)':''));
   } catch (err){
     console.warn(err);
     setText('#api-status', 'GitHub API error or rate limit — showing placeholders.');
