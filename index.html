@@ -33,70 +33,9 @@ body{
 a{color:#9ccdfb;text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* Sidebar + Theme buttons */
-
-<script>
-(function(){
-  const KEY_SIDEBAR='sidebar_collapsed_v1';
-  const KEY_THEME='theme_pref_v1';
-
-  function applySidebar(collapsed){
-    const btn = document.getElementById('toggle-rail');
-    document.body.classList.toggle('sidebar-collapsed', collapsed);
-    if (btn) btn.textContent = collapsed ? '☰' : '✕';
-  }
-
-  function setTheme(mode){
-    document.body.setAttribute('data-theme', mode);
-    const btn = document.getElementById('theme-toggle');
-    if (btn) btn.textContent = (mode === 'light') ? '🌙' : '🌗';
-  }
-
-  // Wait until DOM elements exist
-  document.addEventListener('DOMContentLoaded', ()=>{
-    const railBtn = document.getElementById('toggle-rail');
-    const themeBtn = document.getElementById('theme-toggle');
-
-    // Sidebar init
-    const savedSb = localStorage.getItem(KEY_SIDEBAR)==='1';
-    applySidebar(savedSb);
-
-    // Sidebar toggle
-    if (railBtn) railBtn.onclick = ()=>{
-      const next = !document.body.classList.contains('sidebar-collapsed');
-      applySidebar(next);
-      try{ localStorage.setItem(KEY_SIDEBAR, next?'1':'0'); }catch{}
-    };
-
-    // Theme init
-    const savedTheme = localStorage.getItem(KEY_THEME)
-      || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-    setTheme(savedTheme);
-
-    // Theme toggle
-    if (themeBtn) themeBtn.onclick = ()=>{
-      const next = (document.body.getAttribute('data-theme')==='light') ? 'dark' : 'light';
-      setTheme(next);
-      try{ localStorage.setItem(KEY_THEME, next); }catch{}
-      // repaint
-      document.documentElement.style.transform = 'translateZ(0)';
-      requestAnimationFrame(()=>{ document.documentElement.style.transform = ''; });
-      setTimeout(()=>window.renderSnapshot && window.renderSnapshot(true),150);
-    };
-
-    // Keyboard shortcuts
-    window.addEventListener('keydown',(e)=>{
-      if(/input|textarea|select/i.test(e.target.tagName)) return;
-      if(e.key==='s'||e.key==='S'){ e.preventDefault(); railBtn?.click(); }
-      if(e.key==='t'||e.key==='T'){ e.preventDefault(); themeBtn?.click(); }
-    });
-  });
-})();
-</script>
-
-    
+/* Toggle buttons */
 #toggle-rail,#theme-toggle{
-  position:fixed;top:16px;z-index:60;width:42px;height:42px;border-radius:10px;
+  position:fixed;top:16px;z-index:10010;width:42px;height:42px;border-radius:10px;
   border:1px solid #3a4a5f;background:#243142;color:#e9f2ff;
   font-size:18px;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.25);
   cursor:pointer;transition:background .35s ease,color .35s ease;
@@ -139,6 +78,13 @@ nav a.active{color:#fff;font-weight:800}
 .cta:active{transform:translateY(0);box-shadow:0 8px 16px rgba(255,153,0,.28)}
 .cta .ico{display:inline-grid;place-items:center;width:22px;height:22px}
 .cta .hint{opacity:.75;font-weight:700;font-size:15px}
+.cta::after{
+  content:"";position:absolute;inset:-2px;border-radius:12px;
+  background:linear-gradient(120deg,rgba(255,255,255,.0) 0%,rgba(255,255,255,.45) 35%,rgba(255,255,255,.0) 70%);
+  transform:translateX(-120%);filter:blur(.5px);
+  transition:transform .7s cubic-bezier(.2,.6,.2,1);mix-blend-mode:overlay;
+}
+.cta:hover::after{transform:translateX(120%)}
 
 /* Sections */
 .title,section.panel{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);}
@@ -216,19 +162,20 @@ body[data-theme="light"] .info-card{ background:#ffffff }
   .chart-svg{height:260px}
 }
 </style>
-<script>
-  (function initThemeEarly(){
-    try {
-      const saved = localStorage.getItem('theme_pref_v1');
-      if (saved) {
-        document.addEventListener('DOMContentLoaded', () => {
-          document.body?.setAttribute('data-theme', saved);
-        });
-      }
-    } catch(e) {}
-  })();
-</script>
 
+<!-- Early theme init (prevents flash) -->
+<script>
+(function initThemeEarly(){
+  try {
+    const saved = localStorage.getItem('theme_pref_v1');
+    if (saved) {
+      document.addEventListener('DOMContentLoaded', () => {
+        document.body?.setAttribute('data-theme', saved);
+      });
+    }
+  } catch(e) {}
+})();
+</script>
 
 </head>
 <body data-theme="dark">
@@ -399,43 +346,61 @@ body[data-theme="light"] .info-card{ background:#ffffff }
 <script>
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 
-// Keyboard shortcut: press "C" to open contact page
-window.addEventListener('keydown', (e)=>{
-  if(/input|textarea|select/i.test(e.target.tagName)) return;
-  if(e.key.toLowerCase() === 'c'){ window.location.href = 'contact.html'; }
-});
-
-// Sidebar + theme toggle
+<!-- Sidebar + Theme toggle (single, resilient) -->
+<script>
 (function(){
-  const railBtn=document.getElementById('toggle-rail');
-  const themeBtn=document.getElementById('theme-toggle');
   const KEY_SIDEBAR='sidebar_collapsed_v1';
   const KEY_THEME='theme_pref_v1';
 
-  const applySidebar=(c)=>{document.body.classList.toggle('sidebar-collapsed',c);railBtn.textContent=c?'☰':'✕';};
-  const setTheme=(mode)=>{document.body.setAttribute('data-theme',mode);themeBtn.textContent=(mode==='light')?'🌙':'🌗';};
+  function applySidebar(collapsed){
+    document.body.classList.toggle('sidebar-collapsed', collapsed);
+    const btn = document.getElementById('toggle-rail');
+    if (btn) btn.textContent = collapsed ? '☰' : '✕';
+  }
 
-  const savedSb=localStorage.getItem(KEY_SIDEBAR)==='1'; applySidebar(savedSb);
-  railBtn.onclick=()=>{const next=!document.body.classList.contains('sidebar-collapsed');applySidebar(next);try{localStorage.setItem(KEY_SIDEBAR,next?'1':'0')}catch{}};
+  function setTheme(mode){
+    document.body.setAttribute('data-theme', mode);
+    const btn = document.getElementById('theme-toggle');
+    if (btn) btn.textContent = (mode === 'light') ? '🌙' : '🌗';
+  }
 
-  const saved=localStorage.getItem(KEY_THEME) || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-  setTheme(saved);
-  themeBtn.onclick=()=>{
-    const next=(document.body.getAttribute('data-theme')==='light')?'dark':'light';
-    setTheme(next);
-    try{localStorage.setItem(KEY_THEME,next)}catch{}
-    setTimeout(()=>window.renderSnapshot && window.renderSnapshot(true),150);
-  };
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const railBtn=document.getElementById('toggle-rail');
+    const themeBtn=document.getElementById('theme-toggle');
+
+    // Sidebar init + click
+    const savedSb=localStorage.getItem(KEY_SIDEBAR)==='1';
+    applySidebar(savedSb);
+    if (railBtn) railBtn.addEventListener('click', ()=>{
+      const next=!document.body.classList.contains('sidebar-collapsed');
+      applySidebar(next);
+      try{localStorage.setItem(KEY_SIDEBAR,next?'1':'0')}catch{}
+    });
+
+    // Theme init + click
+    const savedTheme=localStorage.getItem(KEY_THEME) || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    setTheme(savedTheme);
+    if (themeBtn) themeBtn.addEventListener('click', ()=>{
+      const next=(document.body.getAttribute('data-theme')==='light')?'dark':'light';
+      setTheme(next);
+      try{localStorage.setItem(KEY_THEME,next)}catch{}
+      // repaint + refresh charts
+      document.documentElement.style.transform = 'translateZ(0)';
+      requestAnimationFrame(()=>{ document.documentElement.style.transform = ''; });
+      setTimeout(()=>window.renderSnapshot && window.renderSnapshot(true),150);
+    });
+
+    // Shortcuts
+    window.addEventListener('keydown', (e)=>{
+      if(/input|textarea|select/i.test(e.target.tagName)) return;
+      if(e.key==='s'||e.key==='S'){ e.preventDefault(); railBtn?.click(); }
+      if(e.key==='t'||e.key==='T'){ e.preventDefault(); themeBtn?.click(); }
+      if(e.key.toLowerCase()==='c'){ window.location.href='contact.html'; }
+    });
+  });
 })();
-</script>
-
-  <!-- Force repaint after theme change -->
-<script>
-function forceRepaint(){
-  document.documentElement.style.transform = 'translateZ(0)';
-  requestAnimationFrame(()=>{ document.documentElement.style.transform = ''; });
-}
 </script>
 
 <!-- GitHub Snapshot: data + charts -->
