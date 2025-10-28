@@ -34,16 +34,72 @@ a{color:#9ccdfb;text-decoration:none}
 a:hover{text-decoration:underline}
 
 /* Sidebar + Theme buttons */
+
+<script>
+(function(){
+  const KEY_SIDEBAR='sidebar_collapsed_v1';
+  const KEY_THEME='theme_pref_v1';
+
+  function applySidebar(collapsed){
+    const btn = document.getElementById('toggle-rail');
+    document.body.classList.toggle('sidebar-collapsed', collapsed);
+    if (btn) btn.textContent = collapsed ? '☰' : '✕';
+  }
+
+  function setTheme(mode){
+    document.body.setAttribute('data-theme', mode);
+    const btn = document.getElementById('theme-toggle');
+    if (btn) btn.textContent = (mode === 'light') ? '🌙' : '🌗';
+  }
+
+  // Wait until DOM elements exist
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const railBtn = document.getElementById('toggle-rail');
+    const themeBtn = document.getElementById('theme-toggle');
+
+    // Sidebar init
+    const savedSb = localStorage.getItem(KEY_SIDEBAR)==='1';
+    applySidebar(savedSb);
+
+    // Sidebar toggle
+    if (railBtn) railBtn.onclick = ()=>{
+      const next = !document.body.classList.contains('sidebar-collapsed');
+      applySidebar(next);
+      try{ localStorage.setItem(KEY_SIDEBAR, next?'1':'0'); }catch{}
+    };
+
+    // Theme init
+    const savedTheme = localStorage.getItem(KEY_THEME)
+      || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    setTheme(savedTheme);
+
+    // Theme toggle
+    if (themeBtn) themeBtn.onclick = ()=>{
+      const next = (document.body.getAttribute('data-theme')==='light') ? 'dark' : 'light';
+      setTheme(next);
+      try{ localStorage.setItem(KEY_THEME, next); }catch{}
+      // repaint
+      document.documentElement.style.transform = 'translateZ(0)';
+      requestAnimationFrame(()=>{ document.documentElement.style.transform = ''; });
+      setTimeout(()=>window.renderSnapshot && window.renderSnapshot(true),150);
+    };
+
+    // Keyboard shortcuts
+    window.addEventListener('keydown',(e)=>{
+      if(/input|textarea|select/i.test(e.target.tagName)) return;
+      if(e.key==='s'||e.key==='S'){ e.preventDefault(); railBtn?.click(); }
+      if(e.key==='t'||e.key==='T'){ e.preventDefault(); themeBtn?.click(); }
+    });
+  });
+})();
+</script>
+
     
-#toggle-rail{
-  position: fixed; top: 16px; left: 16px;
-  z-index: 10010;                /* was 60 — raise above anything */
-  width: 42px; height: 42px; border-radius: 10px;
-  border: 1px solid #3a4a5f; background: #243142; color: #e9f2ff;
-  font-size: 18px; line-height: 1; display: grid; place-items: center;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25); cursor: pointer;
-  transition: background .35s ease, color .35s ease;
-  pointer-events: auto;          /* ensure clicks are received */
+#toggle-rail,#theme-toggle{
+  position:fixed;top:16px;z-index:60;width:42px;height:42px;border-radius:10px;
+  border:1px solid #3a4a5f;background:#243142;color:#e9f2ff;
+  font-size:18px;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.25);
+  cursor:pointer;transition:background .35s ease,color .35s ease;
 }
 #toggle-rail{left:16px;} #theme-toggle{right:16px;}
 #toggle-rail:focus-visible,#theme-toggle:focus-visible{ outline:3px solid rgba(20,110,180,.45); outline-offset:2px }
@@ -70,71 +126,19 @@ nav a.active{color:#fff;font-weight:800}
 /* Fancy CTA */
 .cta{
   --h:54px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  min-width:220px;
-  height:var(--h);
-  padding:0 22px;
-  border-radius:12px;
-  border:1px solid #3a4a5f;
-  cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-width:220px;height:var(--h);padding:0 22px;
+  border-radius:12px;border:1px solid #3a4a5f;cursor:pointer;
   background:linear-gradient(180deg,#ffb347 0%,#ff9900 70%);
-  color:#0f172a;
-  font-weight:900;
-  font-size:17px;
-  letter-spacing:.2px;
-  box-shadow:0 10px 22px rgba(255,153,0,.28), inset 0 1px 0 rgba(255,255,255,.35);
-  position:relative;
-  text-decoration:none;
-  user-select:none;
-  transform:translateZ(0);
-  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  color:#0f172a;font-weight:900;font-size:17px;
+  box-shadow:0 10px 22px rgba(255,153,0,.28),inset 0 1px 0 rgba(255,255,255,.35);
+  position:relative;text-decoration:none;user-select:none;
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
 }
-.cta:hover{
-  transform:translateY(-2px);
-  box-shadow:0 16px 28px rgba(255,153,0,.32), inset 0 1px 0 rgba(255,255,255,.4);
-  text-decoration:none;
-}
-.cta:active{
-  transform:translateY(0);
-  box-shadow:0 8px 16px rgba(255,153,0,.28);
-}
-.cta .ico{
-  display:inline-grid;
-  place-items:center;
-  width:22px;
-  height:22px;
-}
-.cta .hint{ opacity:.75; font-weight:700; font-size:15px; }
-
-/* Shine sweep on hover */
-.cta::after{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius:12px;
-  background:linear-gradient(
-    120deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.45) 35%,
-    rgba(255,255,255,0) 70%
-  );
-  transform:translateX(-120%);
-  filter:blur(0.5px);
-  transition:transform .7s cubic-bezier(.2,.6,.2,1);
-  pointer-events:none;
-  mix-blend-mode:overlay;
-}
-.cta:hover::after{
-  transform:translateX(120%);
-}
-.cta:focus-visible{
-  outline:3px solid rgba(20,110,180,.45);
-  outline-offset:3px;
-}
-.cta.cta-xl{ --h:60px; min-width:240px; font-size:18px; }
+.cta:hover{transform:translateY(-2px);box-shadow:0 16px 28px rgba(255,153,0,.32),inset 0 1px 0 rgba(255,255,255,.4);}
+.cta:active{transform:translateY(0);box-shadow:0 8px 16px rgba(255,153,0,.28)}
+.cta .ico{display:inline-grid;place-items:center;width:22px;height:22px}
+.cta .hint{opacity:.75;font-weight:700;font-size:15px}
 
 /* Sections */
 .title,section.panel{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);}
@@ -225,12 +229,12 @@ body[data-theme="light"] .info-card{ background:#ffffff }
   })();
 </script>
 
-  
+
 </head>
 <body data-theme="dark">
 
 <!-- UI controls -->
-<button id="toggle-rail" title="Toggle sidebar" onclick="window._toggleSidebar && window._toggleSidebar()">☰</button>
+<button id="toggle-rail" aria-label="Toggle sidebar" aria-expanded="true" title="Toggle sidebar">☰</button>
 <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">🌗</button>
 
 <div class="page">
@@ -696,41 +700,6 @@ async function renderSnapshot(forceRedraw=false){
 
 window.renderSnapshot = renderSnapshot;
 renderSnapshot();
-</script>
-<script>
-(function(){
-  const KEY_SIDEBAR='sidebar_collapsed_v1';
-
-  function applySidebar(collapsed){
-    document.body.classList.toggle('sidebar-collapsed', collapsed);
-    const btn = document.getElementById('toggle-rail');
-    if (btn) btn.textContent = collapsed ? '☰' : '✕';
-  }
-
-  // Expose a safe global fallback the button can call inline
-  window._toggleSidebar = function(){
-    const next = !document.body.classList.contains('sidebar-collapsed');
-    applySidebar(next);
-    try{ localStorage.setItem(KEY_SIDEBAR, next ? '1' : '0'); }catch{}
-  };
-
-  // Bind after DOM is ready so the element definitely exists
-  document.addEventListener('DOMContentLoaded', ()=>{
-    const btn = document.getElementById('toggle-rail');
-    // Initialize from saved state
-    const saved = localStorage.getItem(KEY_SIDEBAR) === '1';
-    applySidebar(saved);
-
-    // Primary click handler
-    if (btn) btn.addEventListener('click', window._toggleSidebar);
-
-    // Extra safety: delegate if something replaces the button dynamically
-    document.addEventListener('click', (e)=>{
-      const t = e.target.closest && e.target.closest('#toggle-rail');
-      if (t) { e.preventDefault(); window._toggleSidebar(); }
-    });
-  });
-})();
 </script>
 
 </body>
