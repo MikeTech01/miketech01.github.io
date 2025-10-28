@@ -7,55 +7,82 @@
 <meta name="description" content="Portfolio and contact for Michael Alibeaj, M.Sc. Computer Science." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2712%27 fill=%27%23232F3E%27/><text x=%2750%25%27 y=%2757%25%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23FF9900%27 font-family=%27Arial%27>MA</text></svg>">
 <style>
-  :root{
-    --navy:#232F3E; --navy-2:#1B2532; --ink:#F5F7FB; --muted:#D6DEEE;
-    --line:#2e3a4a; --blue:#146EB4; --orange:#FF9900; --btn-text:#0f172a;
-    --radius:14px; --max:1160px; --rail:330px;
-    --shadow:0 10px 28px rgba(0,0,0,.25);
-    --font:ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;color:var(--ink);font:16px/1.65 var(--font);
-    background:linear-gradient(180deg,#101723,var(--navy) 50%,#0c131b);
-  }
-  a{color:#9ccdfb;text-decoration:none}
-  a:hover{text-decoration:underline}
-  a:focus-visible{outline:3px solid rgba(20,110,180,.45);outline-offset:2px;border-radius:6px}
-  .page{max-width:var(--max);margin:0 auto;display:grid;
-    grid-template-columns:var(--rail) 1fr;gap:28px;padding:28px}
-  .rail{
-    position:sticky;top:0;align-self:start;height:max-content;
-    padding:20px;border:1px solid var(--line);border-radius:var(--radius);
-    background:var(--navy-2);box-shadow:var(--shadow);
-  }
-  .name{display:flex;align-items:center;gap:12px}
-  .badge{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font-weight:900;color:var(--btn-text);
-    background:linear-gradient(180deg,#ffd89a 0%,#ffb347 60%),linear-gradient(90deg,#4aa3e0,#146EB4);
-    border:1px solid #39485b;}
-  .role{color:#e6eefc;opacity:.92;margin:6px 0 12px}
-  .meta{color:#cfe0ff;font-size:14px}
-  .actions a{display:block;text-align:center;margin-top:10px;padding:11px 14px;
-    border-radius:10px;border:1px solid #3a4a5f;background:#ffb347;color:var(--btn-text);font-weight:800;text-decoration:none}
-  .actions a.secondary{background:#243142;color:#e9f2ff;font-weight:600}
-  nav{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
-  nav a{display:block;padding:8px 0;color:#d7e5ff}
-  nav a.active{color:#ffffff;font-weight:700}
-  main{min-width:0}
-  .title{padding:18px 20px;border:1px solid var(--line);border-radius:var(--radius);
-    background:#1e2836;box-shadow:var(--shadow)}
-  .title h1{margin:0;font-size:clamp(22px,3.4vw,34px);letter-spacing:.3px;color:#fff}
-  .title p{margin:6px 0 0;color:#eaf2ff;opacity:.92}
-  section.panel{padding:22px 20px;border:1px solid var(--line);border-radius:var(--radius);
-    background:#1e2836;box-shadow:var(--shadow);margin-top:16px}
-  section h2{margin:0 0 8px;font-size:16px;letter-spacing:.2px;text-transform:uppercase;color:#dbe7ff}
-  .lead{font-size:20px;margin:4px 0 6px}
-  .muted{color:var(--muted)}
-  .list{margin:10px 0 0;padding-left:18px;color:#e6eeff}
-  footer{opacity:.85;color:#c6d1e3;font-size:14px;text-align:center;margin-top:12px}
-  @media(max-width:980px){.page{grid-template-columns:1fr}.rail{position:relative}nav{display:flex;gap:12px;flex-wrap:wrap}nav a{padding:0}}
-  @media print{body{background:#fff;color:#000}.rail,.title,.panel{background:#fff;box-shadow:none;border-color:#e5e7eb}.actions,nav a[href^="#"]{display:none}a{color:#000;text-decoration:underline}}
+:root{
+  --navy:#232F3E; --navy-2:#1B2532; --ink:#F5F7FB; --muted:#D6DEEE;
+  --line:#2e3a4a; --blue:#146EB4; --orange:#FF9900; --btn-text:#0f172a;
+  --radius:14px; --max:1160px; --rail:330px;
+  --shadow:0 10px 28px rgba(0,0,0,.25);
+  --font:ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;color:var(--ink);font:16px/1.65 var(--font);
+  background:linear-gradient(180deg,#101723,var(--navy) 50%,#0c131b);
+}
+a{color:#9ccdfb;text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible{outline:3px solid rgba(20,110,180,.45);outline-offset:2px;border-radius:6px}
+.page{max-width:var(--max);margin:0 auto;display:grid;
+  grid-template-columns:var(--rail) 1fr;gap:28px;padding:28px}
+.rail{
+  position:sticky;top:0;align-self:start;height:max-content;
+  padding:20px;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--navy-2);box-shadow:var(--shadow);
+}
+.name{display:flex;align-items:center;gap:12px}
+.badge{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font-weight:900;color:var(--btn-text);
+  background:linear-gradient(180deg,#ffd89a 0%,#ffb347 60%),linear-gradient(90deg,#4aa3e0,#146EB4);
+  border:1px solid #39485b;}
+.role{color:#e6eefc;opacity:.92;margin:6px 0 12px}
+.meta{color:#cfe0ff;font-size:14px}
+.actions a{display:block;text-align:center;margin-top:10px;padding:11px 14px;
+  border-radius:10px;border:1px solid #3a4a5f;background:#ffb347;color:var(--btn-text);font-weight:800;text-decoration:none}
+.actions a.secondary{background:#243142;color:#e9f2ff;font-weight:600}
+nav{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+nav a{display:block;padding:8px 0;color:#d7e5ff}
+nav a.active{color:#ffffff;font-weight:700}
+main{min-width:0}
+.title{padding:18px 20px;border:1px solid var(--line);border-radius:var(--radius);
+  background:#1e2836;box-shadow:var(--shadow)}
+.title h1{margin:0;font-size:clamp(22px,3.4vw,34px);letter-spacing:.3px;color:#fff}
+.title p{margin:6px 0 0;color:#eaf2ff;opacity:.92}
+section.panel{padding:22px 20px;border:1px solid var(--line);border-radius:var(--radius);
+  background:#1e2836;box-shadow:var(--shadow);margin-top:16px}
+section h2{margin:0 0 8px;font-size:16px;letter-spacing:.2px;text-transform:uppercase;color:#dbe7ff}
+.lead{font-size:20px;margin:4px 0 6px}
+.muted{color:var(--muted)}
+.list{margin:10px 0 0;padding-left:18px;color:#e6eeff}
+footer{opacity:.85;color:#c6d1e3;font-size:14px;text-align:center;margin-top:12px}
+
+/* KPI & charts */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+.kpi{border:1px solid var(--line);border-radius:10px;background:#233042;padding:14px}
+.kpi .label{color:var(--muted);font-size:.9rem}
+.kpi .value{font-size:1.4rem;font-weight:700;color:#fff;margin-top:2px}
+.kpi .delta{font-size:.9rem;margin-top:2px}
+.kpi .delta.up{color:#35d399}
+.kpi .delta.down{color:#fcae66}
+.charts{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;margin-top:12px}
+figure.chart{border:1px solid var(--line);border-radius:12px;background:#1e2836;padding:12px;margin:0}
+figure.chart h3{margin:0 0 6px;font-size:0.95rem;color:#dbe7ff}
+.chart-svg{width:100%;height:160px;display:block}
+.chart-legend{color:var(--muted);font-size:.85rem;margin-top:4px}
+
+@media (max-width:980px){
+  .page{grid-template-columns:1fr}
+  .rail{position:relative}
+  nav{display:flex;gap:12px;flex-wrap:wrap}
+  nav a{padding:0}
+  .kpis{grid-template-columns:1fr 1fr}
+  .charts{grid-template-columns:1fr}
+}
+@media print{
+  body{background:#fff;color:#000}
+  .rail,.title,.panel{background:#fff;box-shadow:none;border-color:#e5e7eb}
+  .actions,nav a[href^="#"]{display:none}
+  a{color:#000;text-decoration:underline}
+}
 </style>
 </head>
 <body>
@@ -77,6 +104,7 @@
     <nav>
       <a href="#about" class="active">About</a>
       <a href="#skills">Skills</a>
+      <a href="#metrics">Snapshot</a>
       <a href="#awards">Awards</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -98,7 +126,6 @@
       </ul>
     </section>
 
-    <!-- Skills -->
     <section id="skills" class="panel">
       <h2>Skills</h2>
       <ul class="list">
@@ -109,7 +136,35 @@
       </ul>
     </section>
 
-    <!-- Awards -->
+    <!-- === Live GitHub Dashboard === -->
+    <section id="metrics" class="panel" aria-labelledby="metrics-title">
+      <h2 id="metrics-title">Snapshot</h2>
+      <div class="kpis" role="list">
+        <div class="kpi" role="listitem" aria-label="Projects">
+          <div class="label">Projects</div><div class="value" id="kpi-projects">0</div><div class="delta up" id="kpi-projects-delta">loading…</div>
+        </div>
+        <div class="kpi" role="listitem" aria-label="Dashboards">
+          <div class="label">Dashboards</div><div class="value" id="kpi-dashboards">0</div><div class="delta up" id="kpi-dashboards-delta">loading…</div>
+        </div>
+        <div class="kpi" role="listitem" aria-label="Stars">
+          <div class="label">Stars</div><div class="value" id="kpi-stars">0</div><div class="delta up" id="kpi-stars-delta">loading…</div>
+        </div>
+      </div>
+
+      <div class="charts">
+        <figure class="chart">
+          <h3>Learning Velocity (weekly commits ≈ hours)</h3>
+          <svg id="sparkline" class="chart-svg" viewBox="0 0 600 180" preserveAspectRatio="none"></svg>
+          <div class="chart-legend">Last 10 weeks — goal ≥ 10h/wk</div>
+        </figure>
+        <figure class="chart">
+          <h3>Skill Focus (from repos)</h3>
+          <svg id="barchart" class="chart-svg" viewBox="0 0 600 180" preserveAspectRatio="none"></svg>
+          <div class="chart-legend">Based on top repository languages</div>
+        </figure>
+      </div>
+    </section>
+
     <section id="awards" class="panel">
       <h2>Awards</h2>
       <ul class="list">
@@ -119,14 +174,13 @@
       </ul>
     </section>
 
-    <!-- Contact -->
     <section id="contact" class="panel">
       <h2>Contact</h2>
       <p class="muted">Open to Business Intelligence / Data internships — Milan or remote.</p>
       <ul class="list" style="list-style:none;padding-left:0">
         <li>Email: <a href="mailto:malibeaj01@outlook.com">malibeaj01@outlook.com</a></li>
-        <li>GitHub: <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer">github.com/MikeTech01</a></li>
-        <li>LinkedIn: <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer">linkedin.com/in/michael-alibeaj-9810771a6</a></li>
+        <li>GitHub: <a href="https://github.com/MikeTech01" target="_blank">github.com/MikeTech01</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank">linkedin.com/in/michael-alibeaj-9810771a6</a></li>
         <li>Location: Milan, Italy</li>
       </ul>
     </section>
@@ -135,224 +189,134 @@
   </main>
 </div>
 
+<!-- === Footer Scripts === -->
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-  const links = Array.from(document.querySelectorAll('nav a'));
-  const sections = links.map(a => document.querySelector(a.getAttribute('href')));
-  const onScroll = () => {
-    const y = window.scrollY + 120; let active = 0;
-    sections.forEach((s,i)=>{ if(s && s.offsetTop <= y) active = i; });
-    links.forEach((a,i)=> a.classList.toggle('active', i===active));
-  };
-  document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+document.getElementById('year').textContent = new Date().getFullYear();
+const links = Array.from(document.querySelectorAll('nav a'));
+const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+const onScroll = () => {
+  const y = window.scrollY + 120; let active = 0;
+  sections.forEach((s,i)=>{ if(s && s.offsetTop <= y) active = i; });
+  links.forEach((a,i)=> a.classList.toggle('active', i===active));
+};
+document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 </script>
+
+<!-- === GitHub Stats & Charts === -->
 <script>
-/* ========= CONFIG ========= */
-const GH_USER = 'MikeTech01';          // <-- put your GitHub username
-const WEEKS_TO_SHOW = 10;              // sparkline length
+const GH_USER = 'MikeTech01';
+const WEEKS_TO_SHOW = 10;
 const BI_KEYWORDS = ['bi','business intelligence','dashboard','power bi','quicksight'];
+const el = s => document.querySelector(s);
 
-/* ========= DOM SHORTCUTS ========= */
-const el = sel => document.querySelector(sel);
-
-/* ========= DRAW HELPERS (pure SVG) ========= */
-function drawSparkline(svgId, weeklyHours){
-  const svg = document.getElementById(svgId);
-  if(!svg || !weeklyHours?.length) return;
-
-  // Clear old
-  while (svg.lastChild) svg.removeChild(svg.lastChild);
-
-  const W=600,H=180,L=40,R=20,T=10,B=30;
-  const max = Math.max(16, ...weeklyHours);
-  const stepX = (W - L - R) / (weeklyHours.length - 1);
-
+/* ---- SVG helpers ---- */
+function drawSparkline(svgId, data){
+  const svg=document.getElementById(svgId); if(!svg||!data?.length) return;
+  while(svg.lastChild) svg.removeChild(svg.lastChild);
+  const W=600,H=180,L=40,R=20,T=10,B=30,max=Math.max(16,...data),stepX=(W-L-R)/(data.length-1);
   // axes
-  const yAxis = document.createElementNS('http://www.w3.org/2000/svg','line');
-  yAxis.setAttribute('x1',L); yAxis.setAttribute('y1',T);
-  yAxis.setAttribute('x2',L); yAxis.setAttribute('y2',H-B);
-  yAxis.setAttribute('stroke','#2e3a4a'); svg.appendChild(yAxis);
-  const xAxis = document.createElementNS('http://www.w3.org/2000/svg','line');
-  xAxis.setAttribute('x1',L); xAxis.setAttribute('y1',H-B);
-  xAxis.setAttribute('x2',W-R); xAxis.setAttribute('y2',H-B);
-  xAxis.setAttribute('stroke','#2e3a4a'); svg.appendChild(xAxis);
-
-  const pts = weeklyHours.map((v,i)=>{
-    const x = L + i*stepX;
-    const y = T + (1 - v/max) * (H - T - B);
-    return [x,y];
-  });
-
-  const d = pts.map((p,i)=> (i? 'L':'M') + p[0] + ' ' + p[1]).join(' ');
-  const fillPath = d + ` L ${L + (weeklyHours.length-1)*stepX} ${H-B} L ${L} ${H-B} Z`;
-
-  const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
-  const grad = document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
-  grad.setAttribute('id','slGrad'); grad.setAttribute('x1','0'); grad.setAttribute('y1','0'); grad.setAttribute('x2','0'); grad.setAttribute('y2','1');
-  const s1 = document.createElementNS('http://www.w3.org/2000/svg','stop'); s1.setAttribute('offset','0%'); s1.setAttribute('stop-color','#FF9900');
-  const s2 = document.createElementNS('http://www.w3.org/2000/svg','stop'); s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','#146EB4'); s2.setAttribute('stop-opacity','0.2');
+  const yAxis=document.createElementNS('http://www.w3.org/2000/svg','line'); yAxis.setAttribute('x1',L); yAxis.setAttribute('y1',T); yAxis.setAttribute('x2',L); yAxis.setAttribute('y2',H-B); yAxis.setAttribute('stroke','#2e3a4a'); svg.appendChild(yAxis);
+  const xAxis=document.createElementNS('http://www.w3.org/2000/svg','line'); xAxis.setAttribute('x1',L); xAxis.setAttribute('y1',H-B); xAxis.setAttribute('x2',W-R); xAxis.setAttribute('y2',H-B); xAxis.setAttribute('stroke','#2e3a4a'); svg.appendChild(xAxis);
+  const pts=data.map((v,i)=>[L+i*stepX, T+(1-v/max)*(H-T-B)]);
+  const d=pts.map((p,i)=>(i?'L':'M')+p[0]+' '+p[1]).join(' ');
+  const f=d+` L ${L+(data.length-1)*stepX} ${H-B} L ${L} ${H-B} Z`;
+  const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+  const grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+  grad.id='slGrad'; grad.setAttribute('x1','0'); grad.setAttribute('y1','0'); grad.setAttribute('x2','0'); grad.setAttribute('y2','1');
+  const s1=document.createElementNS('http://www.w3.org/2000/svg','stop'); s1.setAttribute('offset','0%'); s1.setAttribute('stop-color','#FF9900');
+  const s2=document.createElementNS('http://www.w3.org/2000/svg','stop'); s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','#146EB4'); s2.setAttribute('stop-opacity','0.2');
   grad.append(s1,s2); defs.appendChild(grad); svg.appendChild(defs);
-
-  const fill = document.createElementNS('http://www.w3.org/2000/svg','path');
-  fill.setAttribute('d', fillPath); fill.setAttribute('fill','url(#slGrad)'); fill.setAttribute('opacity','0.28'); svg.appendChild(fill);
-
-  const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-  path.setAttribute('d', d); path.setAttribute('fill','none'); path.setAttribute('stroke','#FF9900'); path.setAttribute('stroke-width','2.5'); svg.appendChild(path);
-
-  const [lx,ly] = pts[pts.length-1];
-  const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
-  dot.setAttribute('cx', lx); dot.setAttribute('cy', ly); dot.setAttribute('r', '4.5'); dot.setAttribute('fill','#FF9900'); svg.appendChild(dot);
-
-  // goal line (10h)
-  const goal = 10; const gy = T + (1 - goal/max) * (H - T - B);
-  const gl = document.createElementNS('http://www.w3.org/2000/svg','line');
-  gl.setAttribute('x1', L); gl.setAttribute('x2', W - R); gl.setAttribute('y1', gy); gl.setAttribute('y2', gy);
-  gl.setAttribute('stroke','#3a4a5f'); gl.setAttribute('stroke-dasharray','4 4'); svg.insertBefore(gl, svg.firstChild);
+  const fill=document.createElementNS('http://www.w3.org/2000/svg','path'); fill.setAttribute('d',f); fill.setAttribute('fill','url(#slGrad)'); fill.setAttribute('opacity','0.28'); svg.appendChild(fill);
+  const path=document.createElementNS('http://www.w3.org/2000/svg','path'); path.setAttribute('d',d); path.setAttribute('fill','none'); path.setAttribute('stroke','#FF9900'); path.setAttribute('stroke-width','2.5'); svg.appendChild(path);
+  const [lx,ly]=pts[pts.length-1]; const dot=document.createElementNS('http://www.w3.org/2000/svg','circle'); dot.setAttribute('cx',lx); dot.setAttribute('cy',ly); dot.setAttribute('r','4.5'); dot.setAttribute('fill','#FF9900'); svg.appendChild(dot);
+  const goal=10; const gy=T+(1-goal/max)*(H-T-B); const gl=document.createElementNS('http://www.w3.org/2000/svg','line'); gl.setAttribute('x1',L); gl.setAttribute('x2',W-R); gl.setAttribute('y1',gy); gl.setAttribute('y2',gy); gl.setAttribute('stroke','#3a4a5f'); gl.setAttribute('stroke-dasharray','4 4'); svg.insertBefore(gl, svg.firstChild);
 }
-
 function drawBars(svgId, series){
-  const svg = document.getElementById(svgId);
-  if(!svg || !series?.length) return;
-
-  while (svg.lastChild) svg.removeChild(svg.lastChild);
-
-  const W=600,H=180,L=40,R=20,T=10,B=30;
-  const barW = ((W - L - R) / series.length) * 0.65;
-  const gap  = ((W - L - R) / series.length) * 0.35;
-  const maxV = Math.max(1, ...series.map(s=>s.value)) * 1.25;
-
-  const axisX = document.createElementNS('http://www.w3.org/2000/svg','line');
-  axisX.setAttribute('x1',L); axisX.setAttribute('x2',W-R); axisX.setAttribute('y1',H-B); axisX.setAttribute('y2',H-B);
-  axisX.setAttribute('stroke','#2e3a4a'); svg.appendChild(axisX);
-
+  const svg=document.getElementById(svgId); if(!svg||!series?.length) return;
+  while(svg.lastChild) svg.removeChild(svg.lastChild);
+  const W=600,H=180,L=40,R=20,T=10,B=30,barW=((W-L-R)/series.length)*0.65,gap=((W-L-R)/series.length)*0.35,maxV=Math.max(1,...series.map(s=>s.value))*1.25;
+  const axisX=document.createElementNS('http://www.w3.org/2000/svg','line'); axisX.setAttribute('x1',L); axisX.setAttribute('x2',W-R); axisX.setAttribute('y1',H-B); axisX.setAttribute('y2',H-B); axisX.setAttribute('stroke','#2e3a4a'); svg.appendChild(axisX);
   series.forEach((s,i)=>{
-    const x = L + i*(barW+gap) + gap*0.5;
-    const h = (s.value/maxV) * (H - T - B);
-    const y = (H - B) - h;
-
-    const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
-    rect.setAttribute('x', x); rect.setAttribute('y', y);
-    rect.setAttribute('width', barW); rect.setAttribute('height', h);
-    rect.setAttribute('rx','6'); rect.setAttribute('fill', s.color || '#7fb8ff'); rect.setAttribute('opacity','0.92');
-    svg.appendChild(rect);
-
-    const label = document.createElementNS('http://www.w3.org/2000/svg','text');
-    label.setAttribute('x', x + barW/2); label.setAttribute('y', H - B + 16);
-    label.setAttribute('text-anchor','middle'); label.setAttribute('fill','#D6DEEE'); label.setAttribute('font-size','12'); label.textContent = s.label;
-    svg.appendChild(label);
-
-    const val = document.createElementNS('http://www.w3.org/2000/svg','text');
-    val.setAttribute('x', x + barW/2); val.setAttribute('y', y - 6);
-    val.setAttribute('text-anchor','middle'); val.setAttribute('fill','#ffffff'); val.setAttribute('font-size','12'); val.textContent = s.value + (s.suffix || '');
-    svg.appendChild(val);
+    const x=L+i*(barW+gap)+gap*0.5, h=(s.value/maxV)*(H-T-B), y=(H-B)-h;
+    const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    rect.setAttribute('x',x); rect.setAttribute('y',y); rect.setAttribute('width',barW); rect.setAttribute('height',h); rect.setAttribute('rx','6'); rect.setAttribute('fill',s.color||'#7fb8ff'); rect.setAttribute('opacity','0.92'); svg.appendChild(rect);
+    const label=document.createElementNS('http://www.w3.org/2000/svg','text');
+    label.setAttribute('x',x+barW/2); label.setAttribute('y',H-B+16); label.setAttribute('text-anchor','middle'); label.setAttribute('fill','#D6DEEE'); label.setAttribute('font-size','12'); label.textContent=s.label; svg.appendChild(label);
+    const val=document.createElementNS('http://www.w3.org/2000/svg','text');
+    val.setAttribute('x',x+barW/2); val.setAttribute('y',y-6); val.setAttribute('text-anchor','middle'); val.setAttribute('fill','#ffffff'); val.setAttribute('font-size','12'); val.textContent=s.value+(s.suffix||''); svg.appendChild(val);
   });
 }
 
-/* ========= GITHUB FETCHERS ========= */
-// 1) Repos (count, stars, topic keywords, primary languages)
+/* ---- GitHub fetchers ---- */
 async function fetchRepos(user){
-  const res = await fetch(`https://api.github.com/users/${user}/repos?per_page=100&type=owner&sort=updated`, {
-    headers: {'Accept':'application/vnd.github+json'}
-  });
+  const res = await fetch(`https://api.github.com/users/${user}/repos?per_page=100&type=owner&sort=updated`, { headers:{'Accept':'application/vnd.github+json'} });
   if(!res.ok) throw new Error('GitHub repos API error');
-  const repos = (await res.json()).filter(r => !r.fork);
-  return repos;
+  return (await res.json()).filter(r=>!r.fork);
 }
-
-// 2) Events → last 300 public events → aggregate PushEvent commits into last N ISO weeks
 async function fetchWeeklyCommits(user, nWeeks){
-  const res = await fetch(`https://api.github.com/users/${user}/events/public`, {
-    headers: {'Accept':'application/vnd.github+json'}
-  });
+  const res = await fetch(`https://api.github.com/users/${user}/events/public`, { headers:{'Accept':'application/vnd.github+json'} });
   if(!res.ok) throw new Error('GitHub events API error');
   const events = await res.json();
 
-  // buckets for last nWeeks (0=oldest, end=most recent)
-  const now = new Date();
   const weeks = Array(nWeeks).fill(0);
-
-  function isoWeekStart(d){
-    const date = new Date(d); const day = (date.getUTCDay()+6)%7; // Mon=0
-    date.setUTCDate(date.getUTCDate()-day); date.setUTCHours(0,0,0,0); return date;
-  }
+  const now = new Date();
+  function isoWeekStart(d){ const dt=new Date(d); const day=(dt.getUTCDay()+6)%7; dt.setUTCDate(dt.getUTCDate()-day); dt.setUTCHours(0,0,0,0); return dt; }
   const thisWeekStart = isoWeekStart(now);
 
   events.forEach(ev=>{
-    if(ev.type !== 'PushEvent') return;
-    const when = new Date(ev.created_at);
-    const weekStart = isoWeekStart(when);
-    const diffDays = (thisWeekStart - weekStart) / (1000*60*60*24);
-    const idxFromEnd = Math.floor(diffDays/7);
-    const bucket = (WEEKS_TO_SHOW-1) - idxFromEnd; // map to our 0..n-1 timeline
-    if(bucket >= 0 && bucket < WEEKS_TO_SHOW){
-      const commits = ev?.payload?.size || 0;
-      weeks[bucket] += commits;
+    if(ev.type!=='PushEvent') return;
+    const when=new Date(ev.created_at);
+    const weekStart=isoWeekStart(when);
+    const diffDays=(thisWeekStart-weekStart)/(1000*60*60*24);
+    const idxFromEnd=Math.floor(diffDays/7);
+    const bucket=(nWeeks-1)-idxFromEnd;
+    if(bucket>=0 && bucket<nWeeks){
+      weeks[bucket] += (ev?.payload?.size||0);
     }
   });
-
-  // fill leading empty with small zeros for nicer sparkline if no activity
-  return weeks.map(v => Math.min(v, 20));
+  return weeks.map(v=>Math.min(v,20));
 }
 
-/* ========= METRICS + RENDER ========= */
+/* ---- Render dashboard ---- */
 async function renderDashboard(){
   try{
-    const [repos, weeklyCommits] = await Promise.all([
-      fetchRepos(GH_USER),
-      fetchWeeklyCommits(GH_USER, WEEKS_TO_SHOW),
-    ]);
+    const [repos, weeklyCommits] = await Promise.all([ fetchRepos(GH_USER), fetchWeeklyCommits(GH_USER, WEEKS_TO_SHOW) ]);
 
     const projects = repos.length;
     const totalStars = repos.reduce((s,r)=> s + (r.stargazers_count||0), 0);
 
-    // naive "dashboards" guess via keywords in name/description/topics
-    const isBI = r => {
+    const BI_KEYS = BI_KEYWORDS;
+    const dashboards = repos.filter(r=>{
       const blob = `${r.name||''} ${(r.description||'')} ${(r.topics||[]).join(' ')}`.toLowerCase();
-      return BI_KEYWORDS.some(k => blob.includes(k));
-    };
-    const dashboards = repos.filter(isBI).length;
+      return BI_KEYS.some(k=>blob.includes(k));
+    }).length;
 
-    // primary language split (top 3)
+    // language split
     const counts = {};
-    repos.forEach(r => {
-      const lang = (r.language || 'Other');
-      counts[lang] = (counts[lang]||0) + 1;
-    });
-    const langSeries = Object.entries(counts)
-      .sort((a,b)=>b[1]-a[1])
-      .slice(0,3)
-      .map(([label,value],i)=>({
-        label,
-        value,
-        color: i===0 ? '#FF9900' : i===1 ? '#3aa0ff' : '#7fb8ff',
-        suffix:''
-      }));
+    repos.forEach(r=>{ counts[r.language||'Other'] = (counts[r.language||'Other']||0)+1; });
+    const langSeries = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([label,value],i)=>({
+      label, value, color: i===0?'#FF9900':i===1?'#3aa0ff':'#7fb8ff'
+    }));
 
     // KPIs
-    el('#kpi-projects') && (el('#kpi-projects').textContent = projects);
-    el('#kpi-dashboards') && (el('#kpi-dashboards').textContent = dashboards);
-    el('#kpi-stars') && (el('#kpi-stars').textContent = totalStars);
+    const set = (sel,val)=>{ const n=el(sel); if(n) n.textContent = val; };
+    set('#kpi-projects', projects);
+    set('#kpi-dashboards', dashboards);
+    set('#kpi-stars', totalStars);
+    set('#kpi-projects-delta','Auto from GitHub');
+    set('#kpi-dashboards-delta', dashboards ? 'Found via topics/keywords' : 'No BI-tagged repos yet');
+    set('#kpi-stars-delta','Public repo stars total');
 
-    // Sparkline (weekly commits ≈ learning velocity proxy)
-    const hoursApprox = weeklyCommits.map(c => Math.min(15, Math.round(c * 1.0))); // 1 commit ≈ 1h (tweak)
+    // Charts
+    const hoursApprox = weeklyCommits.map(c=>Math.min(15, Math.round(c*1.0))); // 1 commit ≈ 1h
     drawSparkline('sparkline', hoursApprox);
-
-    // Bars (language split as a proxy for focus)
     drawBars('barchart', langSeries);
-
-    // Optional deltas text (simple heuristics)
-    if (el('#kpi-projects-delta')) el('#kpi-projects-delta').textContent = 'Auto from GitHub';
-    if (el('#kpi-dashboards-delta')) el('#kpi-dashboards-delta').textContent = dashboards ? 'Found via topics/keywords' : 'No BI-tagged repos yet';
-    if (el('#kpi-stars-delta')) el('#kpi-stars-delta').textContent = 'Public repo stars total';
-
   } catch (e){
-    console.warn(e);
-    // graceful fallback: leave the static example content in place
+    console.warn('GitHub fetch failed:', e);
+    // leave placeholders as-is for graceful fallback
   }
 }
-
 renderDashboard();
 </script>
-  
 </body>
 </html>
