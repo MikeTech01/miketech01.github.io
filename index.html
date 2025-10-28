@@ -4,62 +4,40 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Michael Alibeaj — M.Sc. Computer Science</title>
-<meta name="description" content="About & Contact for Michael Alibeaj — M.Sc. Computer Science." />
+<meta name="description" content="About & Contact for Michael Alibeaj, M.Sc. Computer Science." />
 <meta name="robots" content="index,follow" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2712%27 fill=%27%23232F3E%27/><text x=%2750%25%27 y=%2757%25%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23FF9900%27 font-family=%27Arial%27>MA</text></svg>">
 <style>
   :root{
-    /* Amazon-inspired palette */
-    --navy:#232F3E;        /* deep */
+    --navy:#232F3E;        /* deep background */
+    --navy-2:#1B2532;      /* panels */
     --ink:#F5F7FB;         /* main text */
-    --muted:#C9D7FF;       /* soft blue text */
-    --line:rgba(255,255,255,.14);
+    --muted:#D6DEEE;       /* secondary */
+    --line:#2e3a4a;        /* borders */
 
-    --blue:#146EB4;        /* accent blue */
-    --blue-2:#7FB8FF;      /* lighter blue */
-    --orange:#FF9900;      /* accent orange */
-    --orange-2:#FFD28A;    /* warm glow */
+    --blue:#146EB4;        /* accent */
+    --orange:#FF9900;      /* accent */
+    --btn-text:#0f172a;    /* dark text on orange */
 
-    --panel:rgba(20,26,36,.70);
-    --panel-strong:rgba(20,26,36,.82);
-    --radius:16px;
+    --radius:14px;
     --max:1160px;
     --rail:330px;
+    --shadow:0 10px 28px rgba(0,0,0,.25);
 
-    --focus: 0 0 0 3px rgba(127,184,255,.45), 0 0 0 6px rgba(255,153,0,.28);
-    --shadow: 0 12px 40px rgba(0,0,0,.28);
-    --shadow-soft: 0 8px 26px rgba(0,0,0,.18);
+    --font: ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
   }
 
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;color:var(--ink);font:16px/1.65 ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-    /* Animated, layered background (navy/blue/orange) */
-    background:
-      radial-gradient(60% 45% at 0% 10%, color-mix(in oklab, var(--blue) 26%, transparent), transparent 60%),
-      radial-gradient(60% 45% at 100% 0%, color-mix(in oklab, var(--orange) 22%, transparent), transparent 60%),
-      radial-gradient(70% 60% at 50% 100%, color-mix(in oklab, var(--blue-2) 20%, transparent), transparent 70%),
-      linear-gradient(180deg, #111827, var(--navy) 45%, #0b131a);
-    background-attachment: fixed;
-    overflow-x:hidden;
+    margin:0;color:var(--ink);font:16px/1.65 var(--font);
+    background:linear-gradient(180deg, #101723, var(--navy) 50%, #0c131b);
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   }
-  /* Ambient “orbs” for subtle motion */
-  .orbs{position:fixed;inset:-10% -10% -10% -10%;pointer-events:none;z-index:-1;filter:saturate(120%) blur(32px)}
-  .orb{position:absolute;border-radius:50%;opacity:.55}
-  .orb.b{background:radial-gradient(closest-side, color-mix(in oklab,var(--blue) 65%, transparent), transparent 70%)}
-  .orb.o{background:radial-gradient(closest-side, color-mix(in oklab,var(--orange) 60%, transparent), transparent 70%)}
-  .orb.g{background:radial-gradient(closest-side, color-mix(in oklab,#22d3ee 45%, transparent), transparent 70%)}
-  @keyframes floaty { to { transform: translate3d(0,-18px,0) scale(1.03) } }
-  .orb{animation: floaty 9s ease-in-out infinite alternate}
-  .orb:nth-child(1){width:36vw;height:36vw;left:-8vw;top:-6vw}
-  .orb:nth-child(2){width:28vw;height:28vw;right:-6vw;top:-4vw;animation-duration:11s}
-  .orb:nth-child(3){width:32vw;height:32vw;left:20vw;bottom:-10vw;animation-duration:13s}
-  @media (prefers-reduced-motion: reduce){
-    .orb{animation:none}
-  }
-
-  a{color:#9bd1ff;text-decoration:none;transition:opacity .15s ease}
+  a{color:#9ccdfb;text-decoration:none}
   a:hover{text-decoration:underline}
+  a:focus-visible{outline:3px solid rgba(20,110,180,.45); outline-offset:2px; border-radius:6px}
+
   .page{
     max-width:var(--max); margin:0 auto; display:grid;
     grid-template-columns:var(--rail) 1fr; gap:28px; padding:28px;
@@ -69,66 +47,48 @@
   .rail{
     position:sticky; top:0; align-self:start; height:max-content;
     padding:20px; border:1px solid var(--line); border-radius:var(--radius);
-    background:var(--panel); backdrop-filter:saturate(1.25) blur(10px);
-    box-shadow: var(--shadow-soft);
+    background:var(--navy-2); box-shadow:var(--shadow);
   }
-  .name{display:flex;align-items:center;gap:14px}
+  .name{display:flex;align-items:center;gap:12px}
   .badge{
-    width:48px;height:48px;border-radius:12px;
+    width:44px;height:44px;border-radius:10px;
+    display:grid;place-items:center;font-weight:900;color:var(--btn-text);
     background:
-      conic-gradient(from 210deg, var(--orange) 0 25%, var(--orange-2) 0 35%,
-                                 var(--blue) 0 70%, var(--blue-2) 0 100%);
-    display:grid;place-items:center;color:#0b1016;font-weight:900;border:1px solid var(--line);
-    box-shadow: inset 0 1px 8px rgba(255,255,255,.25);
+      linear-gradient(180deg,#ffd89a 0%, #ffb347 60%),
+      linear-gradient(90deg,#4aa3e0,#146EB4);
+    mix-blend:normal; border:1px solid #39485b;
   }
-  .role{color:#dbe7ff;opacity:.95;margin:6px 0 12px}
+  .role{color:#e6eefc;opacity:.92;margin:6px 0 12px}
   .meta{color:#cfe0ff;font-size:14px}
 
   .actions a{
     display:block; text-align:center; margin-top:10px; padding:11px 14px;
-    border-radius:12px; border:1px solid var(--line);
-    background:linear-gradient(135deg, color-mix(in oklab, var(--orange) 78%, #fff 10%), color-mix(in oklab, var(--blue) 28%, #fff 6%));
-    color:#111827; font-weight:800; text-decoration:none;
-    box-shadow: var(--shadow-soft);
-    transform: translateY(0); transition: transform .15s ease, box-shadow .15s ease;
+    border-radius:10px; border:1px solid #3a4a5f; background:#ffb347;
+    color:var(--btn-text); font-weight:800; text-decoration:none;
   }
-  .actions a:hover{transform: translateY(-1px); box-shadow: var(--shadow)}
   .actions a.secondary{
-    background:var(--panel-strong); color:#e8f1ff; font-weight:600;
+    background:#243142; color:#e9f2ff; font-weight:600;
   }
-  .actions a:focus-visible{outline:none; box-shadow: var(--focus)}
 
   nav{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
-  nav a{display:block;padding:7px 0;color:#cfe0ff;border-left:3px solid transparent;padding-left:10px}
-  nav a.active{color:#ffffff;font-weight:700;border-left-color: color-mix(in oklab, var(--blue) 50%, var(--orange) 50%)}
+  nav a{display:block;padding:8px 0;color:#d7e5ff}
+  nav a.active{color:#ffffff;font-weight:700}
 
   /* Main */
   main{min-width:0}
   .title{
-    padding:22px 22px; border:1px solid var(--line); border-radius:var(--radius);
-    background:
-      linear-gradient(135deg, color-mix(in oklab, var(--blue) 28%, transparent), color-mix(in oklab, var(--orange) 20%, transparent));
-    box-shadow: var(--shadow-soft);
+    padding:18px 20px; border:1px solid var(--line); border-radius:var(--radius);
+    background:#1e2836; box-shadow:var(--shadow);
   }
   .title h1{
-    margin:0; font-size:clamp(22px,3.6vw,36px); letter-spacing:.3px;
-    background:linear-gradient(90deg,#fff, #dbe7ff 40%, #ffe1b0); -webkit-background-clip:text; background-clip:text; color:transparent;
+    margin:0; font-size:clamp(22px,3.4vw,34px); letter-spacing:.3px;
+    color:#ffffff;
   }
-  .title p{margin:6px 0 0;color:#f8fafc;opacity:.9}
+  .title p{margin:6px 0 0;color:#eaf2ff;opacity:.92}
 
   section.panel{
     padding:22px 20px; border:1px solid var(--line); border-radius:var(--radius);
-    background:var(--panel-strong); backdrop-filter:saturate(1.15) blur(10px); margin-top:16px;
-    box-shadow: var(--shadow-soft); position:relative; overflow:hidden;
-  }
-  /* Neon edge shimmer */
-  section.panel::after{
-    content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none;
-    background: linear-gradient(120deg, color-mix(in oklab, var(--blue) 35%, transparent),
-                                         transparent 30%,
-                                         color-mix(in oklab, var(--orange) 30%, transparent) 60%,
-                                         transparent 85%);
-    opacity:.25;
+    background:#1e2836; box-shadow:var(--shadow); margin-top:16px;
   }
   section h2{
     margin:0 0 8px; font-size:16px; letter-spacing:.2px; text-transform:uppercase; color:#dbe7ff
@@ -144,23 +104,19 @@
     .page{grid-template-columns:1fr}
     .rail{position:relative}
     nav{display:flex;gap:12px;flex-wrap:wrap}
-    nav a{padding:0;border-left:0}
+    nav a{padding:0}
   }
 
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce){
-    .actions a, a{transition:none}
+  /* Print */
+  @media print{
+    body{background:#fff;color:#000}
+    .rail, .title, .panel{background:#fff; box-shadow:none; border-color:#e5e7eb}
+    .actions, nav a[href^="#"]{display:none}
+    a{color:#000;text-decoration:underline}
   }
 </style>
 </head>
 <body>
-  <!-- background ambience -->
-  <div class="orbs">
-    <div class="orb b"></div>
-    <div class="orb o"></div>
-    <div class="orb g"></div>
-  </div>
-
   <div class="page">
     <!-- LEFT: Sidebar -->
     <aside class="rail" aria-label="Sidebar">
