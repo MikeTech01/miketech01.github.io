@@ -55,11 +55,14 @@ section h2{margin:0 0 8px;font-size:16px;letter-spacing:.2px;text-transform:uppe
 .list{margin:10px 0 0;padding-left:18px;color:#e6eeff}
 footer{opacity:.85;color:#c6d1e3;font-size:14px;text-align:center;margin-top:12px}
 
-/* --- Snapshot (KPI + Charts) UPGRADED --- */
+/* --- Snapshot (KPI + Charts) --- */
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}
-.kpi{border:1px solid var(--line);border-radius:12px;background:#233042;padding:14px;min-height:92px;position:relative;overflow:hidden}
+.kpi{border:1px solid var(--line);border-radius:12px;background:#233042;padding:14px;min-height:96px;position:relative;overflow:hidden;transition:box-shadow .25s, transform .15s}
+.kpi:hover{transform:translateY(-1px);box-shadow:0 16px 32px rgba(0,0,0,.28)}
+.kpi.good{background:linear-gradient(180deg,#1f384f,#233042)}
+.kpi.good::after{content:"";position:absolute;inset:-2px;border-radius:12px;padding:1px;background:linear-gradient(135deg,#35d399,#ffb347);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.35}
 .kpi .label{color:var(--muted);font-size:.88rem}
-.kpi .value{font-size:1.5rem;font-weight:700;color:#fff;margin-top:2px}
+.kpi .value{font-size:1.6rem;font-weight:800;color:#fff;margin-top:2px;letter-spacing:.2px}
 .kpi .delta{font-size:.9rem;margin-top:2px}
 .kpi .delta.up{color:#35d399}
 .kpi .delta.down{color:#fcae66}
@@ -153,48 +156,49 @@ figure.chart h3{margin:0 0 6px;font-size:0.95rem;color:#dbe7ff}
           <div class="value" id="kpi-projects">—</div>
           <div class="delta up" id="kpi-projects-delta">loading…</div>
         </div>
-        <div class="kpi skeleton" role="listitem" aria-label="Dashboards">
-          <div class="label">Dashboards</div>
-          <div class="value" id="kpi-dashboards">—</div>
-          <div class="delta up" id="kpi-dashboards-delta">loading…</div>
-        </div>
         <div class="kpi skeleton" role="listitem" aria-label="Stars">
           <div class="label">Stars</div>
           <div class="value" id="kpi-stars">—</div>
           <div class="delta up" id="kpi-stars-delta">loading…</div>
         </div>
-        <div class="kpi skeleton" role="listitem" aria-label="Goal completion">
-          <div class="label">Learning Goal</div>
-          <div class="value" id="kpi-goal">—</div>
-          <div class="delta" id="kpi-goal-note">goal ≥ 10h</div>
+        <div class="kpi skeleton" role="listitem" aria-label="CI Hygiene">
+          <div class="label">CI Hygiene</div>
+          <div class="value" id="kpi-ci">—</div>
+          <div class="delta" id="kpi-ci-note">Repos with Actions</div>
+        </div>
+        <div class="kpi skeleton" role="listitem" aria-label="README Coverage">
+          <div class="label">README Coverage</div>
+          <div class="value" id="kpi-readme">—</div>
+          <div class="delta" id="kpi-readme-note">Repos with README</div>
         </div>
       </div>
 
       <!-- Charts -->
       <div class="charts">
         <figure class="chart">
-          <h3>Learning Velocity (weekly commits ≈ hours)</h3>
-          <svg id="sparkline" class="chart-svg" viewBox="0 0 600 180" preserveAspectRatio="none"></svg>
-          <div class="chart-legend" id="sparkline-legend">Last 10 weeks</div>
+          <h3>Activity by Month (last 12)</h3>
+          <svg id="monthchart" class="chart-svg" viewBox="0 0 600 180" preserveAspectRatio="none"></svg>
+          <div class="chart-legend" id="month-legend">Repos updated per month</div>
         </figure>
 
         <div class="chart-grid">
           <figure class="chart">
             <h3>Skill Focus (from repos)</h3>
-            <svg id="barchart" class="chart-svg" viewBox="0 0 600 180" preserveAspectRatio="none"></svg>
+            <svg id="langchart" class="chart-svg" viewBox="0 0 600 180" preserveAspectRatio="none"></svg>
             <div class="chart-legend">Top repository languages</div>
           </figure>
 
           <figure class="chart">
-            <h3>Goal Gauge (this week)</h3>
-            <svg id="donut" class="chart-svg" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-label="Goal completion donut"></svg>
-            <div class="chart-legend">Target 10h · based on public commits</div>
+            <h3>Top Repos by Stars</h3>
+            <svg id="topstars" class="chart-svg" viewBox="0 0 600 180" preserveAspectRatio="none"></svg>
+            <div class="chart-legend">Top 3 public repos</div>
           </figure>
 
           <figure class="chart">
-            <h3>Before vs After (impact)</h3>
-            <svg id="beforeAfter" class="chart-svg" viewBox="0 0 600 180" preserveAspectRatio="none"></svg>
-            <div class="chart-legend" id="ba-legend">Example: latency reduced (edit values)</div>
+            <h3>Featured (Top 3)</h3>
+            <div class="chart-legend">
+              <ul id="featured-list" style="margin:0;padding-left:18px"></ul>
+            </div>
           </figure>
 
           <figure class="chart">
@@ -245,181 +249,202 @@ document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
 <!-- === GitHub Snapshot Script (live stats) === -->
 <script>
-/* ==================== CONFIG ==================== */
-const GH_USER = 'MikeTech01';        // <-- your GitHub username
-const WEEKS_TO_SHOW = 10;
+/* ============== CONFIG ============== */
+const GH_USER = 'MikeTech01'; // <-- your username
 const BI_KEYWORDS = ['bi','business intelligence','dashboard','power bi','quicksight','analytics'];
-const HOURS_GOAL = 10;               // weekly learning target
+const MAX_HEALTH_REPOS = 15;  // cap API calls (rate-safe)
 
-/* ==================== UTIL & DOM ==================== */
-const $ = (s)=>document.querySelector(s);
+/* ============== UTIL ============== */
+const $ = s => document.querySelector(s);
 const setText = (sel,val)=>{ const n=$(sel); if(n) n.textContent = val; };
 const rmSkel = ()=> document.querySelectorAll('.kpi.skeleton').forEach(k=>k.classList.remove('skeleton'));
+const addGood = (kpiBox)=>{ const n = kpiBox.closest('.kpi'); if(n) n.classList.add('good'); };
 const cacheGet = (k,maxAgeMs)=>{ try{const v=localStorage.getItem(k); if(!v) return null; const {t,data}=JSON.parse(v); return (Date.now()-t<maxAgeMs)?data:null;}catch{return null;} };
 const cacheSet = (k,data)=>{ try{localStorage.setItem(k, JSON.stringify({t:Date.now(),data}))}catch{} };
 
-/* ==================== SVG DRAWERS ==================== */
-function drawSparkline(svgId, data){
-  const svg=document.getElementById(svgId); if(!svg||!data?.length) return;
-  while(svg.lastChild) svg.removeChild(svg.lastChild);
-  const W=600,H=180,L=40,R=20,T=10,B=30,max=Math.max(HOURS_GOAL+4,...data),stepX=(W-L-R)/(data.length-1);
-
-  const addLine=(x1,y1,x2,y2,st='#2e3a4a',dash)=>{ const ln=document.createElementNS('http://www.w3.org/2000/svg','line'); ln.setAttribute('x1',x1);ln.setAttribute('y1',y1);ln.setAttribute('x2',x2);ln.setAttribute('y2',y2);ln.setAttribute('stroke',st); if(dash) ln.setAttribute('stroke-dasharray',dash); svg.appendChild(ln); }
-  addLine(L,T,L,H-B); addLine(L,H-B, W-R,H-B);
-
-  const pts=data.map((v,i)=>[L+i*stepX, T+(1-v/max)*(H-T-B)]);
-  const d=pts.map((p,i)=>(i?'L':'M')+p[0]+' '+p[1]).join(' ');
-  const fillD = d + ` L ${L+(data.length-1)*stepX} ${H-B} L ${L} ${H-B} Z`;
-
-  const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
-  const grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
-  grad.id='slGrad'; grad.setAttribute('x1','0'); grad.setAttribute('y1','0'); grad.setAttribute('x2','0'); grad.setAttribute('y2','1');
-  const s1=document.createElementNS('http://www.w3.org/2000/svg','stop'); s1.setAttribute('offset','0%'); s1.setAttribute('stop-color','#FF9900');
-  const s2=document.createElementNS('http://www.w3.org/2000/svg','stop'); s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','#146EB4'); s2.setAttribute('stop-opacity','0.2');
-  grad.append(s1,s2); defs.appendChild(grad); svg.appendChild(defs);
-
-  const fill=document.createElementNS('http://www.w3.org/2000/svg','path'); fill.setAttribute('d',fillD); fill.setAttribute('fill','url(#slGrad)'); fill.setAttribute('opacity','0.28'); svg.appendChild(fill);
-  const path=document.createElementNS('http://www.w3.org/2000/svg','path'); path.setAttribute('d',d); path.setAttribute('fill','none'); path.setAttribute('stroke','#FF9900'); path.setAttribute('stroke-width','2.5'); svg.appendChild(path);
-
-  const [lx,ly]=pts[pts.length-1]; const dot=document.createElementNS('http://www.w3.org/2000/svg','circle'); dot.setAttribute('cx',lx); dot.setAttribute('cy',ly); dot.setAttribute('r','4.5'); dot.setAttribute('fill','#FF9900'); svg.appendChild(dot);
-
-  const gy=T+(1-HOURS_GOAL/max)*(H-T-B); addLine(L,gy, W-R,gy, '#3a4a5f', '4 4');
+/* --- subtle count-up animation to make numbers shine --- */
+function countTo(el, target, suffix=""){
+  if(!el) return;
+  const startVal = Number(el.textContent.replace(/\D/g,'')) || 0;
+  const dur = 700 + Math.min(1300, Math.abs(target-startVal)*20);
+  const t0 = performance.now();
+  function frame(t){
+    const p = Math.min(1, (t - t0) / dur);
+    const val = Math.round(startVal + (target - startVal) * p);
+    el.textContent = val + suffix;
+    if(p < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
 }
 
-function drawBars(svgId, series){
-  const svg=document.getElementById(svgId); if(!svg||!series?.length) return;
+/* ============== SVG HELPERS ============== */
+function drawColumns(svgId, series){ // vertical bars
+  const svg=document.getElementById(svgId); if(!svg||!series?.length)return;
   while(svg.lastChild) svg.removeChild(svg.lastChild);
-  const W=600,H=180,L=40,R=20,T=10,B=30,barW=((W-L-R)/series.length)*0.65,gap=((W-L-R)/series.length)*0.35,maxV=Math.max(1,...series.map(s=>s.value))*1.25;
-
+  const W=600,H=180,L=40,R=20,T=10,B=30;
+  const barW=((W-L-R)/series.length)*0.65, gap=((W-L-R)/series.length)*0.35;
+  const maxV=Math.max(1,...series.map(s=>s.value))*1.25;
   const axisX=document.createElementNS('http://www.w3.org/2000/svg','line');
-  axisX.setAttribute('x1',L); axisX.setAttribute('x2',W-R); axisX.setAttribute('y1',H-B); axisX.setAttribute('y2',H-B); axisX.setAttribute('stroke','#2e3a4a'); svg.appendChild(axisX);
-
+  axisX.setAttribute('x1',L);axisX.setAttribute('x2',W-R);axisX.setAttribute('y1',H-B);axisX.setAttribute('y2',H-B);
+  axisX.setAttribute('stroke','#2e3a4a');svg.appendChild(axisX);
   series.forEach((s,i)=>{
     const x=L+i*(barW+gap)+gap*0.5, h=(s.value/maxV)*(H-T-B), y=(H-B)-h;
-    const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
-    rect.setAttribute('x',x); rect.setAttribute('y',y); rect.setAttribute('width',barW); rect.setAttribute('height',h); rect.setAttribute('rx','6'); rect.setAttribute('fill',s.color||'#7fb8ff'); rect.setAttribute('opacity','0.92'); svg.appendChild(rect);
-
-    const label=document.createElementNS('http://www.w3.org/2000/svg','text');
-    label.setAttribute('x',x+barW/2); label.setAttribute('y',H-B+16); label.setAttribute('text-anchor','middle'); label.setAttribute('fill','#D6DEEE'); label.setAttribute('font-size','12'); label.textContent=s.label; svg.appendChild(label);
-
+    const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    r.setAttribute('x',x);r.setAttribute('y',y);r.setAttribute('width',barW);r.setAttribute('height',h);
+    r.setAttribute('rx','6');r.setAttribute('fill',s.color||'#7fb8ff');r.setAttribute('opacity','0.92');svg.appendChild(r);
+    const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+    lbl.setAttribute('x',x+barW/2);lbl.setAttribute('y',H-B+16);lbl.setAttribute('text-anchor','middle');
+    lbl.setAttribute('fill','#D6DEEE');lbl.setAttribute('font-size','12');lbl.textContent=s.label;svg.appendChild(lbl);
     const val=document.createElementNS('http://www.w3.org/2000/svg','text');
-    val.setAttribute('x',x+barW/2); val.setAttribute('y',y-6); val.setAttribute('text-anchor','middle'); val.setAttribute('fill','#ffffff'); val.setAttribute('font-size','12'); val.textContent=s.value+(s.suffix||''); svg.appendChild(val);
+    val.setAttribute('x',x+barW/2);val.setAttribute('y',y-6);val.setAttribute('text-anchor','middle');
+    val.setAttribute('fill','#ffffff');val.setAttribute('font-size','12');val.textContent=s.value;svg.appendChild(val);
   });
 }
 
-function drawDonut(svgId, percent){
-  const svg=document.getElementById(svgId); if(!svg) return;
+function drawHBars(svgId, series){ // horizontal bars (Top stars)
+  const svg=document.getElementById(svgId); if(!svg||!series?.length)return;
   while(svg.lastChild) svg.removeChild(svg.lastChild);
-  const cx=100, cy=100, r=70, circ=2*Math.PI*r;
-  const bg=document.createElementNS('http://www.w3.org/2000/svg','circle');
-  bg.setAttribute('cx',cx); bg.setAttribute('cy',cy); bg.setAttribute('r',r); bg.setAttribute('fill','none'); bg.setAttribute('stroke','#2e3a4a'); bg.setAttribute('stroke-width','16'); svg.appendChild(bg);
-  const fg=document.createElementNS('http://www.w3.org/2000/svg','circle');
-  fg.setAttribute('cx',cx); fg.setAttribute('cy',cy); fg.setAttribute('r',r); fg.setAttribute('fill','none'); fg.setAttribute('stroke','#FF9900'); fg.setAttribute('stroke-width','16'); fg.setAttribute('stroke-linecap','round');
-  fg.setAttribute('stroke-dasharray',`${circ*percent} ${circ}`); fg.setAttribute('transform','rotate(-90 100 100)'); svg.appendChild(fg);
-  const t=document.createElementNS('http://www.w3.org/2000/svg','text');
-  t.setAttribute('x',cx); t.setAttribute('y',cy+6); t.setAttribute('text-anchor','middle'); t.setAttribute('fill','#ffffff'); t.setAttribute('font-size','22'); t.setAttribute('font-weight','700');
-  t.textContent = Math.round(percent*100)+'%'; svg.appendChild(t);
+  const W=600,H=180,L=140,R=20,T=20,B=20; // left margin for names
+  const rowH = (H-T-B)/series.length - 8;
+  const maxV=Math.max(1,...series.map(s=>s.value));
+  series.forEach((s,i)=>{
+    const y=T + i*(rowH+8);
+    const w = ((W-L-R)*(s.value/maxV));
+    const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    r.setAttribute('x',L); r.setAttribute('y',y); r.setAttribute('width',w); r.setAttribute('height',rowH);
+    r.setAttribute('rx','6'); r.setAttribute('fill', s.color || '#FF9900'); r.setAttribute('opacity','0.92'); svg.appendChild(r);
+    const name=document.createElementNS('http://www.w3.org/2000/svg','text');
+    name.setAttribute('x',L-8); name.setAttribute('y',y+rowH/2+4); name.setAttribute('text-anchor','end');
+    name.setAttribute('fill','#D6DEEE'); name.setAttribute('font-size','12'); name.textContent=s.label; svg.appendChild(name);
+    const val=document.createElementNS('http://www.w3.org/2000/svg','text');
+    val.setAttribute('x',L+w+6); val.setAttribute('y',y+rowH/2+4); val.setAttribute('fill','#ffffff'); val.setAttribute('font-size','12'); val.textContent=s.value; svg.appendChild(val);
+  });
 }
 
-function drawBeforeAfter(svgId, beforeVal, afterVal, label='Latency (ms)'){
-  const svg=document.getElementById(svgId); if(!svg) return;
-  while(svg.lastChild) svg.removeChild(svg.lastChild);
-  const W=600,H=180,L=40,R=20,T=20,B=40,max=Math.max(beforeVal,afterVal)*1.15, barW=90, gap=80, yBase=H-B;
-
-  const addBar=(x,val,color)=>{ const h=(val/max)*(H-T-B),y=yBase-h; const r=document.createElementNS('http://www.w3.org/2000/svg','rect'); r.setAttribute('x',x); r.setAttribute('y',y); r.setAttribute('width',barW); r.setAttribute('height',h); r.setAttribute('rx','8'); r.setAttribute('fill',color); r.setAttribute('opacity','0.95'); svg.appendChild(r); return {x,y,h}; };
-  const axis=document.createElementNS('http://www.w3.org/2000/svg','line'); axis.setAttribute('x1',L); axis.setAttribute('x2',W-R); axis.setAttribute('y1',yBase); axis.setAttribute('y2',yBase); axis.setAttribute('stroke','#2e3a4a'); svg.appendChild(axis);
-
-  const x1=L+80, x2=x1+barW+gap;
-  addBar(x1,beforeVal,'#7fb8ff'); addBar(x2,afterVal,'#FF9900');
-
-  const tx=(x,text,y)=>{ const t=document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x',x); t.setAttribute('y',y); t.setAttribute('text-anchor','middle'); t.setAttribute('fill','#D6DEEE'); t.setAttribute('font-size','12'); t.textContent=text; svg.appendChild(t); };
-  tx(x1+barW/2,'Before',yBase+16); tx(x2+barW/2,'After',yBase+16);
-
-  const title=document.createElementNS('http://www.w3.org/2000/svg','text'); title.setAttribute('x', (W/2)); title.setAttribute('y', T-6); title.setAttribute('text-anchor','middle'); title.setAttribute('fill','#D6DEEE'); title.setAttribute('font-size','12'); title.textContent=label; svg.appendChild(title);
-
-  const valT=(x,val,y)=>{ const t=document.createElementNS('http://www.w3.org/2000/svg','text'); t.setAttribute('x',x); t.setAttribute('y',y); t.setAttribute('text-anchor','middle'); t.setAttribute('fill','#ffffff'); t.setAttribute('font-size','13'); t.textContent=val; svg.appendChild(t); };
-  valT(x1+barW/2, beforeVal, T+16); valT(x2+barW/2, afterVal, T+16);
-}
-
-/* ==================== GITHUB FETCHERS ==================== */
+/* ============== DATA FETCH ============== */
 async function fetchJSON(url){
   const res = await fetch(url, { headers:{'Accept':'application/vnd.github+json'} });
   if(!res.ok) throw new Error(res.status+' '+res.statusText);
   return res.json();
 }
 async function fetchRepos(user){
+  // Single call, owner repos only, sorted by recent updates
   return (await fetchJSON(`https://api.github.com/users/${user}/repos?per_page=100&type=owner&sort=updated`)).filter(r=>!r.fork);
 }
-async function fetchEvents(user){
-  return fetchJSON(`https://api.github.com/users/${user}/events/public`);
+async function hasReadme(owner, repo){
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/readme`, { headers:{'Accept':'application/vnd.github+json'} });
+  return res.ok; // 200 = has readme, 404 = no readme
+}
+async function hasWorkflows(owner, repo){
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows`, { headers:{'Accept':'application/vnd.github+json'} });
+  if(!res.ok) return false;
+  const j = await res.json();
+  return (j.total_count||0) > 0;
 }
 
-/* ==================== RENDER ==================== */
+/* ============== RENDER ================= */
+function monthKey(d){ return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0'); }
+function last12MonthLabels(){
+  const names=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const out=[]; const now=new Date(Date.now());
+  for(let i=11;i>=0;i--){
+    const dt=new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth()-i, 1));
+    out.push({key: monthKey(dt), label: names[dt.getUTCMonth()]});
+  }
+  return out;
+}
+
 async function renderSnapshot(){
-  const cacheKey='gh_snapshot_v1';
-  const cached = cacheGet(cacheKey, 1000*60*15); // 15 minutes
+  const cacheKey='gh_snapshot_v5';
+  const cached = cacheGet(cacheKey, 1000*60*15); // 15 min cache
   let data = cached;
+
   try{
     if(!data){
-      const [repos, events] = await Promise.all([ fetchRepos(GH_USER), fetchEvents(GH_USER) ]);
+      const repos = await fetchRepos(GH_USER);
 
       const projects = repos.length;
       const stars = repos.reduce((s,r)=>s+(r.stargazers_count||0),0);
-      const dashboards = repos.filter(r=>{
-        const blob = `${r.name||''} ${(r.description||'')} ${(r.topics||[]).join(' ')}`.toLowerCase();
-        return BI_KEYWORDS.some(k=>blob.includes(k));
-      }).length;
 
-      const weeks = Array(WEEKS_TO_SHOW).fill(0);
-      const now = new Date();
-      const isoWeekStart = (d)=>{ const dt=new Date(d); const day=(dt.getUTCDay()+6)%7; dt.setUTCDate(dt.getUTCDate()-day); dt.setUTCHours(0,0,0,0); return dt; };
-      const thisWeek = isoWeekStart(now);
-      events.forEach(ev=>{
-        if(ev.type!=='PushEvent') return;
-        const when = new Date(ev.created_at);
-        const ws = isoWeekStart(when);
-        const diffDays = (thisWeek - ws)/(1000*60*60*24);
-        const idxFromEnd = Math.floor(diffDays/7);
-        const bucket = (WEEKS_TO_SHOW-1) - idxFromEnd;
-        if(bucket>=0 && bucket<WEEKS_TO_SHOW) weeks[bucket] += (ev?.payload?.size||0);
+      // Activity by Month
+      const months = last12MonthLabels();
+      const monthCount = Object.fromEntries(months.map(m=>[m.key,0]));
+      repos.forEach(r=>{
+        const d = new Date(r.pushed_at || r.updated_at);
+        const k = monthKey(d);
+        if(monthCount[k] !== undefined) monthCount[k] += 1;
       });
-      const hours = weeks.map(c=>Math.min(15, Math.round(c*1.0))); // 1 commit ≈ 1h
-      const thisWeekHours = hours[hours.length-1] || 0;
+      const monthSeries = months.map((m,i)=>({ label:m.label, value:monthCount[m.key], color: i%2? '#3aa0ff':'#7fb8ff' }));
 
+      // Language split (top 3)
       const counts={}; repos.forEach(r=>{ const k=r.language||'Other'; counts[k]=(counts[k]||0)+1; });
       const langSeries = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([label,value],i)=>({
         label, value, color: i===0?'#FF9900':i===1?'#3aa0ff':'#7fb8ff'
       }));
 
-      data = {projects, stars, dashboards, hours, thisWeekHours, langSeries};
+      // Top 3 repos by stars
+      const top3 = repos
+        .map(r=>({name:r.name, stars:r.stargazers_count||0, html_url:r.html_url}))
+        .sort((a,b)=>b.stars-a.stars)
+        .slice(0,3);
+      const topStarsSeries = top3.map((r,i)=>({label:r.name, value:r.stars, color:i===0?'#FF9900':'#3aa0ff'}));
+
+      // Health checks (CI/README) on top N most recently updated repos
+      const healthSet = repos.slice(0, MAX_HEALTH_REPOS);
+      let ciOK=0, readmeOK=0;
+      for (const r of healthSet){
+        // eslint-disable-next-line no-await-in-loop
+        const [hasCI, hasRM] = await Promise.all([
+          hasWorkflows(r.owner.login, r.name).catch(()=>false),
+          hasReadme(r.owner.login, r.name).catch(()=>false),
+        ]);
+        if(hasCI) ciOK++;
+        if(hasRM) readmeOK++;
+      }
+      const ciPct = healthSet.length ? Math.round(ciOK/healthSet.length*100) : 0;
+      const readmePct = healthSet.length ? Math.round(readmeOK/healthSet.length*100) : 0;
+
+      data = {projects, stars, monthSeries, langSeries, top3, topStarsSeries, ciPct, readmePct};
       cacheSet(cacheKey, data);
     }
 
-    setText('#kpi-projects', data.projects);
-    setText('#kpi-dashboards', data.dashboards);
-    setText('#kpi-stars', data.stars);
-    setText('#kpi-projects-delta', 'from GitHub');
-    setText('#kpi-dashboards-delta', data.dashboards ? 'keywords/topics match' : 'no BI-tagged repos yet');
-    setText('#kpi-stars-delta', 'public repo stars total');
+    // KPIs (animated)
+    countTo(document.getElementById('kpi-projects'), data.projects);
+    countTo(document.getElementById('kpi-stars'), data.stars);
+    countTo(document.getElementById('kpi-ci'), data.ciPct, '%');
+    countTo(document.getElementById('kpi-readme'), data.readmePct, '%');
 
-    const pct = Math.max(0, Math.min(1, data.thisWeekHours / HOURS_GOAL));
-    setText('#kpi-goal', Math.round(pct*100)+'%');
-    setText('#kpi-goal-note', `${data.thisWeekHours}h / ${HOURS_GOAL}h`);
+    setText('#kpi-projects-delta', 'owner, non-fork');
+    setText('#kpi-stars-delta', 'public repo stars');
+    setText('#kpi-ci-note', `Checked top ${MAX_HEALTH_REPOS} repos`);
+    setText('#kpi-readme-note', `Checked top ${MAX_HEALTH_REPOS} repos`);
 
+    // Add "good" glow if metrics are strong
+    if (data.ciPct >= 70) addGood(document.getElementById('kpi-ci'));
+    if (data.readmePct >= 80) addGood(document.getElementById('kpi-readme'));
+
+    // Remove skeletons
     rmSkel();
 
-    drawSparkline('sparkline', data.hours);
-    drawBars('barchart', data.langSeries);
-    drawDonut('donut', pct);
+    // Charts
+    drawColumns('monthchart', data.monthSeries);
+    drawColumns('langchart', data.langSeries);
+    drawHBars('topstars', data.topStarsSeries);
 
-    // EDIT these with a real impact metric (e.g., latency, cost, ETL time)
-    drawBeforeAfter('beforeAfter', 950, 620, 'Latency (ms) — Before vs After');
-    document.getElementById('ba-legend').textContent = 'Example: −35% latency after pipeline changes';
+    // Featured list
+    const UL = $('#featured-list');
+    if (UL){
+      UL.innerHTML = '';
+      data.top3.forEach(r=>{
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${r.html_url}" target="_blank" rel="noreferrer">${r.name}</a> — ⭐ ${r.stars}`;
+        UL.appendChild(li);
+      });
+    }
 
-    const avg = (data.hours.reduce((a,b)=>a+b,0) / (data.hours.length||1)).toFixed(1);
-    setText('#sparkline-legend', `Last ${WEEKS_TO_SHOW} weeks · avg ${avg}h/wk`);
-
-    setText('#api-status', 'GitHub API: OK' + (cacheGet('gh_snapshot_v1', 1e12)?' (cached ✓)':''));
+    // Legends & status
+    setText('#month-legend', 'Repos updated per month (last 12)');
+    setText('#api-status', 'GitHub API: OK' + (cacheGet('gh_snapshot_v5', 1e12)?' (cached ✓)':''));
   } catch (err){
     console.warn(err);
     setText('#api-status', 'GitHub API error or rate limit — showing placeholders.');
