@@ -320,63 +320,33 @@ body[data-theme="light"] .modal__card{ background:#ffffff }
 </div>
 
 <!-- Contact Modal -->
-<div id="contactModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle" aria-hidden="true">
-  <div class="modal__backdrop" data-close></div>
-  <div class="modal__card" role="document">
-    <header class="modal__hdr">
-      <h3 id="contactTitle">Send a message</h3>
-      <button class="modal__close" type="button" title="Close" aria-label="Close" data-close>✕</button>
-    </header>
+<a class="btn" href="contact.html">Contact page</a>
 
-    <form id="contactFormModal" class="modal__body" novalidate>
-      <input type="hidden" id="formTime" name="formTime" value="">
-      <input type="text" name="company" autocomplete="off" tabindex="-1" style="position:absolute;left:-5000px;opacity:0" aria-hidden="true">
-
-      <div class="grid-2">
-        <div class="fg">
-          <input id="firstName" name="firstName" class="input" placeholder=" " required>
-          <label for="firstName" class="floating">Name</label>
-        </div>
-        <div class="fg">
-          <input id="lastName" name="lastName" class="input" placeholder=" " required>
-          <label for="lastName" class="floating">Surname</label>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="fg">
-          <input id="email" name="email" class="input" type="email" placeholder=" " required>
-          <label for="email" class="floating">Mail</label>
-        </div>
-        <div class="fg">
-          <input id="subject" name="subject" class="input" placeholder=" ">
-          <label for="subject" class="floating">Object</label>
-        </div>
-      </div>
-
-      <div class="fg">
-        <textarea id="message" name="message" class="textarea" placeholder=" " required></textarea>
-        <label for="message" class="floating">Text</label>
-      </div>
-
-      <div class="form-actions" style="margin-top:10px">
-        <label class="consent"><input type="checkbox" id="consent" required> <span>I consent to be contacted about my inquiry.</span></label>
-      </div>
-
-      <div class="form-actions">
-        <button id="sendBtn" class="btn" type="submit">Send message</button>
-        <button class="btn secondary" type="button" data-clear>Clear</button>
-        <span class="badge-pill">No spam · No tracking</span>
-        <span id="formStatus" class="helper" role="status" aria-live="polite"></span>
-      </div>
-
-      <div id="formAlert" class="alert" aria-live="assertive"></div>
-    </form>
-  </div>
-</div>
 
 <!-- Toast -->
-<div id="toast" class="toast">Message sent successfully ✅</div>
+<script>
+(function(){
+  const params = new URLSearchParams(location.search);
+  if (params.get('contact') === 'sent') {
+    let toast = document.getElementById('toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toast';
+      toast.className = 'toast show';
+      toast.textContent = 'Thanks! Your message was sent ✅';
+      document.body.appendChild(toast);
+    } else {
+      toast.textContent = 'Thanks! Your message was sent ✅';
+      toast.classList.add('show');
+    }
+    setTimeout(()=>toast.classList.remove('show'), 2400);
+    const url = new URL(location.href);
+    url.searchParams.delete('contact');
+    history.replaceState(null, '', url);
+  }
+})();
+</script>
+
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -413,129 +383,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
 })();
 </script>
 
-<!-- Contact modal + form handler (Formspree Option 1) -->
-<script>
-(function(){
-  // Modal controls
-  const openBtn = document.getElementById('openContact');
-  const modal = document.getElementById('contactModal');
-  const closeEls = modal.querySelectorAll('[data-close]');
-  const firstField = document.getElementById('firstName');
-  let lastActive = null;
-
-  function openModal(){
-    lastActive = document.activeElement;
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden','false');
-    setTimeout(()=>firstField?.focus(), 40);
-    document.body.style.overflow='hidden';
-  }
-  function closeModal(){
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
-    lastActive?.focus();
-  }
-  openBtn?.addEventListener('click', openModal);
-  closeEls.forEach(el=>el.addEventListener('click', closeModal));
-  document.addEventListener('keydown', e=>{ if(modal.classList.contains('is-open') && e.key==='Escape') closeModal(); });
-
-  // Formspree AJAX (ensure Formspree setting allows AJAX without captcha/key)
-  const FORM_ENDPOINT = 'https://formspree.io/f/your_form_id'; // <-- Replace
-  const form = document.getElementById('contactFormModal');
-  const btn  = document.getElementById('sendBtn');
-  const status = document.getElementById('formStatus');
-  const alertBox = document.getElementById('formAlert');
-  const toast = document.getElementById('toast');
-  const tsField = document.getElementById('formTime');
-  const clearBtn = document.querySelector('[data-clear]');
-  tsField.value = String(Date.now());
-
-  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-  const sanitize = (s='') => s
-    .replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c]))
-    .replace(/https?:\/\//gi, '[link removed]')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
-
-  const showAlert = (ok,msg) => {
-    alertBox.className = 'alert ' + (ok ? 'ok' : 'err');
-    alertBox.textContent = msg;
-    alertBox.style.display = 'block';
-  };
-  const showToast = (msg) => {
-    if(!toast) return;
-    toast.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(()=>toast.classList.remove('show'), 2400);
-  };
-
-  clearBtn?.addEventListener('click', ()=>{ form.reset(); alertBox.style.display='none'; status.textContent=''; });
-
-  form.addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    alertBox.style.display='none'; status.textContent='';
-
-    if (form.company && form.company.value) return; // honeypot
-    const elapsed = (Date.now() - Number(tsField.value||0))/1000;
-    if (elapsed < 5){ showAlert(false, 'Please wait a few seconds before sending.'); return; }
-
-    const firstName = sanitize(form.firstName?.value);
-    const lastName  = sanitize(form.lastName?.value);
-    const email     = sanitize(form.email?.value);
-    const subject   = sanitize(form.subject?.value);
-    const message   = sanitize(form.message?.value);
-    const consent   = document.getElementById('consent')?.checked;
-
-    if(!firstName || !lastName || !email || !message || !consent){ showAlert(false, 'Please complete all required fields and accept consent.'); return; }
-    if(!emailRe.test(email)){ showAlert(false, 'Please enter a valid email address.'); return; }
-    if(message.length < 10){ showAlert(false, 'Message is a bit short — please add a few details.'); return; }
-
-    btn.disabled = true; btn.classList.add('loading'); status.textContent = 'Sending…';
-
-    try{
-      const res = await fetch(FORM_ENDPOINT, {
-        method:'POST',
-        headers:{ 'Accept':'application/json', 'Content-Type':'application/json' },
-        body: JSON.stringify({ firstName, lastName, email, subject, message })
-      });
-      if(res.ok){
-        form.reset(); tsField.value = String(Date.now());
-        showAlert(true, 'Thanks! Your message has been sent.');
-        showToast('Message sent ✅');
-
-        btn.classList.remove('loading');
-        btn.classList.add('success');
-        btn.innerHTML = `
-          <svg class="icon-check" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="9"></circle>
-            <path d="M8 12l3 3 5-6"></path>
-          </svg> Sent!
-        `;
-        setTimeout(()=>{
-          btn.classList.remove('success');
-          btn.innerHTML='Send message';
-          btn.disabled=false;
-          status.textContent='';
-          closeModal();
-        }, 1500);
-        return;
-      }
-      let msg='There was a problem sending your message.';
-      try{ const j=await res.json(); if(j?.error) msg=j.error; }catch{}
-      showAlert(false, msg);
-    }catch{
-      showAlert(false, 'Network error. Please try again later.');
-    }finally{
-      if(btn.classList.contains('loading')){
-        btn.classList.remove('loading');
-        btn.disabled=false;
-        btn.textContent='Send message';
-      }
-    }
-  });
-})();
-</script>
 
 <!-- GitHub Snapshot scripts -->
 <script>
