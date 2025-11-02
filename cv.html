@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Michael Alibeaj — CV</title>
+<meta name="description" content="Curriculum Vitae — Michael Alibeaj, M.Sc. Computer Science (Big Data & Data Science)." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2712%27 fill=%27%23232F3E%27/><text x=%2750%25%27 y=%2757%25%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23FF9900%27 font-family=%27Arial%27>MA</text></svg>">
+
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- GoatCounter (free analytics) — replace GOAT_NAME -->
+<script data-goatcounter="https:/miketech01.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+
+<style>
+:root {
+  --navy:#232F3E; --ink:#F5F7FB; --muted:#D6DEEE;
+  --line:#2e3a4a; --orange:#FF9900;
+  --card:#1e2836; --bg0:#101723; --bg1:#0c131b;
+  --radius:16px; --max:1200px;
+  --shadow:0 12px 32px rgba(0,0,0,.28);
+  --font: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;color:var(--ink);font:17px/1.65 var(--font);
+  background:
+    radial-gradient(900px 600px at 90% -10%, rgba(20,110,180,.22), transparent 60%),
+    radial-gradient(700px 500px at -10% 20%, rgba(255,153,0,.14), transparent 55%),
+    linear-gradient(180deg,var(--bg0),var(--navy) 55%,var(--bg1));
+  transition: background-color .35s ease, color .35s ease;
+}
+a{color:#9ccdfb;text-decoration:none}
+a:hover{text-decoration:underline}
+.page{max-width:var(--max);margin:0 auto;padding:28px}
+
+/* Animation when coming from homepage */
+.page.transition-enter { opacity: 0; transform: translateY(8px); }
+@keyframes enterFade { to { opacity: 1; transform: translateY(0); } }
+
+/* Header */
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;}
+.badge{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:#0f172a;background:linear-gradient(180deg,#ffd89a,#ffb347);border:1px solid #3b4960;}
+.controls{display:flex;gap:10px;}
+#theme-toggle,#back-btn{
+  border:1px solid #3a4a5f;background:#243142;color:#e9f2ff;border-radius:10px;
+  padding:10px 12px;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.25)
+}
+
+/* Hero */
+.hero{border:1px solid var(--line);border-radius:20px;padding:22px;background:linear-gradient(180deg,#1f2c3f,#192636);box-shadow:var(--shadow);}
+.hero h1{margin:0 0 6px;font-size:clamp(22px,3.2vw,34px);}
+.hero p{margin:0;color:#eaf2ff;}
+
+/* Card */
+.card{border:1px solid var(--line);border-radius:16px;margin-top:16px;background:linear-gradient(180deg,#1e2c40,#1a2636);box-shadow:var(--shadow);}
+.card .hd{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);}
+.card .hd h2{margin:0;font-size:1.1rem;text-transform:uppercase;letter-spacing:.08em;color:#dbe7ff;}
+.card .bd{padding:16px;}
+
+/* Buttons */
+.btn{border:1px solid #3a4a5f;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer;}
+.btn.primary{background:linear-gradient(180deg,#ffb347,#ff9900);color:#0f172a;}
+.btn.secondary{background:#243142;color:#e9f2ff;}
+
+/* Embed */
+.embed-wrap{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#0e1622;}
+.embed-keep{position:relative;padding-bottom:130%;height:0;}
+.embed-keep iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0e1622;}
+.embed-fallback{padding:16px;color:#cfe0ff;}
+
+/* Footer */
+footer{margin-top:18px;text-align:center;color:#c6d1e3;}
+.footer-icons a{color:inherit;opacity:.9;}
+.footer-icons a:hover{opacity:1;}
+
+/* Light theme */
+body[data-theme="light"]{
+  --ink:#1B2532; --muted:#516074; --line:#d8e0ec;
+  --card:#ffffff; --bg0:#f4f6fb; --navy:#f0f4fa; --bg1:#ffffff;
+}
+body[data-theme="light"] .hero, body[data-theme="light"] .card{background:#ffffff;}
+body[data-theme="light"] a{color:#146EB4;}
+
+/* Responsive */
+@media (max-width:720px){
+  .topbar{flex-wrap:wrap;gap:8px;}
+  .controls{width:100%;justify-content:flex-end;}
+}
+</style>
+</head>
+<body data-theme="dark">
+<div class="page">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="badge">MA</div>
+      <div>Michael Alibeaj — CV</div>
+    </div>
+    <div class="controls">
+      <a id="back-btn" class="btn secondary" href="index.html">← Back</a>
+      <button id="theme-toggle" class="btn secondary" aria-label="Toggle theme" title="Toggle theme">🌗</button>
+    </div>
+  </div>
+
+  <section class="hero">
+    <h1>M.Sc. Computer Science — Big Data & Data Science</h1>
+    <p>Politecnico di Milano · Milan, Italy</p>
+  </section>
+
+  <section class="card">
+    <div class="hd">
+      <h2>Curriculum Vitae</h2>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <a class="btn primary" href="resume.pdf" target="_blank" rel="noopener">Open in new tab</a>
+        <button id="toggleEmbed" class="btn secondary" type="button" aria-expanded="true">Hide inline</button>
+      </div>
+    </div>
+    <div class="bd">
+      <div id="embedBlock" class="embed-wrap">
+        <div class="embed-keep">
+          <iframe
+            title="Michael Alibeaj — CV"
+            src="resume.pdf#view=FitH&scrollbar=1&toolbar=1"
+            aria-label="Inline CV PDF viewer">
+          </iframe>
+        </div>
+        <div class="embed-fallback">
+          If your browser cannot display embedded PDFs, please use the “Open in new tab” button above.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-icons" style="display:flex;gap:14px;justify-content:center;margin-bottom:8px;">
+      <a href="https://github.com/MikeTech01" target="_blank" rel="noreferrer" title="GitHub" aria-label="GitHub">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58 0-.29-.01-1.06-.02-2.09-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.25 1.84 1.25 1.07 1.83 2.8 1.3 3.48.99.11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.94 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.62-2.81 5.64-5.49 5.93.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.29 0 .32.21.69.83.57A12 12 0 0 0 12 .5z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/michael-alibeaj-9810771a6/" target="_blank" rel="noreferrer" title="LinkedIn" aria-label="LinkedIn">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.6c0-1.34-.02-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.95v5.71H9.35V9h3.41v1.56h.05c.48-.9 1.66-1.86 3.42-1.86 3.66 0 4.33 2.41 4.33 5.55v6.2zM5.34 7.43A2.06 2.06 0 1 1 5.33 3.3a2.06 2.06 0 0 1 .01 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+      </a>
+      <a href="mailto:malibeaj01@outlook.com" title="Email" aria-label="Email">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </a>
+    </div>
+    © <span id="year"></span> Michael Alibeaj
+  </footer>
+
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Apply fade-in transition if navigated from homepage
+(function(){
+  const from = new URLSearchParams(location.search).get('from');
+  if (from === 'home') {
+    const page = document.querySelector('.page');
+    page.classList.add('transition-enter');
+    requestAnimationFrame(()=>{ page.style.animation = 'enterFade .45s ease forwards'; });
+  }
+})();
+
+// Theme sync with index
+(function(){
+  const KEY_THEME='theme_pref_v1';
+  const btn=document.getElementById('theme-toggle');
+  const setTheme=(mode)=>{document.body.setAttribute('data-theme',mode);btn.textContent=(mode==='light')?'🌙':'🌗';};
+  const saved=localStorage.getItem(KEY_THEME) || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  setTheme(saved);
+  btn.addEventListener('click',()=>{
+    const next=(document.body.getAttribute('data-theme')==='light')?'dark':'light';
+    setTheme(next); try{localStorage.setItem(KEY_THEME,next)}catch{}
+  });
+})();
+
+// Inline toggle
+(function(){
+  const btn = document.getElementById('toggleEmbed');
+  const block = document.getElementById('embedBlock');
+  btn.addEventListener('click',()=>{
+    const isHidden = block.style.display==='none';
+    block.style.display = isHidden ? '' : 'none';
+    btn.setAttribute('aria-expanded', String(isHidden));
+    btn.textContent = isHidden ? 'Hide inline' : 'Show inline';
+  });
+})();
+</script>
+
+</body>
+</html>
